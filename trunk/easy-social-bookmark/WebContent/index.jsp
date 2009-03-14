@@ -4,6 +4,10 @@
 
 <%@page import="commons.db.Database"%>
 <%@page import="commons.db.DataBaseUtils"%>
+<%@page import="bookmark.br.Init"%>
+<%@page import="java.sql.Connection"%>
+
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,8 +17,22 @@
 <%="Texto experimentado" %>
 <hr/>
 <%
-	Database db=new Database("MySQL","com.mysql.jdbc.Driver", "jdbc:mysql://localhost/DBbookmark?user=root&amp;password=");
-	BookmarkDAO bookmarkco=new BookmarkDAO("",db);
+	
+	Init.init("jdbc:mysql://localhost/bookmark?user=root&amp;password=");
+	
+	//Connection dbCon=database.createConnection();
+	
+	//dbCon.close();
+	//dbCon = database.createConnection();
+
+	
+	
+	//aRs = dbCon.createStatement().executeQuery("SELECT COUNT(*) FROM GCFF_Component");
+	//aRs.next();
+	//assertEquals("1",aRs.getString(1));
+	
+	//BookmarkDAO bookmarkdao=new BookmarkDAO("tr",db);
+	
 
 %>
 </body>

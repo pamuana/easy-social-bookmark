@@ -1,17 +1,18 @@
+package bookmark.br;
 import commons.db.Database;
 import commons.db.GenericDAO;
 
 
-public class CommentDAO extends GenericDAO<Comment> {
+public class UserDAO extends GenericDAO<User> {
 
-	public CommentDAO(String prefixoTabela, Database database) throws Exception {
+	public UserDAO(String prefixoTabela, Database database) throws Exception {
 		super();
 		init(prefixoTabela,database);
 	}
 
 	@Override
 	protected void createAdditionalTables() throws Exception {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
 	}
 
 }
