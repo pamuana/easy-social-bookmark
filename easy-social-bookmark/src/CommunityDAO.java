@@ -1,17 +1,17 @@
+import commons.db.DataBaseUtils;
+import commons.db.Database;
 import commons.db.GenericDAO;
 
 
 public class CommunityDAO extends GenericDAO<Community> {
 
-	public CommunityDAO() throws Exception {
+	public CommunityDAO(String prefixoTabela, Database database) throws Exception {
 		super();
-		// TODO Auto-generated constructor stub
+		init(prefixoTabela, database);
 	}
 
 	@Override
 	protected void createAdditionalTables() throws Exception {
-		// TODO Auto-generated method stub
-
+		DataBaseUtils.createTable(createConnection(), this.getPrefixoTabela()+"participant", "(idCommunity LONG, idUser LONG)");
 	}
-
 }

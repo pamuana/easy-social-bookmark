@@ -1,17 +1,17 @@
+import commons.db.Database;
 import commons.db.GenericDAO;
 
 
 public class CommentDAO extends GenericDAO<Comment> {
 
-	public CommentDAO() throws Exception {
+	public CommentDAO(String prefixoTabela, Database database) throws Exception {
 		super();
-		// TODO Auto-generated constructor stub
+		init(prefixoTabela,database);
 	}
 
 	@Override
 	protected void createAdditionalTables() throws Exception {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 
 }

@@ -1,17 +1,18 @@
+import commons.db.DataBaseUtils;
+import commons.db.Database;
 import commons.db.GenericDAO;
 
 
 public class TagDAO extends GenericDAO<Tag> {
 
-	public TagDAO() throws Exception {
+	public TagDAO(String prefixoTabela, Database database) throws Exception {
 		super();
-		// TODO Auto-generated constructor stub
+		init(prefixoTabela,database);
 	}
 
 	@Override
 	protected void createAdditionalTables() throws Exception {
-		// TODO Auto-generated method stub
-		
+		DataBaseUtils.createTable(createConnection(), this.getPrefixoTabela()+"categorization", "(idTag LONG, idBookmark LONG)");
 	}
 
 }

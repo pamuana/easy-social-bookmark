@@ -1,17 +1,17 @@
+import commons.db.Database;
 import commons.db.GenericDAO;
 
 
 public class BookmarkDAO extends GenericDAO<Bookmark> {
 
-	public BookmarkDAO() throws Exception {
+	public BookmarkDAO(String prefixoTabela, Database database) throws Exception {
 		super();
-		// TODO Auto-generated constructor stub
+		init(prefixoTabela,database);
 	}
 
 	@Override
 	protected void createAdditionalTables() throws Exception {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 
 }
