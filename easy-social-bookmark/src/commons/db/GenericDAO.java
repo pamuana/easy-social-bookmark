@@ -67,7 +67,7 @@ public abstract class GenericDAO<T> {
      * @throws Exception exce��o
      * */
     public void init(String prefixoTabela, Database database) throws Exception {
-	this.database = database;
+    	this.database = database;
         Connection dbCon = createConnection();
         ResultSet aRs;
         // Nome da tabela

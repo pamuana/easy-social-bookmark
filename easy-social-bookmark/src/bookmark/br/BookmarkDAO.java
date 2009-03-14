@@ -1,3 +1,4 @@
+package bookmark.br;
 import commons.db.Database;
 import commons.db.GenericDAO;
 

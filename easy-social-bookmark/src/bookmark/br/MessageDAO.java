@@ -1,10 +1,11 @@
+package bookmark.br;
 import commons.db.Database;
 import commons.db.GenericDAO;
 
 
-public class UserDAO extends GenericDAO<User> {
+public class MessageDAO extends GenericDAO<Message> {
 
-	public UserDAO(String prefixoTabela, Database database) throws Exception {
+	public MessageDAO(String prefixoTabela, Database database) throws Exception {
 		super();
 		init(prefixoTabela,database);
 	}

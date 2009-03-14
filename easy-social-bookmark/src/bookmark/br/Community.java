@@ -1,3 +1,4 @@
+package bookmark.br;
 import commons.db.DBField;
 public class Community {
  	@DBField(type="Long") private long id;
