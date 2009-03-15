@@ -4,7 +4,7 @@
 
 <%@page import="br.bookmark.db.Database"%>
 <%@page import="br.bookmark.db.DataBaseUtils"%>
-<%@page import="br.bookmark.proyect.Init"%>
+<%@page import="br.bookmark.project.Init"%>
 <%@page import="java.sql.Connection"%>
 
 
@@ -19,19 +19,6 @@
 <%
 	
 	Init.init("jdbc:mysql://localhost/bookmarks?user=root&amp;password=");
-	
-	//Connection dbCon=database.createConnection();
-	
-	//dbCon.close();
-	//dbCon = database.createConnection();
-
-	
-	
-	//aRs = dbCon.createStatement().executeQuery("SELECT COUNT(*) FROM GCFF_Component");
-	//aRs.next();
-	//assertEquals("1",aRs.getString(1));
-	
-	//BookmarkDAO bookmarkdao=new BookmarkDAO("tr",db);
 	
 
 %>
