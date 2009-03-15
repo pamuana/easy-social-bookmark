@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<%@page import="commons.db.Database"%>
-<%@page import="commons.db.DataBaseUtils"%>
-<%@page import="bookmark.br.Init"%>
+<%@page import="br.bookmark.db.Database"%>
+<%@page import="br.bookmark.db.DataBaseUtils"%>
+<%@page import="br.bookmark.models.Init"%>
 <%@page import="java.sql.Connection"%>
 
 
@@ -18,7 +18,7 @@
 <hr/>
 <%
 	
-	Init.init("jdbc:mysql://localhost/bookmark?user=root&amp;password=");
+	Init.init("jdbc:mysql://localhost/bookmarks?user=root&amp;password=");
 	
 	//Connection dbCon=database.createConnection();
 	
