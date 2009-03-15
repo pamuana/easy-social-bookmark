@@ -1,0 +1,17 @@
+package br.bookmark.project;
+
+import java.util.Collection;
+
+import br.bookmark.models.Comment;
+import br.bookmark.models.CommentDAO;
+
+public class CommentMgr {
+	private CommentDAO commentDAO=null;
+	public CommentMgr(CommentDAO commentDAO){
+		this.commentDAO=commentDAO;
+	}
+	
+	public Collection<Comment> findComments() throws Exception {
+        return this.commentDAO.findAll();
+    }
+}
