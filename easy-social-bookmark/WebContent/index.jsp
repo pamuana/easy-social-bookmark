@@ -4,7 +4,7 @@
 
 <%@page import="br.bookmark.db.Database"%>
 <%@page import="br.bookmark.db.DataBaseUtils"%>
-<%@page import="br.bookmark.models.Init"%>
+<%@page import="br.bookmark.proyect.Init"%>
 <%@page import="java.sql.Connection"%>
 
 

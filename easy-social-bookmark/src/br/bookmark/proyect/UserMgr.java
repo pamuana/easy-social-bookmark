@@ -1,6 +1,9 @@
-package br.bookmark.models;
+package br.bookmark.proyect;
 
 import java.util.Collection;
+
+import br.bookmark.models.User;
+import br.bookmark.models.UserDAO;
 
 public class UserMgr {
 	private UserDAO userDAO=null;

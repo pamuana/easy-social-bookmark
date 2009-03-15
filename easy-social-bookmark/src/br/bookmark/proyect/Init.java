@@ -1,5 +1,11 @@
-package br.bookmark.models;
+package br.bookmark.proyect;
 import br.bookmark.db.Database;
+import br.bookmark.models.BookmarkDAO;
+import br.bookmark.models.CommentDAO;
+import br.bookmark.models.CommunityDAO;
+import br.bookmark.models.MessageDAO;
+import br.bookmark.models.TagDAO;
+import br.bookmark.models.UserDAO;
 
 
 public class Init {
