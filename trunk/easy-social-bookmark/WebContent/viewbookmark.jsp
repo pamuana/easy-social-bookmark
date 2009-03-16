@@ -11,7 +11,7 @@
 .group { margin-left: 1.5em; }
 .treeitemfocus { outline: 0px; background-color: #dddddd; color: black;}
   </style>
-  <link rel="stylesheet" href="style.css" type="text/css">
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 <body>
 <div style="text-align: left; width: 150px;">
