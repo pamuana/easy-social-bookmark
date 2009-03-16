@@ -4,10 +4,10 @@
 <%@page import="br.bookmark.project.*"%>
 <%@page import="br.bookmark.models.*"%>
 <%
-	Init bookmarkInit = (Init) session.getAttribute("bookmarkInit");
+	Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
     UserMgr userMgr = new UserMgr(bookmarkInit.getUserDAO());
     if (userMgr == null){
-    	response.sendRedirect("erro.jsp");
+    	response.sendRedirect("error.jsp");
     }
     
 	//Le valores passados por parametro
@@ -19,7 +19,7 @@
 		// Verifica o login e senha
 		User user = userMgr.validateUser(login, password);
 		if (user == null) {
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("error.jsp");
 		} else {
 			// Login valido
 			session.setAttribute("idUser", user.getId());

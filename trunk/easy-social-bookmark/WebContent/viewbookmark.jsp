@@ -1,9 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"    pageEncoding="UTF-8"%>
+<%@page import="br.bookmark.project.*"%>
+<%@page import="br.bookmark.models.*"%>
+<%
+    Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
+	BookmarkMgr bookmarkMgr = new BookmarkMgr(bookmarkInit.getBookmarkDAO());
+	Init tagInit = (Init) session.getAttribute("tagInit");  
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html template="true">
 <head>
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="content-type">
-  <title>viewbookmark</title>
+  <title>View Bookmarks</title>
   <style type="text/css">
 .tree { overflow: auto; width: 15em; height: 25em; cursor: default; border: 1px solid gray; padding-left: .5em;}
 .treeitem { margin-right: .6em;}
@@ -152,11 +160,22 @@ apples</span></div>
 </div>
 <div id="center">
 <div class="bookmark">
-<div class="name">book1</div>
+<%
+	TagMgr tagMgr = new TagMgr(tagInit.getTagDAO());
+	for (Bookmark bm : bookmarkMgr.findBookmarks()) {
+%>
+<div class="name"><%=bm.getName()%></div>
 <div class="shared">73</div>
-<div class="url">www.asd.com</div>
-<div class="commands">share,edit,delete</div>
-<div class="tags">tag1,tag2,tag3</div>
+<div class="url"><%=bm.getUrl()%></div>
+<div class="commands"><a href="viewcommunity.jsp?bookmark=">share</a>,<a href="editbookmark.jsp?bookmark=">edit</a>,<a href="viewcommunity.jsp?bookmark=">delete</a></div>
+<%
+	    for (Tag tag : tagMgr.findTagsByIdBookmark(bm.getId()+"")) {
+%>
+<div class="tags"><%=tag.getName()%></div>
+<%
+	    }
+	}
+%>
 </div>
 </div>
 </div>

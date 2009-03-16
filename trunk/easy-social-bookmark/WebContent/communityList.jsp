@@ -3,7 +3,7 @@
 <head>
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="content-type" />
-  <title>community</title>
+  <title>Community List</title>
   <style type="text/css">
 .tree { overflow: auto; width: 15em; height: 25em; cursor: default; border: 1px solid gray; padding-left: .5em;}
 .treeitem { margin-right: .6em;}
