@@ -3,14 +3,14 @@
 <%@page import="br.bookmark.db.DataBaseUtils"%>
 <%@page import="br.bookmark.project.*"%>
 <%@page import="br.bookmark.models.*"%>
-<%
+<% 
 	Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
     UserMgr userMgr = new UserMgr(bookmarkInit.getUserDAO());
     if (userMgr == null){
     	response.sendRedirect("error.jsp");
     }
     
-	//Le valores passados por parametro
+	//Le valores passados por p
 	String login = request.getParameter("login");
 	String password = request.getParameter("password");
 
