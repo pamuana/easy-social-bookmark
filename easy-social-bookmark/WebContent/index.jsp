@@ -7,7 +7,7 @@
 	String errorCode = request.getParameter("errorCode");
 	 
 	if (request.getParameter("logout") == null) {
-		// Nova sessão
+		// New Session
 		session.setAttribute("bookmarkInit", bookmarkInit);
 	    response.sendRedirect("login.jsp?errorCode="+errorCode);
 	} else {
