@@ -22,4 +22,8 @@ public class TagMgr {
 	public Collection<Tag> findByName(String name) throws Exception{
 		return this.tagDAO.findTagsByName(name);
 	}
+	
+	public Collection<Tag> findTagsByIdBookmark(String idBookmark) throws Exception{
+		return this.tagDAO.findTagsByIdBookmark(Long.parseLong(idBookmark));
+	}
 }
