@@ -20,6 +20,6 @@ public class TagMgr {
 	}
 	
 	public Collection<Tag> findByName(String name) throws Exception{
-		return this.tagDAO.findByName(name);
+		return this.tagDAO.findTagsByName(name);
 	}
 }

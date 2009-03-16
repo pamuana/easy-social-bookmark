@@ -1,4 +1,6 @@
 package br.bookmark.models;
+import java.util.Collection;
+
 import br.bookmark.db.Database;
 import br.bookmark.db.GenericDAO;
 
@@ -14,5 +16,18 @@ public class MessageDAO extends GenericDAO<Message> {
 	protected void createAdditionalTables() throws Exception {
 		// TODO Auto-generated method stub
 	}
-
+	
+	public Collection<Message> findMessagesByIdUser(long idUser) throws Exception{
+		return this.findCollectionByCriterio("idUser="+idUser);
+	}
+	
+	public Collection<Message> findMessagesByIdCommunity(long idCommunity) throws Exception{
+		return this.findCollectionByCriterio("idCommunity="+idCommunity);
+	}
+	
+	// --- Additional Methods for manager communities
+	
+	public void deleteMessage(long idMessage) throws Exception{
+		this.delete(idMessage);
+	}
 }
