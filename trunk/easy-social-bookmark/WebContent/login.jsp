@@ -1,35 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
 <%@page import="br.bookmark.db.Database"%>
 <%@page import="br.bookmark.db.DataBaseUtils"%>
 <%@page import="br.bookmark.project.*"%>
 <%@page import="br.bookmark.models.*"%>
-<%@page import="java.sql.Connection"%>
 <%
-    UserMgr userMgr = new UserMgr();
+	Init bookmarkInit = (Init) session.getAttribute("bookmarkInit");
+    UserMgr userMgr = new UserMgr(bookmarkInit.getUserDAO());
     if (userMgr == null){
     	response.sendRedirect("erro.jsp");
     }
+    
 	//Le valores passados por parametro
 	String login = request.getParameter("login");
 	String password = request.getParameter("password");
 
-	if (login == null) {
-		// Esta voltando de alguma pagina
-		response.sendRedirect("login.jsp");
-	}
-
-	// Verifica o login e senha
-	User user = userMgr.validateUser(login, password);
-	if (user == null) {
-		response.sendRedirect("erro.jsp");
-	} else {
-		// Login valido
-		session.setAttribute("idUser", user.getId());
-		response.sendRedirect("viewbookmark.jsp");
+	if ((login != null)&&(password!=null)) {
+	
+		// Verifica o login e senha
+		User user = userMgr.validateUser(login, password);
+		if (user == null) {
+			response.sendRedirect("login.jsp");
+		} else {
+			// Login valido
+			session.setAttribute("idUser", user.getId());
+			response.sendRedirect("viewbookmark.jsp");
+		}
 	}
 %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -41,9 +38,9 @@ Login
 <br />
 <a href="register.jsp">sign up</a>
 <br />
-<form action="login.jsp" method="post" name="login">
+<form action="login.jsp" method="post" name="formLogin">
 Username:<br />
-<input name="username" /> <br />
+<input name="login" /> <br />
 <br />
 Password: <br />
 <input name="password" type="password" /> <br />
