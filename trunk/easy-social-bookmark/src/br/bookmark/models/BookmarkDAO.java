@@ -1,4 +1,6 @@
 package br.bookmark.models;
+import java.util.Collection;
+
 import br.bookmark.db.Database;
 import br.bookmark.db.GenericDAO;
 
@@ -13,6 +15,14 @@ public class BookmarkDAO extends GenericDAO<Bookmark> {
 	@Override
 	protected void createAdditionalTables() throws Exception {
 		// TODO Auto-generated method stub		
+	}
+
+	public Collection<Bookmark> findByName(String name) throws Exception {
+		return this.findCollectionByCriterio("name='"+name+"'");
+	}
+
+	public Collection<Bookmark> findByUrl(String url) throws Exception {
+		return this.findCollectionByCriterio("url='"+url+"'");
 	}
 
 }

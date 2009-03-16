@@ -15,4 +15,8 @@ public class UserDAO extends GenericDAO<User> {
 		// TODO Auto-generated method stub
 	}
 
+	public User findByLogin(String login) throws Exception {
+		return findElementByCriterio("login='"+login+"'");
+	}
+
 }
