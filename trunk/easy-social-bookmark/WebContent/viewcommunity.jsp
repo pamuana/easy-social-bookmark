@@ -1,8 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"    pageEncoding="UTF-8"%>
+<%@page import="br.bookmark.project.*"%>
+<%@page import="br.bookmark.models.*"%>
+<%
+    Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
+    BookmarkMgr bookmarkMgr = new BookmarkMgr(bookmarkInit.getBookmarkDAO());
+    CommunityMgr communityMgr = new CommunityMgr(bookmarkInit.getCommunityDAO(), bookmarkInit.getUserDAO()); 
+    TagMgr tagMgr = new TagMgr(bookmarkInit.getTagDAO());
+    CommentMgr commentMgr = new CommentMgr(bookmarkInit.getCommentDAO());
+    UserMgr userMgr = new UserMgr(bookmarkInit.getUserDAO());
+    User user = userMgr.findById(""+session.getAttribute("idUser"));
+    MessageMgr messageMgr= new MessageMgr(bookmarkInit.getMessageDAO());
+  
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
-  <title>View Community</title>
+  <title>List Community</title>
 
   <style type="text/css">
 .tree { overflow: auto; width: 15em; height: 25em; cursor: default; border: 1px solid gray; padding-left: .5em;}
@@ -15,8 +29,7 @@
 </head>
 <body>
 <div style="text-align: left; width: 150px;">
-<div class="menuheader">Main
-Menu</div>
+<div class="menuheader">Main Menu</div>
 <div id="LeftMNav">
 <ul>
 <li><a title="Ex-designz homepage" href="http://www.ex-designz.net">&raquo;&nbsp;Home</a></li>
@@ -41,29 +54,58 @@ Dating</a></li>
 News</a></li>
 </ul>
 </div>
-<div id="messages">
-<div class="message">olha
-esse bookmark!</div>
+</div>
+<div id="left">
+    <div id="messages">
+<%
+    for(Message message : messageMgr.findMessagesByIdCommunity()){
+%>
+        <div class="message"><%= message.getText() %></div>
+<%
+    }
+%>
+    </div>
 </div>
 <div id="center">
-<div id="community">
-<div class="namecommunity">Psicotapa</div>
-<div class="descriptioncommunity">esta comunidade se destina ...</div>
-</div>
-<div class="bookmark">
-<div class="name">book1</div>
-<div class="shared">73</div>
-<div class="url">www.asd.com</div>
-<div class="description">novo
-bookmark</div>
-<div class="commands">share,edit,delete</div>
-<div class="tags">tag1,tag2,tag3</div>
-<div class="comments">
-<div class="comment">muito
-bom</div>
-</div>
-</div>
-</div>
+<%
+    for(Community comm : communityMgr.findCommunitiesByIdUser(user.getId()+"")){
+%>
+    <div id="community">
+        <div class="namecommunity"><%= comm.getName() %></div>
+        <div class="descriptioncommunity"><%= comm.getDescription() %></div>
+    </div>
+<%
+         for(Bookmark bk : bookmarkMgr.findBookmarksByIdCommunity(comm.getId()+"")){
+%>
+    <div class="bookmark">
+        <div class="name"><%= bk.getName() %></div>
+        <div class="shared"><%= bookmarkMgr.findByUrl(bk.getUrl()).size() %></div>
+        <div class="url"><%= bk.getUrl() %></div>
+        <div class="description"><%= bk.getDescription() %></div>
+        <div class="commands"><a href="viewcommunity.jsp?bookmark=">share</a>,<a href="editbookmark.jsp?bookmark=">edit</a>,<a href="viewcommunity.jsp?bookmark=">delete</a></div>
+<%
+                    for (Tag tag : tagMgr.findTagsByIdBookmark(bk.getId()+"")) {
+%>
+        <div class="tags"><%=tag.getName()%></div>
+        <div class="comments">
+<%
+                    }
+                    for (Comment comment : commentMgr.findCommentsByIdBookmark(bk.getId()+"")) {
+        
+%>
+        
+          <div class="comment"><%= comment.getText() %></div>
+        
+<%
+                    }
+%>
+        </div>
+    </div>
+<%
+         }
+
+    }
+%>
 </div>
 
 </body>

@@ -18,4 +18,8 @@ public class MessageMgr {
 	public Message findById(String idMessage) throws Exception {
 		return this.messageDAO.findById(Long.parseLong(idMessage));
 	}
+	
+	public Collection<Message> findMessagesByIdCommunity(String idCommunity) throws Exception {
+        return this.messageDAO.findMessagesByIdCommunity(Long.parseLong(idCommunity));
+    }
 }

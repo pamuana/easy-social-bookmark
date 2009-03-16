@@ -57,4 +57,7 @@ public class CommunityMgr {
 	public Collection<String> findIdCommunitiesByIdUser(String idUser) throws Exception{
 		return this.communityDAO.findIdCommunitiesByIdUser(Long.parseLong(idUser));
 	}
+	public void deleteCommunity(String idCommunity) throws Exception{
+		 this.communityDAO.deleteCommunity(Long.parseLong(idCommunity));
+	}
 }

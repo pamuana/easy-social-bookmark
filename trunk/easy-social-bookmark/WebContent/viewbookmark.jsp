@@ -4,7 +4,10 @@
 <%
     Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
 	BookmarkMgr bookmarkMgr = new BookmarkMgr(bookmarkInit.getBookmarkDAO());
-	Init tagInit = (Init) session.getAttribute("tagInit");  
+	TagMgr tagMgr = new TagMgr(bookmarkInit.getTagDAO());
+	UserMgr userMgr = new UserMgr(bookmarkInit.getUserDAO());
+	User user = userMgr.findById(""+session.getAttribute("idUser"));
+  
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html template="true">
@@ -158,26 +161,26 @@ apples</span></div>
 </div>
 </div>
 </div>
-<div id="center">
-<div class="bookmark">
+	<div id="center">
+	    <div class="bookmark">
 <%
-	TagMgr tagMgr = new TagMgr(tagInit.getTagDAO());
-	for (Bookmark bm : bookmarkMgr.findBookmarks()) {
+	
+		for (Bookmark bm : bookmarkMgr.findBookmarksByIdUser(user.getId()+"")) {
 %>
-<div class="name"><%=bm.getName()%></div>
-<div class="shared">73</div>
-<div class="url"><%=bm.getUrl()%></div>
-<div class="commands"><a href="viewcommunity.jsp?bookmark=">share</a>,<a href="editbookmark.jsp?bookmark=">edit</a>,<a href="viewcommunity.jsp?bookmark=">delete</a></div>
+		    <div class="name"><%=bm.getName()%></div>
+		    <div class="shared"><%= bookmarkMgr.findByUrl(bm.getUrl()).size() %></div>
+		    <div class="url"><%=bm.getUrl()%></div>
+		    <div class="commands"><a href="viewcommunity.jsp?bookmark="+<%= bm.getId() %>>share</a>,<a href="editbookmark.jsp?bookmark="+<%= bm.getId() %>>edit</a>,<a href="viewcommunity.jsp?bookmark="+<%= bm.getId() %>>delete</a></div>
 <%
-	    for (Tag tag : tagMgr.findTagsByIdBookmark(bm.getId()+"")) {
+		    for (Tag tag : tagMgr.findTagsByIdBookmark(bm.getId()+"")) {
 %>
-<div class="tags"><%=tag.getName()%></div>
+	        <div class="tags"><%=tag.getName()%></div>
 <%
-	    }
-	}
+		    }
+		}
 %>
-</div>
-</div>
+	    </div>
+	</div>
 </div>
 </body>
 </html>

@@ -27,4 +27,12 @@ public class BookmarkMgr {
 	public Collection<Bookmark> findByUrl(String url) throws Exception{
 		return this.bookmarkDAO.findByUrl(url);
 	}
+	
+	public Collection<Bookmark> findBookmarksByIdUser(String idUser) throws Exception{
+		return this.bookmarkDAO.findBookmarksByIdUser(Long.parseLong(idUser));
+	}
+	
+	public Collection<Bookmark> findBookmarksByIdCommunity(String idCommunity) throws Exception{
+		return this.bookmarkDAO.findBookmarksByIdCommunity(Long.parseLong(idCommunity));
+	}
 }

@@ -19,4 +19,8 @@ public class CommentMgr {
 		return this.commentDAO.findById(Long.parseLong(idComment));
 	}
 	
+	public Collection<Comment> findCommentsByIdBookmark(String idBookmark) throws Exception {
+		return this.commentDAO.findCommentsByIdBookmark(Long.parseLong(idBookmark));
+	}
+	
 }
