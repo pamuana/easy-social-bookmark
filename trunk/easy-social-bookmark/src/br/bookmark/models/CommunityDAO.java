@@ -1,4 +1,5 @@
 package br.bookmark.models;
+import java.sql.SQLException;
 import java.util.Collection;
 
 import br.bookmark.db.DataBaseUtils;
@@ -45,5 +46,17 @@ public class CommunityDAO extends GenericDAO<Community> {
         createConnection().createStatement().executeUpdate(str);
         str = "DELETE FROM "+this.getPrefixoTabela()+"Community"+" WHERE id="+idCommunity;
         createConnection().createStatement().executeUpdate(str);
+	}
+	
+	public void deassignCommunity(long idCommunity,long idUser) throws Exception{
+		String tableName = this.getPrefixoTabela()+"participant";
+		String str = "DELETE FROM "+tableName+" WHERE idUser="+idUser+" AND idCommunity="+idCommunity;
+		createConnection().createStatement().executeUpdate(str);
+	}
+	
+	public void deassignCommunities(long idUser) throws Exception{
+		String tableName = this.getPrefixoTabela()+"participant";
+		String str = "DELETE FROM "+tableName+" WHERE idUser="+idUser;
+		createConnection().createStatement().executeUpdate(str); 
 	}
 }
