@@ -10,7 +10,12 @@
     UserMgr userMgr = new UserMgr(bookmarkInit.getUserDAO());
     User user = userMgr.findById(""+session.getAttribute("idUser"));
     MessageMgr messageMgr= new MessageMgr(bookmarkInit.getMessageDAO());
-  
+    
+    Community community = communityMgr.findById(""+request.getParameter("community"));
+
+    if(request.getParameter("bookmark")!=null){
+        bookmarkMgr.deleteBookmark(request.getParameter("bookmark"));
+    }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -58,7 +63,7 @@ News</a></li>
 <div id="left">
     <div id="messages">
 <%
-    for(Message message : messageMgr.findMessagesByIdCommunity()){
+    for(Message message : messageMgr.findMessagesByIdCommunity(community.getId()+"")){
 %>
         <div class="message"><%= message.getText() %></div>
 <%
@@ -67,23 +72,26 @@ News</a></li>
     </div>
 </div>
 <div id="center">
-<%
-    for(Community comm : communityMgr.findCommunitiesByIdUser(user.getId()+"")){
-%>
+
     <div id="community">
-        <div class="namecommunity"><%= comm.getName() %></div>
-        <div class="descriptioncommunity"><%= comm.getDescription() %></div>
+        <div class="namecommunity"><%= community.getName() %></div>
+        <div class="descriptioncommunity"><%= community.getDescription() %></div>
     </div>
 <%
-         for(Bookmark bk : bookmarkMgr.findBookmarksByIdCommunity(comm.getId()+"")){
+         for(Bookmark bk : bookmarkMgr.findBookmarksByIdCommunity(community.getId()+"")){
 %>
     <div class="bookmark">
         <div class="name"><%= bk.getName() %></div>
         <div class="shared"><%= bookmarkMgr.findByUrl(bk.getUrl()).size() %></div>
         <div class="url"><%= bk.getUrl() %></div>
         <div class="description"><%= bk.getDescription() %></div>
-        <div class="commands"><a href="viewcommunity.jsp?bookmark=">share</a>,<a href="editbookmark.jsp?bookmark=">edit</a>,<a href="viewcommunity.jsp?bookmark=">delete</a></div>
+        <div class="commands"><a href="editbookmark.jsp?bookmark=">edit</a>,
 <%
+              if(community.getIdAdmin() == user.getId()){
+%>
+        <a href="viewcommunity.jsp?bookmark="+<%= bk.getId() %>>delete</a></div>
+<%
+              }
                     for (Tag tag : tagMgr.findTagsByIdBookmark(bk.getId()+"")) {
 %>
         <div class="tags"><%=tag.getName()%></div>
@@ -103,8 +111,6 @@ News</a></li>
     </div>
 <%
          }
-
-    }
 %>
 </div>
 

@@ -35,4 +35,8 @@ public class BookmarkMgr {
 	public Collection<Bookmark> findBookmarksByIdCommunity(String idCommunity) throws Exception{
 		return this.bookmarkDAO.findBookmarksByIdCommunity(Long.parseLong(idCommunity));
 	}
+	
+	public void deleteBookmark(String idBookmark) throws Exception{
+		this.bookmarkDAO.deleteBookmark(Long.parseLong(idBookmark));
+	}
 }
