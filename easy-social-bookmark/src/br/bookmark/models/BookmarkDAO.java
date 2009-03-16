@@ -24,5 +24,18 @@ public class BookmarkDAO extends GenericDAO<Bookmark> {
 	public Collection<Bookmark> findByUrl(String url) throws Exception {
 		return this.findCollectionByCriterio("url='"+url+"'");
 	}
-
+	
+	public Collection<Bookmark> findBookmarksByIdCommunity(long idCommunity) throws Exception {
+		return this.findCollectionByCriterio("idCommunity="+idCommunity);
+	}
+	
+	public Collection<Bookmark> findBookmarksByIdUser(long idUser) throws Exception{
+		return this.findCollectionByCriterio("idUser="+idUser);
+	}
+	
+	// --- Additional Methods for manager communities
+	
+	public void deleteBookmark(long idBookmark) throws Exception{
+		this.delete(idBookmark);
+	} 
 }

@@ -1,5 +1,4 @@
 package br.bookmark.models;
-import java.sql.SQLException;
 import java.util.Collection;
 
 import br.bookmark.db.DataBaseUtils;
@@ -36,7 +35,7 @@ public class CommunityDAO extends GenericDAO<Community> {
 	}
 	
 	public Collection<Community> findCommunitiesByIdUser(long idUser) throws Exception{
-		return this.findCollectionByCriterio("idCommunity IN (SELECT idCommunity FROM "+this.getPrefixoTabela()+"participant WHERE idUser="+idUser+")");
+		return this.findCollectionByCriterio("id IN (SELECT idCommunity FROM "+this.getPrefixoTabela()+"participant WHERE idUser="+idUser+")");
 	}
 	
 	// --- Additional Methods for manager communities
