@@ -15,4 +15,16 @@ public class BookmarkMgr {
 	public Collection<Bookmark> findBookmarks() throws Exception {
         return this.bookmarkDAO.findAll();
     }
+	
+	public Bookmark findById(String idBookmark) throws Exception{
+		return this.bookmarkDAO.findById(Long.parseLong(idBookmark));
+	}
+	
+	public Collection<Bookmark> findByName(String name) throws Exception{
+		return this.bookmarkDAO.findByName(name);
+	}
+	
+	public Collection<Bookmark> findByUrl(String url) throws Exception{
+		return this.bookmarkDAO.findByUrl(url);
+	}
 }

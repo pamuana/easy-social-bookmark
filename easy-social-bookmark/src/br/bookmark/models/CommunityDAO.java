@@ -1,4 +1,6 @@
 package br.bookmark.models;
+import java.util.Collection;
+
 import br.bookmark.db.DataBaseUtils;
 import br.bookmark.db.Database;
 import br.bookmark.db.GenericDAO;
@@ -14,5 +16,34 @@ public class CommunityDAO extends GenericDAO<Community> {
 	@Override
 	protected void createAdditionalTables() throws Exception {
 		DataBaseUtils.createTable(createConnection(), this.getPrefixoTabela()+"participant", "(idCommunity LONG, idUser LONG)");
+	}
+
+	public Collection<Community> findByName(String name) throws Exception {
+		return this.findCollectionByCriterio("name='"+name+"'");
+	}
+
+	public Collection<Community> findByIdParent(long idParent) throws Exception {
+		return this.findCollectionByCriterio("idParent="+idParent);
+	}
+
+	public Collection<String> findIdUsersByIdCommunity(long idCommunity) throws Exception{
+		return this.findField("idUser", this.getPrefixoTabela()+"participant", "idCommunity="+idCommunity);
+	}
+	
+	public Collection<String> findIdCommunitiesByIdUser(long idUser) throws Exception{
+		return this.findField("idCommunity", this.getPrefixoTabela()+"participant", "idUser="+idUser);
+	}
+	
+	public Collection<Community> findCommunitiesByIdUser(long idUser) throws Exception{
+		return this.findCollectionByCriterio("idCommunity IN (SELECT idCommunity FROM "+this.getPrefixoTabela()+"participant WHERE idUser="+idUser+")");
+	}
+	
+	// --- Additional Methods for manager communities
+	
+	public void deleteCommunity(long idCommunity) throws Exception{
+		String str = "DELETE FROM "+this.getPrefixoTabela()+"participant"+" WHERE idCommunity="+idCommunity;
+        createConnection().createStatement().executeUpdate(str);
+        str = "DELETE FROM "+this.getPrefixoTabela()+"Community"+" WHERE id="+idCommunity;
+        createConnection().createStatement().executeUpdate(str);
 	}
 }

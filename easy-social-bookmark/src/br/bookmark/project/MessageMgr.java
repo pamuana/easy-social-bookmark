@@ -14,4 +14,8 @@ public class MessageMgr {
 	public Collection<Message> findMessages() throws Exception {
         return this.messageDAO.findAll();
     }
+	
+	public Message findById(String idMessage) throws Exception {
+		return this.messageDAO.findById(Long.parseLong(idMessage));
+	}
 }

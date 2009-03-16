@@ -14,4 +14,12 @@ public class TagMgr {
 	public Collection<Tag> findTags() throws Exception {
         return this.tagDAO.findAll();
     }
+	
+	public Tag findById(String idTag) throws Exception {
+		return this.tagDAO.findById(Long.parseLong(idTag));
+	}
+	
+	public Collection<Tag> findByName(String name) throws Exception{
+		return this.tagDAO.findByName(name);
+	}
 }

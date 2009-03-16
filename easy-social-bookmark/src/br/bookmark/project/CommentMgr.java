@@ -14,4 +14,9 @@ public class CommentMgr {
 	public Collection<Comment> findComments() throws Exception {
         return this.commentDAO.findAll();
     }
+	
+	public Comment findById(String idComment) throws Exception {
+		return this.commentDAO.findById(Long.parseLong(idComment));
+	}
+	
 }
