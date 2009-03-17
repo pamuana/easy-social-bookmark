@@ -37,5 +37,4 @@ public class UserMgr {
     public void delete(Long userId) throws Exception {
         this.userDAO.delete(userId);
     }
- 
 }
