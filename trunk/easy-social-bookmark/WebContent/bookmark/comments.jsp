@@ -4,10 +4,16 @@
 <%
 		Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
 		CommentMgr commentMgr = new CommentMgr(bookmarkInit.getCommentDAO());
-		Comment comment = commentMgr.findById(request.getParameter("comment")+"");
+		String comment = "";
+		if(request.getParameter("comment")!=null){
+			Comment com = commentMgr.findById(request.getParameter("comment")+"");
+			comment = com.getText();
+		}
 		
 		if(request.getParameter("operation")!=null){
-			comment.setText(request.getParameter("text")+"");
+			Comment comments =new Comment();
+			comments.setText(request.getParameter("text")+"");
+			commentMgr.save(comments);
 		}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -18,7 +24,7 @@
 <body>
 <form action="comments.jsp" method="post" name="comments">
 	<input type="hidden" name="operation" value="operation"/>
-	<textarea cols="50" rows="10" name="text" value="<%= comment.getText() %>"></textarea>
+	<textarea cols="50" rows="10" name="text" value="<%= comment %>"></textarea>
 	<br/>
 	<input name="send" value="send" type="submit"/>
 	<input name="cancel" value="cancel" type="button"/>

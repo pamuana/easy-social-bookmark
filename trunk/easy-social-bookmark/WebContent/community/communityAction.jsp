@@ -32,6 +32,14 @@
        communityMgr.save(community);
        msg = "update done with success";
        href = "communityForm.jsp?community="+idCommunity;
+    }else if(operation.equals("createcommunity")){
+    	Community comm = new Community();
+    	comm.setName(request.getParameter("name"));
+    	comm.setDescription(request.getParameter("description"));
+    	communityMgr.save(comm);
+    	
+        msg = "communitey created with success";
+        href = "communityForm.jsp?community="+comm.getId();
     }
     
 %>
