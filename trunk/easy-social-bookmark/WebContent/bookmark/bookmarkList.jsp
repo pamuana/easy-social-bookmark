@@ -7,7 +7,6 @@
 	TagMgr tagMgr = new TagMgr(bookmarkInit.getTagDAO());
 	UserMgr userMgr = new UserMgr(bookmarkInit.getUserDAO());
 	User user = userMgr.findById(""+session.getAttribute("idUser"));
-  
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html template="true">
@@ -28,12 +27,12 @@
 <div style="text-align: left; width: 150px;">
 <div class="menuheader">Main
 Menu</div>
+
+<!-- begin left menu -->
 <div id="LeftMNav">
 <ul>
-  <li><a title="Ex-designz homepage" href="http://www.ex-designz.net">&raquo;&nbsp;Home</a></li>
-  <li><a title="Forum Help/Guide"
- href="http://www.ex-designz.net/faqhelp.asp">&raquo;&nbsp;Forum
-Help</a></li>
+  <li><a title="new bookmark" href="bookmarkForm.jsp">&raquo;&nbsp;New Bookmark</a></li>
+  <li><a title="Forum Help/Guide" href="http://www.ex-designz.net/faqhelp.asp">&raquo;&nbsp;Forum Help</a></li>
   <li><a title="Browse through our hundreds of free articles"
  href="http://www.ex-designz.net/article.asp">&raquo;&nbsp;Article
 Directory</a></li>
@@ -62,6 +61,8 @@ Dating</a></li>
 News</a></li>
 </ul>
 </div>
+<!-- end left menu -->
+
 <div id="tree" role="tree" tabindex="-1" class="tree"
  onclick="return treeItemClick(event);"
  ondblclick="return treeItemEvent(event);"

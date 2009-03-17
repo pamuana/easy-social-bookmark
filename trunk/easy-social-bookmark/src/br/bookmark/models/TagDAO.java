@@ -59,8 +59,10 @@ public class TagDAO extends GenericDAO<Tag> {
 	
 	public void assignBookmark(long idTag,long idBookmark) throws Exception{
 		String tableName = this.getPrefixoTabela()+"categorization";
-		String str = "INSERT INTO "+tableName+" (idTag,idBookmark) 	VALUES("+idTag+","+idBookmark+")";
-		createConnection().createStatement().executeUpdate(str);
+		if (this.count(tableName, "idTag="+idTag+" AND idBookmark="+idBookmark)==0){
+			String str = "INSERT INTO "+tableName+" (idTag,idBookmark) 	VALUES("+idTag+","+idBookmark+")";
+			createConnection().createStatement().executeUpdate(str);
+		}
 	}
 	
 	public void deassignTag(long idBookmark) throws Exception{
