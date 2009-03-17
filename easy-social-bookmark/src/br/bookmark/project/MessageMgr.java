@@ -22,4 +22,12 @@ public class MessageMgr {
 	public Collection<Message> findMessagesByIdCommunity(String idCommunity) throws Exception {
         return this.messageDAO.findMessagesByIdCommunity(Long.parseLong(idCommunity));
     }
+	
+	public void save(Message message) throws Exception {
+        this.messageDAO.save(message);
+    }
+    
+    public void delete(Long messageId) throws Exception {
+        this.messageDAO.delete(messageId);
+    }
 }
