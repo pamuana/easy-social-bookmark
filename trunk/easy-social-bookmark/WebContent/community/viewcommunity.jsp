@@ -85,22 +85,27 @@ News</a></li>
         <div class="shared"><%= bookmarkMgr.findByUrl(bk.getUrl()).size() %></div>
         <div class="url"><%= bk.getUrl() %></div>
         <div class="description"><%= bk.getDescription() %></div>
-        <div class="commands"><a href="editbookmark.jsp?bookmark="+<%= bk.getId() %>>edit</a>,
+        <div class="commands"><a href="<%= "editbookmark.jsp?bookmark="+bk.getId() %>">edit</a>,
 <%
               if(community.getIdAdmin() == user.getId()){
 %>
-        <a href="viewcommunity.jsp?bookmark="+<%= bk.getId() %>>delete</a></div>
+        <a href="<%= "viewcommunity.jsp?bookmark="+bk.getId() %>">delete</a></div>
 <%
               }
                     for (Tag tag : tagMgr.findTagsByIdBookmark(bk.getId()+"")) {
 %>
         <div class="tags"><%=tag.getName()%></div>
-        <div class="comments">
 <%
                     }
+%>
+       <div class="comments">
+       <a href="<%= "../bookmark/comments.jsp?bookmark="+bk.getId()+"&community="+community.getId() %>">Add comment</a>
+       
+<%
                     for (Comment comment : commentMgr.findCommentsByIdBookmark(bk.getId()+"")) {
         
 %>
+
         
           <div class="comment"><%= comment.getText() %></div>
         
