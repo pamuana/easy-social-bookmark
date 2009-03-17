@@ -51,12 +51,6 @@ public class TagDAO extends GenericDAO<Tag> {
         createConnection().createStatement().executeUpdate(str);
 	}
 	
-	public void deassignBookmark(long idTag,long idBookmark) throws Exception{
-		String tableName = this.getPrefixoTabela()+"categorization";
-		String str = "DELETE FROM "+tableName+" WHERE idTag="+idTag+" AND idBookmark="+idBookmark;
-		createConnection().createStatement().executeUpdate(str);
-	}
-	
 	public void assignBookmark(long idTag,long idBookmark) throws Exception{
 		String tableName = this.getPrefixoTabela()+"categorization";
 		if (this.count(tableName, "idTag="+idTag+" AND idBookmark="+idBookmark)==0){
@@ -65,9 +59,29 @@ public class TagDAO extends GenericDAO<Tag> {
 		}
 	}
 	
+	public void deassignBookmark(long idTag,long idBookmark) throws Exception{
+		String tableName = this.getPrefixoTabela()+"categorization";
+		String str = "DELETE FROM "+tableName+" WHERE idTag="+idTag+" AND idBookmark="+idBookmark;
+		createConnection().createStatement().executeUpdate(str);
+		if (this.count(tableName, "idTag="+idTag)==0){
+			this.delete(idTag);
+		}
+	}
+	
 	public void deassignTag(long idBookmark) throws Exception{
 		String tableName = this.getPrefixoTabela()+"categorization";
 		String str = "DELETE FROM "+tableName+" WHERE idBookmark="+idBookmark;
-		createConnection().createStatement().executeUpdate(str); 
+		createConnection().createStatement().executeUpdate(str);
+		this.deleteTagsWithoutCategorization();
+	}
+
+	protected void deleteTagsWithoutCategorization() throws Exception {
+		String tableName = this.getPrefixoTabela()+"categorization";
+		Collection<Tag> tags = this.findAll();
+		for (Tag tag:tags){
+			if (this.count(tableName, "idTag="+tag.getId())==0){
+				this.delete(tag.getId());
+			}
+		}
 	}
 }
