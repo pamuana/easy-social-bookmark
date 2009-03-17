@@ -63,6 +63,7 @@ News</a></li>
 </div>
 <!-- end left menu -->
 
+<!-- begin right menu -->
 <div id="tree" role="tree" tabindex="-1" class="tree"
  onclick="return treeItemClick(event);"
  ondblclick="return treeItemEvent(event);"
@@ -87,6 +88,8 @@ News</a></li>
  onclick="imgToggle(event);" alt=""><span tabindex="-1" role="treeitem"
  aria-expanded="true" class="treeitem">Leafy</span>
 </div>
+
+
 <div role="group" class="group">
 <div role="presentation"><span tabindex="-1" role="treeitem"
  class="treeitem">Lettuce</span></div>
@@ -162,11 +165,13 @@ apples</span></div>
 </div>
 </div>
 </div>
+<!-- end right menu -->
 	<div id="center">
 	    <div class="bookmark">
 <%
 	
 		for (Bookmark bm : bookmarkMgr.findBookmarksByIdUser(user.getId()+"")) {
+			if (bm.getIdCommunity()==0){
 %>
 		    <div class="name"><%=bm.getName()%></div>
 		    <div class="shared"><%= bookmarkMgr.findByUrl(bm.getUrl()).size() %></div>
@@ -177,7 +182,8 @@ apples</span></div>
 %>
 	        <div class="tags"><%=tag.getName()%></div>
 <%
-		    }
+		    	}
+			}
 		}
 %>
 	    </div>

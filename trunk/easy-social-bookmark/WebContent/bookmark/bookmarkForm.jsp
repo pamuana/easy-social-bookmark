@@ -22,7 +22,9 @@
     	for (Tag tag: tags){
     		tagsString=tagsString+tag.getName()+",";
     	}
-    	tagsString=tagsString.substring(0,tagsString.length()-1);
+    	if (tagsString.length()>0){
+    		tagsString=tagsString.substring(0,tagsString.length()-1);
+    	}
 		operation="edit";
     }
     if (request.getParameter("operation").equals("share")){
