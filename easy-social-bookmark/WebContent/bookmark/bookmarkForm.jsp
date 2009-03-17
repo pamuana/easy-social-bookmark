@@ -55,9 +55,7 @@
 	<br />
 	Tags:
 	<br />
-	<textarea name="tags" cols="50" rows="10">
-    	<%=tagsString%>
-	</textarea>
+	<textarea name="tags" cols="50" rows="10"><%=tagsString%></textarea>
 	<br />
 	<input name="send" value="send" type="submit" />
 	<input name="cancel" type="button" value="Cancel"/>
