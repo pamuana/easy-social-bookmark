@@ -78,7 +78,7 @@ News</a></li>
     <div id="community">
         <a class="namecommunity"><%= comm.getName() %></a>
         <div class="descriptioncommunity"><%= comm.getDescription() %></div>
-        <div class="commands"><a href="viewcommunity.jsp?community=">share</a>,
+        <div class="commands"><a href="viewcommunity.jsp?community="+<%= comm.getId() %>>share</a>,
 <%
          if(comm.getIdAdmin() == user.getId()){
 %>
