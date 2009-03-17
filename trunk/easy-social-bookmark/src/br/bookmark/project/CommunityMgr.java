@@ -66,6 +66,10 @@ public class CommunityMgr {
 		this.communityDAO.deassignCommunity(Long.parseLong(idCommunity), Long.parseLong(idUser));
 	}
 	
+	public void assignCommunity(String idCommunity,String idUser) throws Exception{
+		this.communityDAO.assignCommunity(Long.parseLong(idCommunity), Long.parseLong(idUser));
+	}
+	
 	public void save(Community community) throws Exception {
         this.communityDAO.save(community);
     }

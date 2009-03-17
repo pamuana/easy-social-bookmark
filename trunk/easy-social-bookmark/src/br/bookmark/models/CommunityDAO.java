@@ -53,6 +53,12 @@ public class CommunityDAO extends GenericDAO<Community> {
 		createConnection().createStatement().executeUpdate(str);
 	}
 	
+	public void assignCommunity(long idCommunity,long idUser) throws Exception{
+		String tableName = this.getPrefixoTabela()+"participant";
+		String str = "INSERT INTO "+tableName+" (idUser,idCommunity) VALUES ("+idUser+","+idCommunity+")";
+		createConnection().createStatement().executeUpdate(str);
+	}
+	
 	public void deassignCommunities(long idUser) throws Exception{
 		String tableName = this.getPrefixoTabela()+"participant";
 		String str = "DELETE FROM "+tableName+" WHERE idUser="+idUser;

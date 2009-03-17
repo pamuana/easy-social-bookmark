@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"    pageEncoding="UTF-8"%>
 <%@page import="br.bookmark.project.*"%>
 <%@page import="br.bookmark.models.*"%>
+<%@page import="java.util.*"%>
+
 <%
     Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
     CommunityMgr communityMgr = new CommunityMgr(bookmarkInit.getCommunityDAO(), bookmarkInit.getUserDAO());     
@@ -44,7 +46,7 @@
     <input name="cancel" value="cancel" type="button"/>
 </form>
 <%
-      }else{
+      }else if(request.getParameter("create")!=null){
 %>
 <form action="communityAction.jsp" method="post" name="comments">
     <input type="hidden" name="operation" value="createcommunity"/>
@@ -61,8 +63,32 @@
 </form>
     
 <%
+      }else if(request.getParameter("addcommunity")!=null){
     	  
+         
+%>
+<form action="communityAction.jsp" method="post" name="comments">
+    <input type="hidden" name="operation" value="addcommunity"/>
+    Select Communities:
+    <br/>
+ <%
+ 
+		 Collection<Community> communities=communityMgr.findCommunities();
+		 for (Community community : communities){
+			 for(Community comm : communityMgr.findCommunitiesByIdUser(session.getAttribute("idUser").toString())){
+				 if(comm.getId()!=community.getId())
+					    out.println(community.getName()+"<input type=\"checkbox\" name=\"community"+community.getId()+"\" value=\""+community.getId()+"\" /><br/>");
+			 }
+		 }
+ %>
+    <input name="send" value="send" type="submit"/>
+    <input name="cancel" value="cancel" type="button"/>
+</form>
+    
+<%
+          
       }
 %>
+
 </body>
 </html>
