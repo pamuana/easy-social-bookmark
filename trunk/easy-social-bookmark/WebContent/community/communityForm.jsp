@@ -73,13 +73,13 @@
     <br/>
  <%
  
-		 Collection<Community> communities=communityMgr.findCommunities();
+		 Collection<Community> communities=communityMgr.findDiffCommunitiesByIdUser(session.getAttribute("idUser").toString());
+     
 		 for (Community community : communities){
-			 for(Community comm : communityMgr.findCommunitiesByIdUser(session.getAttribute("idUser").toString())){
-				 if(comm.getId()!=community.getId())
-					    out.println(community.getName()+"<input type=\"checkbox\" name=\"community"+community.getId()+"\" value=\""+community.getId()+"\" /><br/>");
-			 }
+			 
+			  out.println(community.getName()+"<input type=\"checkbox\" name=\"community"+community.getId()+"\" value=\""+community.getId()+"\" /><br/>");			 
 		 }
+		 
  %>
     <input name="send" value="send" type="submit"/>
     <input name="cancel" value="cancel" type="button"/>

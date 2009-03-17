@@ -35,25 +35,24 @@
 <!-- begin left menu -->
 	<div id="LeftMNav">
 	<ul>
+  		<li><a title="view bookmark" href="bookmarkList.jsp">&raquo;&nbsp;View Bookmark</a></li>
   		<li><a title="new bookmark" href="bookmarkForm.jsp">&raquo;&nbsp;New Bookmark</a></li>
-  		<li><a title="Forum Help/Guide" href="http://www.ex-designz.net/faqhelp.asp">&raquo;&nbsp;Forum Help</a></li>
-  		<li><a title="Browse through our hundreds of free articles" href="http://www.ex-designz.net/article.asp">&raquo;&nbsp;Article Directory</a></li>
-  		<li><a title="Free sing-along lyrics with tune" href="http://www.ex-designz.net/lyricskaraoke.asp">&raquo;&nbsp;Music</a></li>
-  		<li><a title="Prank,Filipino,computer and cebuano jokes" href="http://www.ex-designz.net/extremejoke.asp">&raquo;&nbsp;Jokes</a></li>
-  		<li><a title="Photos of sexy H-wood beauties,hunks and Pinay babes" href="http://www.ex-designz.net/gallery/default.asp">&raquo;&nbsp;Photo Gallery</a></li>
-  		<li><a title="Download freeware,midi and web template" href="http://www.ex-designz.net/dlcentral.asp">&raquo;&nbsp;Download Central</a></li>
-  		<li><a title="Link Directory" href="http://www.ex-designz.net/directory/default.asp">&raquo;&nbsp;Link Directory</a></li>
-  		<li><a title="Recipe" href="http://www.ex-designz.net/recipemain.asp">&raquo;&nbsp;World Recipe</a></li>
-		<li><a title="Find,make friends at Ex-designz dating service" href="http://www.ex-designz.net/dating.asp">&raquo;&nbsp;Online Dating</a></li>
-		<li><a title="Horoscope-Astrology" href="http://www.ex-designz.net/horoscope.asp">&raquo;&nbsp;Horoscope</a></li>
-		<li><a title="Headline News from around the world" href="http://www.ex-designz.net/topstorynews.asp">&raquo;&nbsp;Headline News</a></li>
+  		<li><a title="view interesting" href="#">&raquo;&nbsp;View Interesting</a></li>
+  		<li><a title="view statistic" href="#">&raquo;&nbsp;View Statistics</a></li>
 	</ul>
+	<hr/>
+	<ul>
+        <li><a title="list communities" href="../community/communityList.jsp">&raquo;&nbsp;List Communities</a></li>
+        <li><a title="new community" href="../community/communityForm.jsp?create=create">&raquo;&nbsp;New Community</a></li>
+        <li><a title="add community" href="../community/communityForm.jsp?addcommunity=addcommunity">&raquo;&nbsp;Add Community</a></li>
+    </ul>
 	</div>
 	<!-- end left menu -->
 
 	<!-- begin right menu -->
 	<div id="right-menu">
 		<div id="tree">
+		  <a title="list communities" href="../community/communityList.jsp">List Communities</a>
 			<ul>
 <%
 		// TODO criar uma funç~ao recursiva para esta chamada

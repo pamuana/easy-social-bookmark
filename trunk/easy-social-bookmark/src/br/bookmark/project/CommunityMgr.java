@@ -58,6 +58,10 @@ public class CommunityMgr {
 		return this.communityDAO.findIdCommunitiesByIdUser(Long.parseLong(idUser));
 	}
 	
+	public Collection<Community> findDiffCommunitiesByIdUser(String idUser) throws Exception{
+		return this.communityDAO.findDiffCommunitiesByIdUser(Long.parseLong(idUser));
+	}
+	
 	public void deleteCommunity(String idCommunity) throws Exception{
 		 this.communityDAO.deleteCommunity(Long.parseLong(idCommunity));
 	}
