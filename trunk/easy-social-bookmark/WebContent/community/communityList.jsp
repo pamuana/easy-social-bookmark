@@ -79,11 +79,11 @@ News</a></li>
     <div id="community">
         <a class="namecommunity"><%= comm.getName() %></a>
         <div class="descriptioncommunity"><%= comm.getDescription() %></div>
-        <div class="commands"><a href="viewcommunity.jsp?community="+<%= comm.getId() %>>share</a>,
+        <div class="commands"><a href="<%= "../community/viewcommunity.jsp?community="+comm.getId() %>">share</a>,
 <%
          if(comm.getIdAdmin() == user.getId()){
 %>
-          <a href="communityForm.jsp?community="+<%= comm.getId() %>>edit</a>,<a href="communityList.jsp?deleteComm="+<%= comm.getId() %>>delete</a>
+          <a href="<%= "communityForm.jsp?community="+comm.getId() %>">edit</a>,<a href="<%= "communityList.jsp?deleteComm="+comm.getId() %>">delete</a>
 <%
          }
 %>          

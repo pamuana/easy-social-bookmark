@@ -171,7 +171,7 @@ apples</span></div>
 		    <div class="name"><%=bm.getName()%></div>
 		    <div class="shared"><%= bookmarkMgr.findByUrl(bm.getUrl()).size() %></div>
 		    <div class="url"><%=bm.getUrl()%></div>
-		    <div class="commands"><a href="viewcommunity.jsp?bookmark="+<%= bm.getId() %>>share</a>,<a href="editbookmark.jsp?bookmark="+<%= bm.getId() %>>edit</a>,<a href="viewcommunity.jsp?bookmark="+<%= bm.getId() %>>delete</a></div>
+		    <div class="commands"><a href="../community/viewcommunity.jsp?bookmark="+<%= bm.getId() %>>share</a>,<a href="editbookmark.jsp?bookmark="+<%= bm.getId() %>>edit</a>,<a href="viewcommunity.jsp?bookmark="+<%= bm.getId() %>>delete</a></div>
 <%
 		    for (Tag tag : tagMgr.findTagsByIdBookmark(bm.getId()+"")) {
 %>
