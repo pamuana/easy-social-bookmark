@@ -38,6 +38,10 @@ public class CommunityDAO extends GenericDAO<Community> {
 		return this.findCollectionByCriterio("id IN (SELECT idCommunity FROM "+this.getPrefixoTabela()+"participant WHERE idUser="+idUser+")");
 	}
 	
+	public Collection<Community> findDiffCommunitiesByIdUser(long idUser) throws Exception{
+		return this.findCollectionByCriterio("id NOT IN (SELECT idCommunity FROM "+this.getPrefixoTabela()+"participant WHERE idUser="+idUser+")");
+	}
+	
 	// --- Additional Methods for manager communities
 	
 	public void deleteCommunity(long idCommunity) throws Exception{
