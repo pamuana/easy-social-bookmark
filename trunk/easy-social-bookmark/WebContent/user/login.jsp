@@ -7,7 +7,7 @@
 	Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
     UserMgr userMgr = new UserMgr(bookmarkInit.getUserDAO());
     if (userMgr == null){
-    	response.sendRedirect("error.jsp");
+    	response.sendRedirect("../error.jsp");
     }
     
 	//Le valores passados por p
@@ -19,11 +19,11 @@
 		// Verifica o login e senha
 		User user = userMgr.validateUser(login, password);
 		if (user == null) {
-			response.sendRedirect("error.jsp");
+			response.sendRedirect("../error.jsp");
 		} else {
 			// Login valido
 			session.setAttribute("idUser", user.getId());
-			response.sendRedirect("viewbookmark.jsp");
+			response.sendRedirect("../bookmark/viewbookmark.jsp");
 		}
 	}
 %>

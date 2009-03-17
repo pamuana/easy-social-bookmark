@@ -9,7 +9,7 @@
 	if (request.getParameter("logout") == null) {
 		// New Session A
 		session.setAttribute("bookmarkInit", bookmarkInit);
-	    response.sendRedirect("login.jsp?errorCode="+errorCode);
+	    response.sendRedirect("user/login.jsp?errorCode="+errorCode);
 	} else {
 		// Logout A
 		session.invalidate();
