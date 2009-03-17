@@ -3,6 +3,7 @@
 <%@page import="br.bookmark.db.DataBaseUtils"%>
 <%@page import="br.bookmark.project.*"%>
 <%@page import="br.bookmark.models.*"%>
+<%@page import="java.util.*"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -14,6 +15,8 @@
 <%
     Init bookmarkInit = (Init) session.getAttribute("bookmarkInit");
     CommunityMgr communityMgr=new CommunityMgr(bookmarkInit.getCommunityDAO(),bookmarkInit.getUserDAO());
+    UserMgr userMgr = new UserMgr(bookmarkInit.getUserDAO());
+    User user = userMgr.findById(""+session.getAttribute("idUser"));
     
     String idCommunity = request.getParameter("idCommunity");
     String operation = request.getParameter("operation");
@@ -40,6 +43,15 @@
     	
         msg = "communitey created with success";
         href = "communityForm.jsp?community="+comm.getId();
+    }else if (operation.equals("addcommunity")){
+        Collection<Community> communities=communityMgr.findCommunities();
+        for (Community community : communities){
+            if (request.getParameter("community"+community.getId())!=null){
+                communityMgr.assignCommunity(community.getId()+"",user.getId()+"");
+            }
+        }
+        msg = "communitey add with success";
+        href = "communityForm.jsp?addcommunity=addcommunity";
     }
     
 %>

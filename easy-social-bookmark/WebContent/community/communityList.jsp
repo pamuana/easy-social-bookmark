@@ -79,7 +79,8 @@ News</a></li>
     <div id="community">
         <a class="namecommunity"><%= comm.getName() %></a>
         <div class="descriptioncommunity"><%= comm.getDescription() %></div>
-        <div class="commands"><a href="<%= "../community/viewcommunity.jsp?community="+comm.getId() %>">share</a>,
+        <div class="commands">
+        <a href="<%= "../community/viewcommunity.jsp?community="+comm.getId() %>">share</a>,
 <%
          if(comm.getIdAdmin() == user.getId()){
 %>
@@ -87,6 +88,8 @@ News</a></li>
 <%
          }
 %>          
+        <a href="communityForm.jsp?create=create">Cretate Community</a>
+        <a href="communityForm.jsp?addcommunity=addcommunity">Add Community</a>
         </div> 
     </div>
 <%
@@ -95,6 +98,11 @@ News</a></li>
 %>
     <div id="community">
         There are no community to this user.
+        <br />
+        <div class="commands">
+            <a href="communityForm.jsp?create=create">Cretate Community</a>
+            <a href="communityForm.jsp?addcommunity=addcommunity">Add Community</a>
+        </div>
     </div>
 <%
     }

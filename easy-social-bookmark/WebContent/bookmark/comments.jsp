@@ -35,6 +35,8 @@
 	<input type="hidden" name="operation" value="operation"/>
 	<input type="hidden" name="bookmark" value="<%=bookmark.getId() %>"/>
 	<input type="hidden" name="community" value="<%=request.getParameter("community")%>"/>
+	Comments:
+	<br/>
 	<textarea cols="50" rows="10" name="text" ></textarea>
 	<br/>
 	<input name="send" value="send" type="submit"/>
