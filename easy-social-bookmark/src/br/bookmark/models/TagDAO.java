@@ -57,6 +57,12 @@ public class TagDAO extends GenericDAO<Tag> {
 		createConnection().createStatement().executeUpdate(str);
 	}
 	
+	public void assignBookmark(long idTag,long idBookmark) throws Exception{
+		String tableName = this.getPrefixoTabela()+"categorization";
+		String str = "INSERT INTO "+tableName+" (idTag,idBookmark) 	VALUES("+idTag+","+idBookmark+")";
+		createConnection().createStatement().executeUpdate(str);
+	}
+	
 	public void deassignTag(long idBookmark) throws Exception{
 		String tableName = this.getPrefixoTabela()+"categorization";
 		String str = "DELETE FROM "+tableName+" WHERE idBookmark="+idBookmark;
