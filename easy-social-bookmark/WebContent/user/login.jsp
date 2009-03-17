@@ -23,7 +23,7 @@
 		} else {
 			// Login valido
 			session.setAttribute("idUser", user.getId());
-			response.sendRedirect("../bookmark/viewbookmark.jsp");
+			response.sendRedirect("../bookmark/bookmarkList.jsp");
 		}
 	}
 %>

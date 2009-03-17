@@ -39,4 +39,8 @@ public class BookmarkMgr {
 	public void deleteBookmark(String idBookmark) throws Exception{
 		this.bookmarkDAO.deleteBookmark(Long.parseLong(idBookmark));
 	}
+	
+	public void save(Bookmark bookmark) throws Exception {
+        this.bookmarkDAO.save(bookmark);
+    }
 }
