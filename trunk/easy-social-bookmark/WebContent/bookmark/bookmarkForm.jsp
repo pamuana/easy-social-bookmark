@@ -27,7 +27,7 @@
     	}
 		operation="edit";
     }
-    if (request.getParameter("operation").equals("share")){
+    if (request.getParameter("operation")!=null&&request.getParameter("operation").equals("share")){
     	operation="share";
     }
 %>
