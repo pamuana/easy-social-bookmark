@@ -5,7 +5,6 @@ import java.util.Collection;
 
 import br.bookmark.models.Tag;
 import br.bookmark.models.TagDAO;
-import br.bookmark.models.User;
 
 public class TagMgr {
 	private TagDAO tagDAO=null;
