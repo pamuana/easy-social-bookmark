@@ -4,7 +4,18 @@
 <%
     Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
     CommunityMgr communityMgr = new CommunityMgr(bookmarkInit.getCommunityDAO(), bookmarkInit.getUserDAO());     
-    Community community = communityMgr.findById(""+request.getParameter("community"));
+    
+    String idCommunity="";
+    String name="";
+    String description="";
+    if(request.getParameter("community")!=null){
+        Community community = communityMgr.findById(""+request.getParameter("community"));
+        idCommunity = community.getId()+"";
+        name = community.getName();
+        description = community.getDescription();
+        
+        
+    }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -13,17 +24,45 @@
   <title>Form Community</title>
 </head>
  <body>
-<form action="communityAction.jsp" method="get" name="comments">
+ <%
+      if(request.getParameter("community")!=null){
+ %>
+<form action="communityAction.jsp" method="post" name="comments">
     <input type="hidden" name="operation" value="managecommunity"/>
-    <input type="hidden" name="idCommunity" value="<%= community.getId() %>"></input>
-    <input type="text" name="name" value="<%= community.getName() %>"></input>
+    <input type="hidden" name="idCommunity" value="<%= idCommunity %>"></input>
+    Community:
     <br/>
-    <textarea name="description" ><%= community.getDescription() %></textarea>
+    <input type="text" name="name" value="<%= name %>"></input>
     <br/>
-    <a href="<%= "managemembers.jsp?idCommunity="+community.getId() %>">Manage Members</a>
+    Description:
+    <br/>
+    <textarea name="description" ><%= description %></textarea>
+    <br/>
+    <a href="<%= "managemembers.jsp?idCommunity="+idCommunity%>">Manage Members</a>
     <br/>
     <input name="send" value="send" type="submit"/>
     <input name="cancel" value="cancel" type="button"/>
 </form>
+<%
+      }else{
+%>
+<form action="communityAction.jsp" method="post" name="comments">
+    <input type="hidden" name="operation" value="createcommunity"/>
+    Community name:
+    <br/>
+    <input type="text" name="name" ></input>
+    <br/>
+    Description:
+    <br/>
+    <textarea name="description" ></textarea>
+    <br/>
+    <input name="send" value="send" type="submit"/>
+    <input name="cancel" value="cancel" type="button"/>
+</form>
+    
+<%
+    	  
+      }
+%>
 </body>
 </html>
