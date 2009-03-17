@@ -85,7 +85,7 @@ News</a></li>
         <div class="shared"><%= bookmarkMgr.findByUrl(bk.getUrl()).size() %></div>
         <div class="url"><%= bk.getUrl() %></div>
         <div class="description"><%= bk.getDescription() %></div>
-        <div class="commands"><a href="editbookmark.jsp?bookmark=">edit</a>,
+        <div class="commands"><a href="editbookmark.jsp?bookmark="+<%= bk.getId() %>>edit</a>,
 <%
               if(community.getIdAdmin() == user.getId()){
 %>
