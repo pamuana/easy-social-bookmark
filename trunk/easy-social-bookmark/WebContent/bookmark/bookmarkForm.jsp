@@ -25,6 +25,9 @@
     	tagsString=tagsString.substring(0,tagsString.length()-1);
 		operation="edit";
     }
+    if (request.getParameter("operation").equals("share")){
+    	operation="share";
+    }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
@@ -57,6 +60,15 @@
 	<br />
 	<textarea name="tags" cols="50" rows="10"><%=tagsString%></textarea>
 	<br />
+<%
+	if (operation.equals("share")){
+		CommunityMgr communityMgr=new CommunityMgr(bookmarkInit.getCommunityDAO(),bookmarkInit.getUserDAO());
+		Collection<Community> communities=communityMgr.findCommunitiesByIdUser(session.getAttribute("idUser").toString());
+		for (Community community : communities){
+			out.println(community.getName()+"<input type=\"checkbox\" name=\"community"+community.getId()+"\" value=\""+community.getId()+"\" /><br/>");
+		}
+	}
+%>
 	<input name="send" value="send" type="submit" />
 	<input name="cancel" type="button" value="Cancel"/>
 </form>

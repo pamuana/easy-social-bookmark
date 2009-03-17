@@ -93,6 +93,10 @@ public class TagMgr {
 	public void deassignBookmark(String idTag,String idBookmark) throws Exception{
 		this.tagDAO.deassignBookmark(Long.parseLong(idTag),Long.parseLong(idBookmark));
 	}
+	
+	public void deassignBookmark(String idBookmark) throws Exception{
+		this.tagDAO.deassignTag(Long.parseLong(idBookmark));
+	}
 	    
     public Collection<Tag> findTagsByIdCommunity(String idCommunity) throws Exception {
 		return this.tagDAO.findTagsByIdCommunity(Long.parseLong(idCommunity));

@@ -63,6 +63,36 @@
 		tagMgr.assignBookmarkWithIdUser(nameTags,""+bookmark.getId(),idUser);
 		
 		msg="we edit your Bookmark with success";
+	} else if (operation.equals("share")){
+		CommunityMgr communityMgr=new CommunityMgr(bookmarkInit.getCommunityDAO(),bookmarkInit.getUserDAO());
+		Collection<Community> communities=communityMgr.findCommunitiesByIdUser(session.getAttribute("idUser").toString());
+		for (Community community : communities){
+			if (request.getParameter("community"+community.getId())!=null){
+				Bookmark bookmark= new Bookmark();
+				bookmark.setIdUser(Long.parseLong(idUser));
+				bookmark.setName(request.getParameter("name"));
+				bookmark.setUrl(request.getParameter("url"));
+				bookmark.setDescription(request.getParameter("description"));
+				bookmark.setIdCommunity(community.getId());
+				bookmarkMgr.save(bookmark);
+			
+				String[] nameTags = request.getParameter("tags").split(",");
+				Collection<Bookmark> communityBookmarks=bookmarkMgr.findBookmarksByIdCommunity(""+community.getId());
+				for (Bookmark communityBookmark:communityBookmarks){
+					if (communityBookmark.getName().equals(bookmark.getName())&&communityBookmark.getUrl().equals(bookmark.getUrl())){
+						tagMgr.assignBookmarkWithIdCommunity(nameTags,""+communityBookmark.getId(),""+community.getId());
+					}
+				}
+			}
+		}
+		
+		
+		
+		msg="your bookmark was shared with your communities";
+	} else if (operation.equals("delete")){
+		tagMgr.deassignBookmark(request.getParameter("idBookmark"));
+		bookmarkMgr.deleteBookmark(request.getParameter("idBookmark"));
+		msg="bookmark deleted !!!";
 	}
 %>
 	<SCRIPT type="text/javascript">
