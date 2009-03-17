@@ -22,17 +22,26 @@
     
     if (operation.equals("removeMember")){
         communityMgr.deassignCommunity(idCommunity,request.getParameter("idUser"));
-        msg = "membro removido da comunidade com exito";
+        msg = "member removed successfull";
         href = "managemembers.jsp?idCommunity="+idCommunity;
+    }else if (operation.equals("managecommunity")){
+    	
+       Community community = communityMgr.findById(idCommunity);
+       community.setDescription(request.getParameter("description"));
+       community.setName(request.getParameter("name"));
+       communityMgr.save(community);
+       msg = "update done with success";
+       href = "communityForm.jsp?community="+idCommunity;
     }
+    
 %>
-<!-- 
+
     <SCRIPT type="text/javascript">
     <%
     if(!msg.equals("")) out.print("alert('"+msg+"');"); 
     %>
         window.location.href = "<%=href%>";
     </SCRIPT>           
- -->
+
   </body>
 </html>

@@ -73,6 +73,7 @@ News</a></li>
 </div>
 <div id="center">
 <%
+    if(!(communityMgr.findCommunitiesByIdUser(user.getId()+"").size()==0)){
     for(Community comm : communityMgr.findCommunitiesByIdUser(user.getId()+"")){
 %>
     <div id="community">
@@ -82,11 +83,18 @@ News</a></li>
 <%
          if(comm.getIdAdmin() == user.getId()){
 %>
-          <a href="editcommunity.jsp?community="+<%= comm.getId() %>>edit</a>,<a href="communityList.jsp?deleteComm="+<%= comm.getId() %>>delete</a>
+          <a href="communityForm.jsp?community="+<%= comm.getId() %>>edit</a>,<a href="communityList.jsp?deleteComm="+<%= comm.getId() %>>delete</a>
 <%
          }
 %>          
         </div> 
+    </div>
+<%
+    }
+    }else{
+%>
+    <div id="community">
+        There are no community to this user.
     </div>
 <%
     }
