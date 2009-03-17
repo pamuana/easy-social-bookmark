@@ -18,7 +18,7 @@
     <input type="hidden" name="idCommunity" value="<%= community.getId() %>"></input>
     <input type="text" name="name" value="<%= community.getName() %>"></input>
     <br/>
-    <input name="description" value="<%= community.getDescription() %>" ></input>
+    <textarea name="description" ><%= community.getDescription() %></textarea>
     <br/>
     <a href="<%= "managemembers.jsp?idCommunity="+community.getId() %>">Manage Members</a>
     <br/>
