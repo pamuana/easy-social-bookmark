@@ -19,7 +19,7 @@
 	String idUser = session.getAttribute("idUser").toString();
 	
 	String msg = "";
-	String href= "";
+	String href= ""; href="bookmarkList.jsp";
 	String operation=(request.getParameter("operation")!=null?request.getParameter("operation"):"");
 	
 	if (operation.equals("new")){
@@ -37,10 +37,32 @@
 				tagMgr.assignBookmarkWithIdUser(nameTags,""+userBookmark.getId(),idUser);
 			}
 		}
-		msg="we save your Bookmark with success";
-		href="bookmarkList.jsp";
-	} else if (operation.equals("edit")){
 		
+		msg="we save your Bookmark with success";
+		
+	} else if (operation.equals("edit")){
+		Bookmark bookmark=bookmarkMgr.findById(request.getParameter("idBookmark"));
+		bookmark.setName(request.getParameter("name"));
+		bookmark.setUrl(request.getParameter("url"));
+		bookmark.setDescription(request.getParameter("description"));
+		bookmarkMgr.save(bookmark);
+		
+		String[] nameTags = request.getParameter("tags").split(",");
+		Collection<String> collectionNameTags=new ArrayList<String>();
+		for (String editNameTag:nameTags){
+			collectionNameTags.add(editNameTag);
+		}
+		
+		Collection<Tag> currentTags=tagMgr.findTagsByIdBookmark(""+bookmark.getId());
+		for (Tag currentTag:currentTags){
+			if (!collectionNameTags.contains(currentTag.getName())){
+				tagMgr.deassignBookmark(""+currentTag.getId(),""+bookmark.getId());
+			}
+		}
+		
+		tagMgr.assignBookmarkWithIdUser(nameTags,""+bookmark.getId(),idUser);
+		
+		msg="we edit your Bookmark with success";
 	}
 %>
 	<SCRIPT type="text/javascript">

@@ -73,6 +73,7 @@ public class TagMgr {
 		}
 		
     	for(String tagName : tags){
+    		tagName=tagName.replaceFirst(" ", "");
     		tagName=tagName.replaceAll(" ","");
     		if (!tagsCommunityName.contains(tagName)){
     			Tag tagNew=new Tag();
@@ -87,6 +88,10 @@ public class TagMgr {
     			} 
     		}
 		}
+	}
+	
+	public void deassignBookmark(String idTag,String idBookmark) throws Exception{
+		this.tagDAO.deassignBookmark(Long.parseLong(idTag),Long.parseLong(idBookmark));
 	}
 	    
     public Collection<Tag> findTagsByIdCommunity(String idCommunity) throws Exception {
