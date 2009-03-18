@@ -34,15 +34,16 @@
        community.setName(request.getParameter("name"));
        communityMgr.save(community);
        msg = "update done with success";
-       href = "communityForm.jsp?community="+idCommunity;
+       href = "communityList.jsp";
     }else if(operation.equals("createcommunity")){
     	Community comm = new Community();
     	comm.setName(request.getParameter("name"));
     	comm.setDescription(request.getParameter("description"));
+    	comm.setIdAdmin(user.getId());
     	communityMgr.save(comm);
     	
         msg = "community created with success";
-        href = "communityForm.jsp?community="+comm.getId();
+        href = "communityList.jsp";
     }else if (operation.equals("addcommunity")){
         Collection<Community> communities=communityMgr.findCommunities();
         for (Community community : communities){
@@ -51,7 +52,7 @@
             }
         }
         msg = "community add with success";
-        href = "communityForm.jsp?addcommunity=addcommunity";
+        href = "communityList.jsp";
     }
     
 %>
