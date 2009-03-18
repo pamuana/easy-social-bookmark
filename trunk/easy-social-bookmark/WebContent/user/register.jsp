@@ -3,13 +3,26 @@
 <%@page import="br.bookmark.db.DataBaseUtils"%>
 <%@page import="br.bookmark.project.*"%>
 <%@page import="br.bookmark.models.*"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<link rel="stylesheet" href="../css/style.css" type="text/css" />
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
-  <title>register</title>
+<title>Forgot Password</title>
 </head>
 <body>
+<div id="wrap">
+	<div id="container">
+    	<div id="header">
+			<div id="caption">
+				<div id="title">
+					<h1>Easy Bookmark Social</h1>
+					<p>Web System Develpoment </p>
+					<br />
+			  </div>
+			</div>
+		</div>
+        <div id="content">
+       	  <div id="main">
 <%
 	
 	Init bookmarkInit = (Init) session.getAttribute("bookmarkInit");
@@ -34,21 +47,35 @@
 		}
 	}
 %>
-Register<br>
-<form action="register.jsp" name="registerForm" method="post">
-	Login:<br>
-	<input name="login" value="<%=(request.getParameter("login")!=null?request.getParameter("login"):"")%>"><br>
-	Name:<br>
-	<input name="name" value="<%=(request.getParameter("name")!=null?request.getParameter("name"):"")%>"><br>
-	Email:<br>
-	<input name="email" value="<%=(request.getParameter("email")!=null?request.getParameter("email"):"")%>"><br>
-	Password:<br>
-	<input name="password" type="password"><br>
-	Confirm Password:<br>
-	<input name="confirmpassword" type="password"><br>
-	<br>
-	<input name="send" value="send" type="submit"> &nbsp; <input value="cancel" name="cancel" type="button">
-</form>
-
+            Register<br>
+            <form action="register.jsp" name="registerForm" method="post">
+                Login:<br>
+                <input name="login" value="<%=(request.getParameter("login")!=null?request.getParameter("login"):"")%>"><br>
+                Name:<br>
+                <input name="name" value="<%=(request.getParameter("name")!=null?request.getParameter("name"):"")%>"><br>
+                Email:<br>
+                <input name="email" value="<%=(request.getParameter("email")!=null?request.getParameter("email"):"")%>"><br>
+                Password:<br>
+                <input name="password" type="password"><br>
+                Confirm Password:<br>
+                <input name="confirmpassword" type="password"><br>
+                <br>
+                <input name="send" value="send" type="submit"> &nbsp; <input value="cancel" name="cancel" type="button">
+            </form>
+            <br/>
+            <br/>
+            <br/>
+			<br/>
+            <br/>
+            <br/>
+			<br/>
+        </div>
+        <div id="sidebar"></div>
+        	<div class="clear"> </div>
+        	<div id="footer"></div>
+        </div>
+       </div>
+   </div>
+</div>
 </body>
 </html>
