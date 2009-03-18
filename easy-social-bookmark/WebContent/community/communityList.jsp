@@ -19,45 +19,87 @@
   
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<link rel="stylesheet" href="../css/style.css" type="text/css" />
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
   <title>List Community</title>
-
-  <style type="text/css">
-.tree { overflow: auto; width: 15em; height: 25em; cursor: default; border: 1px solid gray; padding-left: .5em;}
-.treeitem { margin-right: .6em;}
-.collapsedgroup { display : none; }
-.group { margin-left: 1.5em; }
-.treeitemfocus { outline: 0px; background-color: #dddddd; color: black;}
-  </style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
-<div style="text-align: left; width: 150px;">
-<div class="menuheader">Main Menu</div>
-<!-- begin left menu -->
-    <div id="LeftMNav">
-    <ul>
-        <li><a title="view bookmark" href="../bookmark/bookmarkList.jsp">&raquo;&nbsp;View Bookmark</a></li>
-        <li><a title="new bookmark" href="../bookmark/bookmarkForm.jsp">&raquo;&nbsp;New Bookmark</a></li>
-        <li><a title="view interesting" href="#">&raquo;&nbsp;View Interesting</a></li>
-        <li><a title="view statistic" href="#">&raquo;&nbsp;View Statistics</a></li>
-    </ul>
-    <hr/>
-    <ul>
-        <li><a title="list communities" href="communityList.jsp">&raquo;&nbsp;List Communities</a></li>
-        <li><a title="new community" href="communityForm.jsp?create=create">&raquo;&nbsp;New Community</a></li>
-        <li><a title="add community" href="communityForm.jsp?addcommunity=addcommunity">&raquo;&nbsp;Add Community</a></li>
-    </ul>
-    </div>
-    <!-- end left menu -->
-
-    <!-- begin right menu -->
-    <div id="right-menu">
-        <div id="tree">
-          <a title="list communities" href="communityList.jsp">List Communities</a>
-            <ul>
+<div id="wrap">
+	<div id="container">
+    	<div id="header">
+			<div id="caption">
+				<div id="title">
+					<h1>Easy Bookmark Social</h1>
+					<p>Web System Develpoment </p>
+					<br />
+			  </div>
+			</div>
+		</div>
+        <div id="content">
+       	  <div id="main">
+          <%
+    if(!(communityMgr.findCommunitiesByIdUser(idUser).size()==0)){
+    for(Community comm : communityMgr.findCommunitiesByIdUser(idUser)){
+%>
+            <div class="node">
+              <h2 class="nodeTitle">  <a class="namecommunity" href="<%= "communityMessage.jsp?idCommunity="+comm.getId() %>"><%= "Community: "+comm.getName() %></a></h2>
+                <div ><%= "Description: "+comm.getDescription() %></div>
+                <div class="post">
+<%
+         if(comm.getIdAdmin()==Long.parseLong(idUser)){
+%>
+                  <a class="editlinks" href="<%= "communityForm.jsp?community="+comm.getId() %>">edit</a>                 
+                  <a class="addcomment"href="<%= "managemembers.jsp?idCommunity="+comm.getId()%>">Manage Members</a>
+                  <a href="<%= "communityList.jsp?deleteComm="+comm.getId() %>">delete</a>
+<%
+         }
+%>         
+                </div> 
+                <p/>&nbsp;
+                <hr/>
+                <p/>&nbsp;
+            </div>
+<%
+    }
+    }else{
+%>
+                <div class="node">
+                    There are no community to this user.
+                    <br />
+                    <div class="post">
+                        <a href="communityForm.jsp?create=create">Cretate Community</a>
+                        <a href="communityForm.jsp?addcommunity=addcommunity">Add Community</a>
+                    </div>
+                </div>
+<%
+    }
+%>
+          </div>
+		  <div id="sidebar">
+        		<div id="block-menu-principal" class="block">
+        			<h2>Main Menu</h2>
+        			<div class="content">
+                        <ul>
+                            <li><a title="view bookmark" href="../bookmark/bookmarkList.jsp">&raquo;&nbsp;View Bookmark</a></li>
+                            <li><a title="new bookmark" href="../bookmark/bookmarkForm.jsp">&raquo;&nbsp;New Bookmark</a></li>
+                            <li><a title="view interesting" href="#">&raquo;&nbsp;View Interesting</a></li>
+                            <li><a title="view statistic" href="#">&raquo;&nbsp;View Statistics</a></li>
+                        </ul>
+						<br/><p/>&nbsp;
+						<ul>
+                            <li><a title="list communities" href="communityList.jsp">&raquo;&nbsp;List Communities</a></li>
+                            <li><a title="new community" href="communityForm.jsp?create=create">&raquo;&nbsp;New Community</a></li>
+                            <li><a title="add community" href="communityForm.jsp?addcommunity=addcommunity">&raquo;&nbsp;Add Community</a></li>
+                        </ul>
+    				</div>
+                 </div>
+                 <p/>&nbsp;
+        		<hr/>
+        		<p/>&nbsp;
+ 				<div id="block-menu-community" class="block">
+                     <h2> <a title="list communities" href="communityList.jsp">List Communities</a></h2>
+                     <div class="content">
+                     <ul class="menu">
 <%
         // TODO criar uma funç~ao recursiva para esta chamada
         Collection<Community> communities=communityMgr.findCommunitiesByIdUser(idUser);
@@ -79,47 +121,14 @@
             }
         }
 %>
-            </ul>
-        </div>
-    </div>
-
-    </div>
-    <!-- end right menu -->
-<div id="center">
-<%
-    if(!(communityMgr.findCommunitiesByIdUser(idUser).size()==0)){
-    for(Community comm : communityMgr.findCommunitiesByIdUser(idUser)){
-%>
-    <div id="community">
-        <a class="namecommunity" href="<%= "communityMessage.jsp?idCommunity="+comm.getId() %>"><%= comm.getName() %></a>
-        <div class="descriptioncommunity"><%= comm.getDescription() %></div>
-        <div class="commands">
-<%
-         if(comm.getIdAdmin()==Long.parseLong(idUser)){
-%>
-          <a href="<%= "communityForm.jsp?community="+comm.getId() %>">edit</a>,
-          <a href="<%= "communityList.jsp?deleteComm="+comm.getId() %>">delete</a>,
-          <a href="<%= "managemembers.jsp?idCommunity="+comm.getId()%>">Manage Members</a>
-<%
-         }
-%>         
-        </div> 
-    </div>
-<%
-    }
-    }else{
-%>
-    <div id="community">
-        There are no community to this user.
-        <br />
-        <div class="commands">
-            <a href="communityForm.jsp?create=create">Cretate Community</a>
-            <a href="communityForm.jsp?addcommunity=addcommunity">Add Community</a>
-        </div>
-    </div>
-<%
-    }
-%>
+                     </ul>
+                  </div>
+    			</div>
+            </div>
+        	<div class="clear"></div>
+        	<div id="footer"></div>
+          </div>
+	</div>
 </div>
 </body>
 </html>
