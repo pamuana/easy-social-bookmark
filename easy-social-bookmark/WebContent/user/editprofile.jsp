@@ -2,11 +2,25 @@
 <%@page import="br.bookmark.project.*"%>
 <%@page import="br.bookmark.models.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
-  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
+<link rel="stylesheet" href="../css/style.css" type="text/css" />
+<html xmlns="http://www.w3.org/1999/xhtml">
   <title>Edit Profile</title>
 </head>
 <body>
+<body>
+<div id="wrap">
+	<div id="container">
+    	<div id="header">
+			<div id="caption">
+				<div id="title">
+					<h1>Easy Bookmark Social</h1>
+					<p>Web System Develpoment </p>
+					<br />
+			  </div>
+			</div>
+		</div>
+        <div id="content">
+       	  <div id="main">
 <%
 	Init bookmarkInit = (Init) session.getAttribute("bookmarkInit");
 
@@ -52,22 +66,40 @@
 		}
 	}
 %>
-<form action="editprofile.jsp" name="formRegister" method="post">
-	Login:<br />
-	<input name="login" value="<%=user.getLogin()%>" /><br />
-	Name:<br />
-	<input name="name" value="<%=user.getName()%>" /><br />
-	Email:<br />
-	<input name="email" value="<%=user.getEmail()%>" /><br />
-	Password:<br />
-	<input name="password" type="password" value="<%=user.getPassword()%>" /><br />
-	Confirm Password:<br />
-	<input name="confirmpassword" type="password" value="<%=user.getPassword()%>" /><br />
-	<br />
-	<input name="send" value="send" type="submit" /> &nbsp; <input value="cancel" name="cancel" type="button" />
-	<p/>
-	<a href="../bookmark/bookmarkList.jsp">List your Bookmarks</a>
-</form>
-
+            <form action="editprofile.jsp" name="formRegister" method="post">
+                Login:<br />
+                <input name="login" value="<%=user.getLogin()%>" /><br />
+                Name:<br />
+                <input name="name" value="<%=user.getName()%>" /><br />
+                Email:<br />
+                <input name="email" value="<%=user.getEmail()%>" /><br />
+                Password:<br />
+                <input name="password" type="password" value="<%=user.getPassword()%>" /><br />
+                Confirm Password:<br />
+                <input name="confirmpassword" type="password" value="<%=user.getPassword()%>" /><br />
+                <br />
+                <input name="send" value="send" type="submit" /> &nbsp; <input value="cancel" name="cancel" type="button" />
+                <p/>
+                <a href="../bookmark/bookmarkList.jsp">List your Bookmarks</a>
+            </form>
+            
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+    
+		</div>
+        <div id="sidebar"></div>
+        <div class="clear"> </div>
+        <div id="footer"></div>
+       </div>   
+	</div>
+</div>
 </body>
 </html>
