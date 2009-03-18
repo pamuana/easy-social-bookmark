@@ -60,7 +60,8 @@
                 Confirm Password:<br>
                 <input name="confirmpassword" type="password"><br>
                 <br>
-                <input name="send" value="send" type="submit"> &nbsp; <input value="cancel" name="cancel" type="button">
+                <input name="send" value="send" type="submit"> &nbsp;
+                <input value="cancel" name="cancel" type="button" onclick="history.back()">
             </form>
             <br/>
             <br/>
