@@ -6,6 +6,9 @@
 		Init bookmarkInit = (Init) session.getAttribute("bookmarkInit");
 
 		CommentMgr commentMgr = new CommentMgr(bookmarkInit.getCommentDAO());
+		
+		BookmarkMgr bookmarkMgr = new BookmarkMgr(bookmarkInit.getBookmarkDAO());
+		
 		String idBookmark = request.getParameter("idBookmark");
 		String idUser = session.getAttribute("idUser").toString();
 		String operation = ""+request.getParameter("operation");
@@ -18,7 +21,7 @@
 				comment.setIdBookmark(Long.parseLong(idBookmark));
 				comment.setIdUser(Long.parseLong(idUser));
 				commentMgr.save(comment);
-				String src= "bookmarkList.jsp";
+				String src= "bookmarkCommunityList.jsp?idCommunity="+bookmarkMgr.findById(idBookmark).getIdCommunity();
 			
 %>
     <SCRIPT type="text/javascript">
