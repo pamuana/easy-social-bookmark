@@ -20,12 +20,26 @@
     }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<link rel="stylesheet" href="../css/style.css" type="text/css" />
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
   <title>Form Community</title>
 </head>
  <body>
+ <div id="wrap">
+	<div id="container">
+    	<div id="header">
+			<div id="caption">
+				<div id="title">
+					<h1>Easy Bookmark Social</h1>
+					<p>Web System Develpoment </p>
+					<br />
+			  </div>
+			</div>
+		</div>
+        <div id="content">
+       	  <div id="main">
  <%
       if(request.getParameter("community")!=null){
  %>
@@ -42,9 +56,22 @@
     <br/>
     <a href="<%= "managemembers.jsp?idCommunity="+idCommunity%>">Manage Members</a>
     <br/>
+    <br/>
     <input name="send" value="send" type="submit"/>
     <input name="cancel" value="cancel" type="button"/>
 </form>
+	<br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
 <%
       }else if(request.getParameter("create")!=null){
 %>
@@ -58,9 +85,22 @@
     <br/>
     <textarea name="description" ></textarea>
     <br/>
+    <br/>
     <input name="send" value="send" type="submit"/>
     <input name="cancel" value="cancel" type="button"/>
 </form>
+	<br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
     
 <%
       }else if(request.getParameter("addcommunity")!=null){
@@ -81,14 +121,33 @@
 		 }
 		 
  %>
+ 	<br/>
+    <br/>
     <input name="send" value="send" type="submit"/>
     <input name="cancel" value="cancel" type="button"/>
 </form>
+	<br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
     
 <%
           
       }
 %>
-
+		</div>
+        <div id="sidebar"></div>
+        <div class="clear"> </div>
+        <div id="footer"></div>
+       </div>   
+</div>
 </body>
 </html>
