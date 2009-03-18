@@ -56,7 +56,7 @@
 			if ((bm.getIdCommunity()==0)&&(view)){
 %>
 		<div class="node">
-		    <h2 class="nodeTitle"><%=bm.getName()%> - (<%=bookmarkMgr.findByUrl(bm.getUrl()).size()%>)</h2>
+		    <h2 class="nodeTitle"><a href="<%=bm.getUrl()%>" target="_blank"><%=bm.getName()%> &nbsp;&nbsp; (<%=bookmarkMgr.findByUrl(bm.getUrl()).size()%>)</a></h2>
 		    <div class="post">
 		    <div class="taxonomy">
 				Tag's:
@@ -70,15 +70,17 @@
 %>
 			</div> 
 		    <div class="shared"></div>
-		    <div class="url"><%=bm.getUrl()%></div>
-		    <ul class="links inline">
-		    	<li class="comment_add first"><a href="bookmarkForm.jsp?operation=share&idBookmark=<%=bm.getId()%>">share</a></li>
-		    	<li class="comment_add first"><a href="bookmarkForm.jsp?idBookmark=<%=bm.getId()%>">edit</a></li>
-		    	<li class="comment_add first"><a href="bookmarkAction.jsp?operation=delete&idBookmark=<%= bm.getId() %>">delete</a></li>
-		    </ul>
-
+		    <div class="url"><a href="<%=bm.getUrl()%>" target="_blank"><%=bm.getUrl()%></div>
+		    <div>
+		    <a class="addcomment" href="bookmarkForm.jsp?operation=share&idBookmark=<%=bm.getId()%>">share</a>
+			<a class="editlinks" href="bookmarkForm.jsp?idBookmark=<%=bm.getId()%>">edit</a>
+		    <a href="bookmarkAction.jsp?operation=delete&idBookmark=<%= bm.getId() %>">delete</a>
+			</div>
 			</div>
 		</div>
+		<p/>&nbsp;
+        <hr/>
+        <p/>&nbsp;
 <%
 			}
 		}
