@@ -16,15 +16,7 @@
 <head>
   <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
   <title>Community Messages</title>
-
-  <style type="text/css">
-.tree { overflow: auto; width: 15em; height: 25em; cursor: default; border: 1px solid gray; padding-left: .5em;}
-.treeitem { margin-right: .6em;}
-.collapsedgroup { display : none; }
-.group { margin-left: 1.5em; }
-.treeitemfocus { outline: 0px; background-color: #dddddd; color: black;}
-  </style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 <body>
 <div style="text-align: left; width: 150px;">
@@ -52,7 +44,7 @@
           <a title="list communities" href="communityList.jsp">List Communities</a>
             <ul>
 <%
-        // TODO criar uma funç~ao recursiva para esta chamada
+        // TODO criar uma função recursiva para esta chamada
         Collection<Community> communities=communityMgr.findCommunitiesByIdUser(idUser);
         for (Community comm :communities){
             if (comm.getIdParent()==0){
@@ -79,15 +71,28 @@
     </div>
     <!-- end right menu -->
 <div id="center">
-    <div class="namecommunity"><%= community.getName() %></div>
-    <div class="communitydescription"><%= community.getDescription() %></div>
+    <div class="namecommunity">Community <%= community.getName() %></div>
+    <div class="communitydescription">Description <%= community.getDescription() %></div>
     <div class="newmessage">
-        <a>Add Message</a>
+        <a href="<%= "messageForm.jsp?idCommunity="+idCommunty+"&operation=new" %>">Add Message</a>
     </div>
 <%
      for(Message message : messageMgr.findMessagesByIdCommunity(idCommunty)){    
 %>  
-     <div class="message"><%= message.getText() %></div>
+     <div class="message">
+     <%= message.getText() %>
+     <br />
+<%
+    if(message.getIdUser()==(Long.parseLong(idUser))){
+%>
+     <div class="commands">
+        <a href="<%= "messageForm.jsp?idCommunity="+idCommunty+"&idMessage="+message.getId()+"&operation=edit" %>">edit</a>
+        <a href="<%= "messageAction.jsp?idCommunity="+idCommunty+"&idMessage="+message.getId()+"&operation=delete"%>">delete</a>
+     </div>
+<%
+    }
+%>
+     </div>
 <%
      }
 %>
