@@ -18,5 +18,9 @@ public class UserDAO extends GenericDAO<User> {
 	public User findByLogin(String login) throws Exception {
 		return findElementByCriterio("login='"+login+"'");
 	}
+	
+	public User findByEmail(String email) throws Exception {
+		return findElementByCriterio("email='"+email+"'");
+	}
 
 }

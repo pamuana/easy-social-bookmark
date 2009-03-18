@@ -41,7 +41,7 @@
     	comm.setDescription(request.getParameter("description"));
     	communityMgr.save(comm);
     	
-        msg = "communitey created with success";
+        msg = "community created with success";
         href = "communityForm.jsp?community="+comm.getId();
     }else if (operation.equals("addcommunity")){
         Collection<Community> communities=communityMgr.findCommunities();
@@ -50,7 +50,7 @@
                 communityMgr.assignCommunity(community.getId()+"",user.getId()+"");
             }
         }
-        msg = "communitey add with success";
+        msg = "community add with success";
         href = "communityForm.jsp?addcommunity=addcommunity";
     }
     

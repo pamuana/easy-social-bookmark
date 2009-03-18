@@ -29,6 +29,10 @@ public class UserMgr {
     public User findByLogin(String login) throws Exception {
         return this.userDAO.findByLogin(login);
     }
+    
+    public User findByEmail(String email) throws Exception {
+        return this.userDAO.findByEmail(email);
+    }
 
     public void save(User user) throws Exception {
         this.userDAO.save(user);
