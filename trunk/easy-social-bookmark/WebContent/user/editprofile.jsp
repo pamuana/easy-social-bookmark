@@ -66,7 +66,7 @@
 	<br />
 	<input name="send" value="send" type="submit" /> &nbsp; <input value="cancel" name="cancel" type="button" />
 	<p/>
-	<a href="viewbookmark.jsp">view bookmarks</a>
+	<a href="../bookmark/bookmarkList.jsp">List your Bookmarks</a>
 </form>
 
 </body>

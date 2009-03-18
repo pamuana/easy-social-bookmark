@@ -10,13 +10,15 @@
 	String idUser=session.getAttribute("idUser").toString();
 	
 	CommunityMgr communityMgr=new CommunityMgr(bookmarkInit.getCommunityDAO(),bookmarkInit.getUserDAO());
+	CommentMgr commentMgr= new CommentMgr(bookmarkInit.getCommentDAO());
+	String idCommunity = request.getParameter("idCommunity").toString();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html template="true">
 <head>
   <meta content="text/html; charset=ISO-8859-1"
  http-equiv="content-type">
-  <title>View Bookmarks</title>
+  <title>View Bookmarks by Community</title>
   <style type="text/css">
 .tree { overflow: auto; width: 15em; height: 25em; cursor: default; border: 1px solid gray; padding-left: .5em;}
 .treeitem { margin-right: .6em;}
@@ -78,10 +80,10 @@
 		<div id="tags">
 		<ul>
 <%
-		Collection<Tag> userTags=tagMgr.findTagsByIdUser(idUser);
-		for (Tag tag:userTags){
+		Collection<Tag> communityTags=tagMgr.findTagsByIdCommunity(idCommunity);
+		for (Tag tag:communityTags){
 %>
-			<li><a href="bookmarkList.jsp?idTag=<%=tag.getId()%>"><%=tag.getName()%></a></li>
+			<li><a href="bookmarkCommunityList.jsp?idCommunity=<%=idCommunity%>&idTag=<%=tag.getId()%>"><%=tag.getName()%></a></li>
 <%	
 		}
 %>
@@ -91,46 +93,69 @@
 
 	</div>
 	<!-- end right menu -->
+	
 	<div id="center">
-	    
+
+    <div id="community">
 <%
-		Collection<String> bookmarkIds=new ArrayList<String>();
+    Community community=communityMgr.findById(idCommunity);
+%>
+        <div class="namecommunity"><%=community.getName() %></div>
+        <div class="descriptioncommunity"><%= community.getDescription() %></div>
+    </div>
+<%
+	
+	Collection<String> bookmarkIds=new ArrayList<String>();
+	if (request.getParameter("idTag")!=null){
+		bookmarkIds=tagMgr.findIdBookmarksByIdTag(request.getParameter("idTag"));
+	}
+
+	Collection<Bookmark> bookmarks = bookmarkMgr.findBookmarksByIdCommunity(idCommunity);
+	for(Bookmark bk : bookmarks){
+		boolean view=true;
 		if (request.getParameter("idTag")!=null){
-			bookmarkIds=tagMgr.findIdBookmarksByIdTag(request.getParameter("idTag"));
+			view=bookmarkIds.contains(""+bk.getId());
 		}
-		
-		Collection<Bookmark> bookmarks = bookmarkMgr.findBookmarksByIdUser(idUser);
-		for (Bookmark bm : bookmarks) {
-			boolean view=true;
-			if (request.getParameter("idTag")!=null){
-				view=bookmarkIds.contains(""+bm.getId());
-			}
-			if ((bm.getIdCommunity()==0)&&(view)){
+		if (view){
 %>
-		<div class="bookmark">
-		    <div class="name"><%=bm.getName()%></div>
-		    <div class="shared"><%= bookmarkMgr.findByUrl(bm.getUrl()).size() %></div>
-		    <div class="url"><%=bm.getUrl()%></div>
-		    <div class="commands">
-		    	<a href="bookmarkForm.jsp?operation=share&idBookmark=<%=bm.getId()%>">share</a>,
-		    	<a href="bookmarkForm.jsp?idBookmark=<%=bm.getId()%>">edit</a>,
-		    	<a href="bookmarkAction.jsp?operation=delete&idBookmark=<%= bm.getId() %>">delete</a>
-		    </div>
+    <div class="bookmark">
+        <div class="name"><%= bk.getName() %></div>
+        <div class="shared"><%= bookmarkMgr.findByUrl(bk.getUrl()).size() %></div>
+        <div class="url"><%= bk.getUrl() %></div>
+        <div class="description"><%= bk.getDescription() %></div>
+        <div class="commands">
+			<a href="bookmarkForm.jsp?idBookmark=<%=bk.getId()%>">edit</a>,
 <%
-			Collection<Tag> tags=tagMgr.findTagsByIdBookmark(""+bm.getId());
-		    for (Tag tag : tags) {
+			if(community.getIdAdmin() == Long.parseLong(idUser)){
 %>
-	        <div class="tags"><%=tag.getName()%></div>
+			<a href="bookmarkAction.jsp?operation=delete&idBookmark=<%=bk.getId()%>">delete</a>
 <%
-		    	}
+        	}
 %>
 		</div>
 <%
-			}
-		}
+			for (Tag tag : tagMgr.findTagsByIdBookmark(bk.getId()+"")) {
 %>
-	    
+        <div class="tags"><%=tag.getName()%></div>
+<%
+			}
+%>
+		<div class="comments">
+<%
+			Collection<Comment> comments=commentMgr.findCommentsByIdBookmark(bk.getId()+"");
+			for (Comment comment : comments) {
+%>
+			<div class="comment"><%= comment.getText() %></div>
+<%
+			}
+%>
+        </div>
+        <a href="comments.jsp?idBookmark=<%=bk.getId()%>">Add comment</a>
 	</div>
+<%
+		}
+	}
+%>
 </div>
 </body>
 </html>

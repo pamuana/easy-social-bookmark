@@ -31,7 +31,7 @@ public class TagDAO extends GenericDAO<Tag> {
 	}
 	
 	public Collection<String> findIdBookmarksByIdTag(long idTag) throws Exception{
-		return this.findField("idBookmarks", this.getPrefixoTabela()+"categorization", "idTag="+idTag);
+		return this.findField("idBookmark", this.getPrefixoTabela()+"categorization", "idTag="+idTag);
 	}
 	
 	public Collection<String> findIdTagsByIdBookmark(long idBookmark) throws Exception{
