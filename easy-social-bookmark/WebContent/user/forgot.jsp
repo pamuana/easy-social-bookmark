@@ -70,6 +70,7 @@
         <br />
         <br />
         <input type="submit" value="Send" name="send"/>
+        <input value="cancel" name="cancel" type="button" onclick="history.back()">
     </form>
 
     <p>

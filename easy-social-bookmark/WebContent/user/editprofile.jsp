@@ -78,7 +78,7 @@
                 Confirm Password:<br />
                 <input name="confirmpassword" type="password" value="<%=user.getPassword()%>" /><br />
                 <br />
-                <input name="send" value="send" type="submit" /> &nbsp; <input value="cancel" name="cancel" type="button" />
+                <input name="send" value="send" type="submit" /> &nbsp; <input value="cancel" name="cancel" type="button" onclick="history.back()" />
                 <p/>
                 <a href="../bookmark/bookmarkList.jsp">List your Bookmarks</a>
             </form>
