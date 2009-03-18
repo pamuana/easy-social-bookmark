@@ -96,7 +96,7 @@
 	}
 %>
 				<input name="send" value="send" type="submit" />
-				<input name="cancel" type="button" value="Cancel"/>
+				<input name="cancel" type="button" value="Cancel" onclick="history.back()"/>
 			</form>
 
 		</div>
