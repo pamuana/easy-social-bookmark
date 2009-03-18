@@ -28,6 +28,7 @@
 	Init bookmarkInit = (Init) session.getAttribute("bookmarkInit");
 	CommunityMgr communityMgr=new CommunityMgr(bookmarkInit.getCommunityDAO(),bookmarkInit.getUserDAO());
 	String idCommunity= request.getParameter("idCommunity");
+	Community communinty = communityMgr.findById(idCommunity);
 	
 	if ((communityMgr == null)||(idCommunity.equals(""))||(idCommunity==null)){
 		response.sendRedirect("error.jsp");
@@ -35,17 +36,23 @@
 	
 	Collection<User> users = communityMgr.findUsersByIdCommunity(idCommunity);
 %>
-<div class="community"> community</div>
+<h2 class="nodeTitle"> <%= communinty.getName() %></h2>
 
 <%
 	for (User user:users){
 %>
 	<div class="member">
-		<div class="login"><%=user.getLogin()%></div>
-		<div class="name"><%=user.getName()%></div>
-		<div class="email"><%=user.getEmail()%></div>
+    	 <div class="login">Login: <%=user.getLogin()%></div>
+         <div class="name">Name: <%=user.getName()%></div>
+         <div class="email">Email: <%=user.getEmail()%></div>
+        <br/>
 		<a href="communityAction.jsp?operation=removeMember&idCommunity=<%=idCommunity%>&idUser=<%=user.getId()%>">remove</a>
 	</div>
+         <br />
+         <br />
+         <br />
+         <br />
+         <br />
 <%
 	}
 %>
@@ -53,7 +60,7 @@
         <div id="sidebar"></div>
         <div class="clear"> </div>
         <div id="footer"></div>
-       </div>   
-
+      </div>  
+</div>
 </body>
 </html>
