@@ -29,7 +29,7 @@
 		href = "communityMessage.jsp?idCommunity="+idCommunty;
 	}else if(operation.equals("edit")){
 		String message = request.getParameter("message");
-        Message msg = new Message();
+        Message msg = messageMgr.findById(idUser);
         msg.setIdCommunity(Long.parseLong(idCommunty));
         msg.setIdUser(Long.parseLong(idUser));
         msg.setText(message);
