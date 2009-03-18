@@ -32,6 +32,10 @@ public class TagMgr {
 		return this.tagDAO.findTagsByIdUser(Long.parseLong(idUser));
 	}
 	
+	public Collection<String> findIdBookmarksByIdTag(String idTag) throws Exception{
+		return this.tagDAO.findIdBookmarksByIdTag(Long.parseLong(idTag));
+	}
+	
 	public void assignBookmark(String idTag, String idBookmark) throws Exception {
         this.tagDAO.assignBookmark(Long.parseLong(idTag) , Long.parseLong(idBookmark) );
     }
