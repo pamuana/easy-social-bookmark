@@ -9,9 +9,10 @@
 	if(request.getParameter("email")!=null){
 	    UserMgr userMgr = new UserMgr(bookmarkInit.getUserDAO());
 	    User user = userMgr.findByEmail(email);
-	    pssw= user.getPassword();
-	    login = user.getLogin();
-    
+        if(user!=null){
+		    pssw= user.getPassword();
+		    login = user.getLogin();
+        }
 	}
 
 %>
@@ -24,7 +25,7 @@
 <%
 	if(request.getParameter("email")==null){
 %>
-<form action="forgot.jsp">
+<form action="forgot.jsp" method="post">
 	<div>Type your email address: </div>
 	<br />
 	<input type="text" name="email"></input>
@@ -35,12 +36,15 @@
 	}else{
 		if(!login.equals("")){
 %>
-<div>login: <%= login%></div>
-<div>password: <%= pssw %> </div>
+<form action="login.jsp" method="post">
+	<div>login: <%= login%></div>
+	<div>password: <%= pssw %> </div>
+    <input type="submit" value="Back" name="back"/>
+</form>
 <%
 		}else{
 %>
-<form action="forgot.jsp">
+<form action="forgot.jsp" method="post">
     <div>Email not found</div>
     <br />
     <div>Type your email address: </div>
