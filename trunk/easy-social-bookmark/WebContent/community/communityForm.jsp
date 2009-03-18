@@ -58,7 +58,7 @@
     <br/>
     <br/>
     <input name="send" value="send" type="submit"/>
-    <input name="cancel" value="cancel" type="button"/>
+    <input name="cancel" value="cancel" type="button" onclick="history.back()"/>
 </form>
 	<br/>
     <br/>
@@ -87,7 +87,7 @@
     <br/>
     <br/>
     <input name="send" value="send" type="submit"/>
-    <input name="cancel" value="cancel" type="button"/>
+    <input name="cancel" value="cancel" type="button" onclick="history.back()"/>
 </form>
 	<br/>
     <br/>
@@ -124,7 +124,7 @@
  	<br/>
     <br/>
     <input name="send" value="send" type="submit"/>
-    <input name="cancel" value="cancel" type="button"/>
+    <input name="cancel" value="cancel" type="button" onclick="history.back()"/>
 </form>
 	<br/>
     <br/>
