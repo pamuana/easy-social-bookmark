@@ -87,8 +87,8 @@ Message:
         			<h2>Main Menu</h2>
         			<div class="content">
 						<ul>
-  							<li><a title="view bookmark" href="bookmarkList.jsp">&raquo;&nbsp;View Bookmark</a></li>
-  							<li><a title="new bookmark" href="bookmarkForm.jsp">&raquo;&nbsp;New Bookmark</a></li>
+  							<li><a title="view bookmark" href="../bookmark/bookmarkList.jsp">&raquo;&nbsp;View Bookmark</a></li>
+  							<li><a title="new bookmark" href="../bookmark/bookmarkForm.jsp">&raquo;&nbsp;New Bookmark</a></li>
   							<li><a title="view interesting" href="#">&raquo;&nbsp;View Interesting</a></li>
   							<li><a title="view statistic" href="#">&raquo;&nbsp;View Statistics</a></li>
 						</ul>
