@@ -12,86 +12,34 @@
 	CommunityMgr communityMgr=new CommunityMgr(bookmarkInit.getCommunityDAO(),bookmarkInit.getUserDAO());
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html template="true">
+<html>
 <head>
-  <meta content="text/html; charset=ISO-8859-1"
- http-equiv="content-type">
-  <title>View Bookmarks</title>
-  <style type="text/css">
-.tree { overflow: auto; width: 15em; height: 25em; cursor: default; border: 1px solid gray; padding-left: .5em;}
-.treeitem { margin-right: .6em;}
-.collapsedgroup { display : none; }
-.group { margin-left: 1.5em; }
-.treeitemfocus { outline: 0px; background-color: #dddddd; color: black;}
-  </style>
-  <link rel="stylesheet" href="css/style.css" type="text/css">
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Bookmark List</title>
+  <link rel="stylesheet" href="../css/style.css" type="text/css">
 </head>
 <body>
-<div style="text-align: left; width: 100%;">
-	<div class="menuheader">Main Menu</div>
-	<a title="edit profile" href="../user/editprofile.jsp">Edit your profile</a>
-<!-- begin left menu -->
-	<div id="LeftMNav">
-	<ul>
-  		<li><a title="view bookmark" href="bookmarkList.jsp">&raquo;&nbsp;View Bookmark</a></li>
-  		<li><a title="new bookmark" href="bookmarkForm.jsp">&raquo;&nbsp;New Bookmark</a></li>
-  		<li><a title="view interesting" href="#">&raquo;&nbsp;View Interesting</a></li>
-  		<li><a title="view statistic" href="#">&raquo;&nbsp;View Statistics</a></li>
-	</ul>
-	<hr/>
-	<ul>
-        <li><a title="list communities" href="../community/communityList.jsp">&raquo;&nbsp;List Communities</a></li>
-        <li><a title="new community" href="../community/communityForm.jsp?create=create">&raquo;&nbsp;New Community</a></li>
-        <li><a title="add community" href="../community/communityForm.jsp?addcommunity=addcommunity">&raquo;&nbsp;Add Community</a></li>
-    </ul>
-	</div>
-	<!-- end left menu -->
-
-	<!-- begin right menu -->
-	<div id="right-menu">
-		<div id="tree">
-		  <a title="list communities" href="../community/communityList.jsp">List Communities</a>
-			<ul>
-<%
-		// TODO criar uma funç~ao recursiva para esta chamada
-		Collection<Community> communities=communityMgr.findCommunitiesByIdUser(idUser);
-		for (Community community:communities){
-			if (community.getIdParent()==0){
-%>
-				<li><a href="bookmarkCommunityList.jsp?idCommunity=<%=community.getId()%>"><%=community.getName()%></a></li>
-					<ul>
-<%
-						Collection<Community> subcommunities=communityMgr.findSubCommunity(""+community.getId());
-						for (Community subcommunity:subcommunities){
-%>
-							<li><a href="bookmarkCommunityList.jsp?idCommunity=<%=subcommunity.getId()%>"><%=subcommunity.getName()%></a></li>
-<%
-						}
-%>
+<div id="wrap">
+	<div id="container">
+	
+		<div id="header">
+			<div id="caption">
+				<div id="title">
+					<h1>Easy Bookmark Social</h1>
+					<p>Web System Develpoment </p>
+					<br />
+			  	</div>
+			</div>
+			<div id="navigation">
+				<div id="menus">
+					<ul class="links">
 					</ul>
-<%			
-			}
-		}
-%>
-			</ul>
+				</div>
+				<div id="searchbox"><a title="edit profile" href="../user/editprofile.jsp">Edit your profile</a></div>
+			</div>
 		</div>
-		<div id="tags">
-		<ul>
-<%
-		Collection<Tag> userTags=tagMgr.findTagsByIdUser(idUser);
-		for (Tag tag:userTags){
-%>
-			<li><a href="bookmarkList.jsp?idTag=<%=tag.getId()%>"><%=tag.getName()%></a></li>
-<%	
-		}
-%>
-		</ul>
-		</div>
-	</div>
-
-	</div>
-	<!-- end right menu -->
-	<div id="center">
+		<div id="content">
+		<div id="main">
 	    
 <%
 		Collection<String> bookmarkIds=new ArrayList<String>();
@@ -107,29 +55,105 @@
 			}
 			if ((bm.getIdCommunity()==0)&&(view)){
 %>
-		<div class="bookmark">
-		    <div class="name"><%=bm.getName()%></div>
-		    <div class="shared"><%= bookmarkMgr.findByUrl(bm.getUrl()).size() %></div>
-		    <div class="url"><%=bm.getUrl()%></div>
-		    <div class="commands">
-		    	<a href="bookmarkForm.jsp?operation=share&idBookmark=<%=bm.getId()%>">share</a>,
-		    	<a href="bookmarkForm.jsp?idBookmark=<%=bm.getId()%>">edit</a>,
-		    	<a href="bookmarkAction.jsp?operation=delete&idBookmark=<%= bm.getId() %>">delete</a>
-		    </div>
+		<div class="node">
+		    <h2 class="nodeTitle"><%=bm.getName()%> - (<%=bookmarkMgr.findByUrl(bm.getUrl()).size()%>)</h2>
+		    <div class="post">
+		    <div class="taxonomy">
+				Tag's:
 <%
 			Collection<Tag> tags=tagMgr.findTagsByIdBookmark(""+bm.getId());
 		    for (Tag tag : tags) {
 %>
-	        <div class="tags"><%=tag.getName()%></div>
+		       		&nbsp;<%=tag.getName()%>, &nbsp;&nbsp;&nbsp;
 <%
 		    	}
 %>
+			</div> 
+		    <div class="shared"></div>
+		    <div class="url"><%=bm.getUrl()%></div>
+		    <ul class="links inline">
+		    	<li class="comment_add first"><a href="bookmarkForm.jsp?operation=share&idBookmark=<%=bm.getId()%>">share</a></li>
+		    	<li class="comment_add first"><a href="bookmarkForm.jsp?idBookmark=<%=bm.getId()%>">edit</a></li>
+		    	<li class="comment_add first"><a href="bookmarkAction.jsp?operation=delete&idBookmark=<%= bm.getId() %>">delete</a></li>
+		    </ul>
+
+			</div>
 		</div>
 <%
 			}
 		}
 %>
-	    
+			</div>
+        	<div id="sidebar">
+        		<div id="block-menu-principal" class="block">
+        			<h2>Main Menu</h2>
+        			<div class="content">
+						<ul>
+  							<li><a title="view bookmark" href="bookmarkList.jsp">&raquo;&nbsp;View Bookmark</a></li>
+  							<li><a title="new bookmark" href="bookmarkForm.jsp">&raquo;&nbsp;New Bookmark</a></li>
+  							<li><a title="view interesting" href="#">&raquo;&nbsp;View Interesting</a></li>
+  							<li><a title="view statistic" href="#">&raquo;&nbsp;View Statistics</a></li>
+						</ul>
+						<br/><p/>&nbsp;
+						<ul>
+        					<li><a title="list communities" href="../community/communityList.jsp">&raquo;&nbsp;List Communities</a></li>
+        					<li><a title="new community" href="../community/communityForm.jsp?create=create">&raquo;&nbsp;New Community</a></li>
+        					<li><a title="add community" href="../community/communityForm.jsp?addcommunity=addcommunity">&raquo;&nbsp;Add Community</a></li>
+    					</ul>    			
+        			</div>
+        		</div>
+        		<p/>&nbsp;
+        		<hr/>
+        		<p/>&nbsp;
+        		<div id="block-menu-community" class="block">
+        			<h2><a title="list communities" href="../community/communityList.jsp">List Communities</a></h2>
+        			<div class="content">
+					<ul class="menu">
+<%
+					// TODO criar uma funç~ao recursiva para esta chamada
+				Collection<Community> communities=communityMgr.findCommunitiesByIdUser(idUser);
+				for (Community community:communities){
+					if (community.getIdParent()==0){
+%>
+						<li><a href="bookmarkCommunityList.jsp?idCommunity=<%=community.getId()%>"><%=community.getName()%></a>
+						<ul>
+<%
+						Collection<Community> subcommunities=communityMgr.findSubCommunity(""+community.getId());
+						for (Community subcommunity:subcommunities){
+%>
+							<li><a href="bookmarkCommunityList.jsp?idCommunity=<%=subcommunity.getId()%>"><%=subcommunity.getName()%></a></li>
+<%
+						}
+%>
+						</ul>
+						</li>
+<%			
+					}
+				}
+%>
+					</ul>
+					</div>
+        		</div>
+        		<p/>&nbsp;
+        		<hr/>
+        		<p/>&nbsp;
+        		<div id="block-tags" class="block">
+        			<h2>List of Tags</h2>
+        			<div class="content">
+<%
+					Collection<Tag> userTags=tagMgr.findTagsByIdUser(idUser);
+					for (Tag tag:userTags){
+%>
+						<a href="bookmarkList.jsp?idTag=<%=tag.getId()%>"><%=tag.getName()%></a>
+<%	
+					}
+%>
+					</div>
+        		</div>
+        	</div>
+        	<div class="clear"></div>
+        	<div id="footer"></div>
+		</div>
 	</div>
 </div>
 </body>
