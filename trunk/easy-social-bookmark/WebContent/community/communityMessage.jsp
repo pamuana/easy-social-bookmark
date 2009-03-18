@@ -37,33 +37,37 @@
                 <div class="communitydescription">Description <%= community.getDescription() %></div>
             
                 <div><a href="<%= "messageForm.jsp?idCommunity="+idCommunty+"&operation=new" %>">Add Message</a></div>
-				<div class="node">
-                	<div class="post">
+				
 <%
      for(Message message : messageMgr.findMessagesByIdCommunity(idCommunty)){    
 %>  
-     <div class="message">
-     <%= message.getText() %>
-     <br />
-<%
+                <div class="node">
+                    <div class="post">
+					     <div class="message">
+					     <%= message.getText() %>
+					     <br />
+	<%
     if(message.getIdUser()==(Long.parseLong(idUser))){
 %>
-     <div class="commands">
-        <a class="editlinks" href="<%= "messageForm.jsp?idCommunity="+idCommunty+"&idMessage="+message.getId()+"&operation=edit" %>">edit</a>
-        <a href="<%= "messageAction.jsp?idCommunity="+idCommunty+"&idMessage="+message.getId()+"&operation=delete"%>">delete</a>
-     </div>
+						     <div class="commands">
+						        <a class="editlinks" href="<%= "messageForm.jsp?idCommunity="+idCommunty+"&idMessage="+message.getId()+"&operation=edit" %>">edit</a>
+						        <a href="<%= "messageAction.jsp?idCommunity="+idCommunty+"&idMessage="+message.getId()+"&operation=delete"%>">delete</a>
+						     </div>
 <%
     }
 %>
-     </div>
+                        </div>
+                     </div>
+                    <p/>&nbsp;
+	                <hr/>
+	                <p/>&nbsp;
+                </div>
 <%
      }
 %>
                      <br />
                      <br />
                      <br />
-					</div>
-                </div>
             </div>
             <div id="sidebar">
             	<div id="block-menu-principal" class="block">

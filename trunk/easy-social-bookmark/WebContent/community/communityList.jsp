@@ -46,6 +46,8 @@
                 <div ><%= "Description: "+comm.getDescription() %></div>
                 <div class="post">
 <%
+		System.out.println(comm.getIdAdmin());
+		System.out.println(Long.parseLong(idUser));
          if(comm.getIdAdmin()==Long.parseLong(idUser)){
 %>
                   <a class="editlinks" href="<%= "communityForm.jsp?community="+comm.getId() %>">edit</a>                 
