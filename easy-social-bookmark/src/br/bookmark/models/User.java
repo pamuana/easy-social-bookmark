@@ -1,5 +1,5 @@
 package br.bookmark.models;
-import br.bookmark.db.DBField;
+import br.bookmark.db.util.DBField;
 public class User {
 	@DBField(type="Long") private long id;
     @DBField(type="Text(200)") private String name;

@@ -1,9 +1,11 @@
-package br.bookmark.models;
+package br.bookmark.db;
+import java.util.ArrayList;
 import java.util.Collection;
 
-import br.bookmark.db.DataBaseUtils;
-import br.bookmark.db.Database;
-import br.bookmark.db.GenericDAO;
+import br.bookmark.db.util.DataBaseUtils;
+import br.bookmark.db.util.Database;
+import br.bookmark.db.util.GenericDAO;
+import br.bookmark.models.Tag;
 
 
 public class TagDAO extends GenericDAO<Tag> {
@@ -82,6 +84,54 @@ public class TagDAO extends GenericDAO<Tag> {
 			if (this.count(tableName, "idTag="+tag.getId())==0){
 				this.delete(tag.getId());
 			}
+		}
+	}
+	
+	public void assignBookmarkWithIdUser(String[] tags, long idBookmark,long idUser) throws Exception{
+		Collection<Tag> tagsUser=this.findTagsByIdUser(idUser);
+		Collection<String> tagsUserName=new ArrayList<String>();
+		for (Tag tagUser:tagsUser){
+			tagsUserName.add(tagUser.getName());
+		}
+		
+    	for(String tagName : tags){
+    		tagName=tagName.replaceAll(" ","");
+    		if (!tagsUserName.contains(tagName)){
+    			Tag tagNew=new Tag();
+    			tagNew.setIdUser(idUser);
+    			tagNew.setName(tagName);
+    			this.save(tagNew);
+    		}
+    		
+    		for (Tag tag:this.findTagsByName(tagName)){
+    			if (idUser==tag.getIdUser()){
+    				this.assignBookmark(tag.getId(), idBookmark);
+    			} 
+    		}
+		}
+	}
+	
+	public void assignBookmarkWithIdCommunity(String[] tags, long idBookmark,long idCommunity, Collection<Tag> tagsCommunity) throws Exception{
+		Collection<String> tagsCommunityName=new ArrayList<String>();
+		for (Tag tagCommunity:tagsCommunity){
+			tagsCommunityName.add(tagCommunity.getName());
+		}
+		
+    	for(String tagName : tags){
+    		tagName=tagName.replaceFirst(" ", "");
+    		tagName=tagName.replaceAll(" ","");
+    		if (!tagsCommunityName.contains(tagName)){
+    			Tag tagNew=new Tag();
+    			tagNew.setIdCommunity(idCommunity);
+    			tagNew.setName(tagName);
+    			this.save(tagNew);
+    		}
+    		
+    		for (Tag tag:this.findTagsByName(tagName)){
+    			if (idCommunity==tag.getIdCommunity()){
+    				this.assignBookmark(tag.getId(), idBookmark);
+    			} 
+    		}
 		}
 	}
 }

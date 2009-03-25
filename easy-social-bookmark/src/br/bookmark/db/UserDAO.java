@@ -1,6 +1,7 @@
-package br.bookmark.models;
-import br.bookmark.db.Database;
-import br.bookmark.db.GenericDAO;
+package br.bookmark.db;
+import br.bookmark.db.util.Database;
+import br.bookmark.db.util.GenericDAO;
+import br.bookmark.models.User;
 
 
 public class UserDAO extends GenericDAO<User> {
@@ -22,5 +23,11 @@ public class UserDAO extends GenericDAO<User> {
 	public User findByEmail(String email) throws Exception {
 		return findElementByCriterio("email='"+email+"'");
 	}
-
+	
+	public User validateUser(String login, String password) throws Exception  {
+        User user = this.findByLogin(login);
+        if (user == null) return null;
+        if (user.getPassword().equals(password)) return user;
+        return null;
+    }
 }
