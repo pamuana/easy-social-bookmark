@@ -16,7 +16,7 @@
 //  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307,
 //  USA.
 //
-package br.bookmark.db;
+package br.bookmark.db.util;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;

@@ -1,6 +1,6 @@
 package br.bookmark.models;
 
-import br.bookmark.db.DBField;
+import br.bookmark.db.util.DBField;
 
 public class Log {
 	@DBField(type="Long") private long id;

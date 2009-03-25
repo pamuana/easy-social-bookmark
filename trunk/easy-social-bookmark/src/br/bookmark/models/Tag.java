@@ -1,5 +1,5 @@
 package br.bookmark.models;
-import br.bookmark.db.DBField;
+import br.bookmark.db.util.DBField;
 public class Tag {
 	@DBField(type="Long") private long id;
     @DBField(type="Long") private long idUser;

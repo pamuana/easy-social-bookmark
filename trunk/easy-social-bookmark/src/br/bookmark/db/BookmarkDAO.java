@@ -1,8 +1,9 @@
-package br.bookmark.models;
+package br.bookmark.db;
 import java.util.Collection;
 
-import br.bookmark.db.Database;
-import br.bookmark.db.GenericDAO;
+import br.bookmark.db.util.Database;
+import br.bookmark.db.util.GenericDAO;
+import br.bookmark.models.Bookmark;
 
 
 public class BookmarkDAO extends GenericDAO<Bookmark> {
