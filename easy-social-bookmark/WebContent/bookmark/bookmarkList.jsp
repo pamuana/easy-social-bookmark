@@ -1,15 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"    pageEncoding="UTF-8"%>
-<%@page import="br.bookmark.project.*"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"	pageEncoding="UTF-8"%>
+<%@page import="br.bookmark.project.Init"%>
 <%@page import="br.bookmark.models.*"%>
+<%@page import="br.bookmark.db.BookmarkDAO"%>
+<%@page import="br.bookmark.db.TagDAO"%>
+<%@page import="br.bookmark.db.CommunityDAO"%>
 <%@page import="java.util.*" %>
+<%@ taglib uri="br.bookmark.project" prefix="Widget"%>
 <%
     Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
-	BookmarkMgr bookmarkMgr = new BookmarkMgr(bookmarkInit.getBookmarkDAO());
-	TagMgr tagMgr = new TagMgr(bookmarkInit.getTagDAO());
+	BookmarkDAO bookmarkDAO = bookmarkInit.getBookmarkDAO();
+	TagDAO tagDAO = bookmarkInit.getTagDAO();
 	
 	String idUser=session.getAttribute("idUser").toString();
 	
-	CommunityMgr communityMgr=new CommunityMgr(bookmarkInit.getCommunityDAO(),bookmarkInit.getUserDAO());
+	CommunityDAO communityDAO= bookmarkInit.getCommunityDAO();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -26,7 +30,7 @@
 			<div id="caption">
 				<div id="title">
 					<h1>Easy Bookmark Social</h1>
-					<p>Web System Develpoment </p>
+					<p>Web System Development </p>
 					<br />
 			  	</div>
 			</div>
@@ -44,10 +48,10 @@
 <%
 		Collection<String> bookmarkIds=new ArrayList<String>();
 		if (request.getParameter("idTag")!=null){
-			bookmarkIds=tagMgr.findIdBookmarksByIdTag(request.getParameter("idTag"));
+			bookmarkIds=tagDAO.findIdBookmarksByIdTag(Long.parseLong(request.getParameter("idTag")));
 		}
 		
-		Collection<Bookmark> bookmarks = bookmarkMgr.findBookmarksByIdUser(idUser);
+		Collection<Bookmark> bookmarks = bookmarkDAO.findBookmarksByIdUser(Long.parseLong(idUser));
 		for (Bookmark bm : bookmarks) {
 			boolean view=true;
 			if (request.getParameter("idTag")!=null){
@@ -56,17 +60,17 @@
 			if ((bm.getIdCommunity()==0)&&(view)){
 %>
 		<div class="node">
-		    <h2 class="nodeTitle"><a href="<%=bm.getUrl()%>" target="_blank"><%=bm.getName()%> &nbsp;&nbsp; (<%=bookmarkMgr.findByUrl(bm.getUrl()).size()%>)</a></h2>
+		    <h2 class="nodeTitle"><a href="<%=bm.getUrl()%>" target="_blank"><%=bm.getName()%> &nbsp;&nbsp; (<%=bookmarkDAO.findByUrl(bm.getUrl()).size()%>)</a></h2>
 		    <div class="post">
 		    <div class="taxonomy">
 				Tag's:
 <%
-			Collection<Tag> tags=tagMgr.findTagsByIdBookmark(""+bm.getId());
-		    for (Tag tag : tags) {
+			//Collection<Tag> tags=tagDAO.findTagsByIdBookmark(""+bm.getId());
+		    //for (Tag tag : tags) {
 %>
-		       		&nbsp;<%=tag.getName()%>, &nbsp;&nbsp;&nbsp;
+		       		&nbsp;<% // tag.getName()%>, &nbsp;&nbsp;&nbsp;
 <%
-		    	}
+		    //	}
 %>
 			</div> 
 		    <div class="shared"></div>
@@ -88,21 +92,7 @@
 			</div>
         	<div id="sidebar">
         		<div id="block-menu-principal" class="block">
-        			<h2>Main Menu</h2>
-        			<div class="content">
-						<ul>
-  							<li><a title="view bookmark" href="bookmarkList.jsp">&raquo;&nbsp;View Bookmark</a></li>
-  							<li><a title="new bookmark" href="bookmarkForm.jsp">&raquo;&nbsp;New Bookmark</a></li>
-  							<li><a title="view interesting" href="#">&raquo;&nbsp;View Interesting</a></li>
-  							<li><a title="view statistic" href="#">&raquo;&nbsp;View Statistics</a></li>
-						</ul>
-						<br/><p/>&nbsp;
-						<ul>
-        					<li><a title="list communities" href="../community/communityList.jsp">&raquo;&nbsp;List Communities</a></li>
-        					<li><a title="new community" href="../community/communityForm.jsp?create=create">&raquo;&nbsp;New Community</a></li>
-        					<li><a title="add community" href="../community/communityForm.jsp?addcommunity=addcommunity">&raquo;&nbsp;Add Community</a></li>
-    					</ul>    			
-        			</div>
+        			<Widget:MenuPrincipal/>
         		</div>
         		<p/>&nbsp;
         		<hr/>
@@ -113,14 +103,14 @@
 					<ul class="menu">
 <%
 					// TODO criar uma funç~ao recursiva para esta chamada
-				Collection<Community> communities=communityMgr.findCommunitiesByIdUser(idUser);
+				Collection<Community> communities=communityDAO.findCommunitiesByIdUser(Long.parseLong(idUser));
 				for (Community community:communities){
 					if (community.getIdParent()==0){
 %>
 						<li><a href="bookmarkCommunityList.jsp?idCommunity=<%=community.getId()%>"><%=community.getName()%></a>
 						<ul>
 <%
-						Collection<Community> subcommunities=communityMgr.findSubCommunity(""+community.getId());
+						Collection<Community> subcommunities=communityDAO.findByIdParent(community.getId());
 						for (Community subcommunity:subcommunities){
 %>
 							<li><a href="bookmarkCommunityList.jsp?idCommunity=<%=subcommunity.getId()%>"><%=subcommunity.getName()%></a></li>
@@ -143,7 +133,7 @@
         			<h2>List of Tags</h2>
         			<div class="content">
 <%
-					Collection<Tag> userTags=tagMgr.findTagsByIdUser(idUser);
+					Collection<Tag> userTags=tagDAO.findTagsByIdUser(Long.parseLong(idUser));
 					for (Tag tag:userTags){
 %>
 						<a href="bookmarkList.jsp?idTag=<%=tag.getId()%>"><%=tag.getName()%></a>

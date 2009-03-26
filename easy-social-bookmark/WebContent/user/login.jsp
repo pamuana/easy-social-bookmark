@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
-<%@page import="br.bookmark.db.Database"%>
-<%@page import="br.bookmark.db.DataBaseUtils"%>
-<%@page import="br.bookmark.project.*"%>
-<%@page import="br.bookmark.models.*"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
+<%@page import="br.bookmark.project.Init"%>
+<%@page import="br.bookmark.db.UserDAO"%>
+<%@page import="br.bookmark.models.User"%>
 <% 
 	Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
-    UserMgr userMgr = new UserMgr(bookmarkInit.getUserDAO());
-    if (userMgr == null){
+    UserDAO userDAO = bookmarkInit.getUserDAO();
+    if (userDAO == null){
     	response.sendRedirect("error.jsp");
     }
     
@@ -17,7 +16,7 @@
 	if ((login != null)&&(password!=null)) {
 	
 		// Verifica o login e senha
-		User user = userMgr.validateUser(login, password);
+		User user = userDAO.validateUser(login, password);
 		if (user == null) {
 			response.sendRedirect("error.jsp");
 		} else {

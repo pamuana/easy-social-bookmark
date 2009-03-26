@@ -7,7 +7,32 @@ import br.bookmark.db.TagDAO;
 import br.bookmark.db.UserDAO;
 import br.bookmark.db.util.Database;
 
+/*
 
+public class Init {
+	
+	protected Init() {}
+	
+	private static class SingletonHolder {
+		private final static String urlCon="jdbc:mysql://localhost/bookmarks?user=root&amp;password=";
+	    private final static String prefixoTable="";
+		private final static Database database = new Database("MySQL","com.mysql.jdbc.Driver", urlCon);
+		
+		private final static UserDAO userDAO = new UserDAO(prefixoTable,database);
+		private final static BookmarkDAO bookmarkDAO = new BookmarkDAO(prefixoTable,database);
+		private final static CommunityDAO communityDAO = new CommunityDAO(prefixoTable,database);
+		private final static CommentDAO commentDAO = new CommentDAO(prefixoTable,database);
+		private final static MessageDAO messageDAO = new MessageDAO(prefixoTable,database);
+		private final static TagDAO tagDAO = new TagDAO(prefixoTable,database);
+		
+		private final static Init INSTANCE = new Init();
+	}
+	
+	public static Init getInstance() {
+		return SingletonHolder.INSTANCE;
+	}
+}
+*/
 public class Init {
 	public static Database database = null;
     public static String urlCon="";

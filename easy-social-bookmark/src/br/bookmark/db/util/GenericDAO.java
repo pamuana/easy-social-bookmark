@@ -45,7 +45,7 @@ public abstract class GenericDAO<T> {
 
     /**
      * construtor da classe GenericDAO 
-     * @throws Exception exce��o
+     * @throws GenericDAOException exce��o
      * */
     public GenericDAO() throws Exception {
         this.persistentClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
@@ -503,7 +503,7 @@ public abstract class GenericDAO<T> {
     
     //TODO Additional Method to recover information of log  
     protected Collection<String> findFieldLeftJoin(String fieldName, String potteryTableName, String siteTableName, String rule, String criterio) throws Exception {
-        if (!this.init) throw new GenericDAOException ("DAO n�o inicializado.");
+        if (!this.init) throw new Exception ("DAO n�o inicializado.");
         Connection dbCon = createConnection();
         Statement aStmt = dbCon.createStatement();
         String str = "SELECT "+fieldName+" FROM "+potteryTableName+" LEFT JOIN "+siteTableName+" ON "+rule+(!criterio.equals("")?" WHERE "+criterio:"");
