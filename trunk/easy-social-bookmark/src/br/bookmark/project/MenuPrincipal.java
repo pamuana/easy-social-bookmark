@@ -13,7 +13,7 @@ public class MenuPrincipal extends TagSupport {
     
     public int doStartTag() {
       try {
-    	  	pageContext.getResponse().setCharacterEncoding("ISO8859-1");
+
             JspWriter out = pageContext.getOut();
             String context = (((HttpServletRequest) pageContext.getRequest()).getContextPath());
             out.println("á -->"+context);
