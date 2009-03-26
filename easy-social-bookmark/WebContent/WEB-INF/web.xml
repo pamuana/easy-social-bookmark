@@ -8,5 +8,15 @@
 		<welcome-file>default.html</welcome-file>
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
-	</welcome-file-list>
+	</welcome-file-list>	
+	
+    <servlet>
+	    <description></description>
+	    <servlet-name>CommentAdd</servlet-name>
+	    <servlet-class>br.bookmark.servlet.CommentAdd</servlet-class>
+    </servlet>
+	<servlet-mapping>
+	    <servlet-name>CommentAdd</servlet-name>
+	    <url-pattern>/bookmark/CommentAdd</url-pattern>
+    </servlet-mapping>    
 </web-app>

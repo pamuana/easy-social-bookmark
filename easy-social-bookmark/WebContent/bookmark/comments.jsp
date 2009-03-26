@@ -3,7 +3,7 @@
 <%@page import="br.bookmark.models.*"%>
 <%@page import="java.util.*"%>
 <%
-		Init bookmarkInit = (Init) session.getAttribute("bookmarkInit");
+	/*	Init bookmarkInit = (Init) session.getAttribute("bookmarkInit");
 
 		CommentMgr commentMgr = new CommentMgr(bookmarkInit.getCommentDAO());
 		
@@ -29,7 +29,7 @@
     </SCRIPT>
 <%
 			}
-		}
+		}*/
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -60,9 +60,9 @@
 		</div>
 		<div id="content">
 		<div id="main">
-			<form action="comments.jsp" method="post" name="comments">
+			<form action="CommentAdd" method="post" >
 				<input type="hidden" name="operation" value="new"/>
-				<input type="hidden" name="idBookmark" value="<%=idBookmark%>"/>
+				<input type="hidden" name="idBookmark" value="<%= request.getParameter("idBookmark")%>"/>
 				Comments:
 				<br/>
 				<textarea cols="50" rows="10" name="text" ></textarea>
@@ -100,7 +100,7 @@
 					<ul class="menu">
 <%
 					// TODO criar uma funç~ao recursiva para esta chamada
-				Collection<Community> communities=communityMgr.findCommunitiesByIdUser(idUser);
+	/*			Collection<Community> communities=communityMgr.findCommunitiesByIdUser(idUser);
 				for (Community community:communities){
 					if (community.getIdParent()==0){
 %>
@@ -118,7 +118,7 @@
 						</li>
 <%			
 					}
-				}
+				}*/
 %>
 					</ul>
 					</div>
