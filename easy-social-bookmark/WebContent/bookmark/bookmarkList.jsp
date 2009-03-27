@@ -5,13 +5,14 @@
 <%@page import="br.bookmark.db.TagDAO"%>
 <%@page import="br.bookmark.db.CommunityDAO"%>
 <%@page import="java.util.*" %>
-<%@ taglib uri="br.bookmark.project" prefix="Widget"%>
+<%@taglib uri="br.bookmark.project" prefix="Widget" %>
 <%
     Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
 	BookmarkDAO bookmarkDAO = bookmarkInit.getBookmarkDAO();
 	TagDAO tagDAO = bookmarkInit.getTagDAO();
 	
 	String idUser=session.getAttribute("idUser").toString();
+	String idTag=request.getParameter("idTag");
 	
 	CommunityDAO communityDAO= bookmarkInit.getCommunityDAO();
 %>
@@ -43,52 +44,19 @@
 			</div>
 		</div>
 		<div id="content">
-		<div id="main">
-	    
-<%
-		Collection<String> bookmarkIds=new ArrayList<String>();
-		if (request.getParameter("idTag")!=null){
-			bookmarkIds=tagDAO.findIdBookmarksByIdTag(Long.parseLong(request.getParameter("idTag")));
-		}
-		
-		Collection<Bookmark> bookmarks = bookmarkDAO.findBookmarksByIdUser(Long.parseLong(idUser));
-		for (Bookmark bm : bookmarks) {
-			boolean view=true;
-			if (request.getParameter("idTag")!=null){
-				view=bookmarkIds.contains(""+bm.getId());
-			}
-			if ((bm.getIdCommunity()==0)&&(view)){
-%>
-		<div class="node">
-		    <h2 class="nodeTitle"><a href="<%=bm.getUrl()%>" target="_blank"><%=bm.getName()%> &nbsp;&nbsp; (<%=bookmarkDAO.findByUrl(bm.getUrl()).size()%>)</a></h2>
-		    <div class="post">
-		    <div class="taxonomy">
-				Tag's:
-<%
-			//Collection<Tag> tags=tagDAO.findTagsByIdBookmark(""+bm.getId());
-		    //for (Tag tag : tags) {
-%>
-		       		&nbsp;<% // tag.getName()%>, &nbsp;&nbsp;&nbsp;
-<%
-		    //	}
-%>
-			</div> 
-		    <div class="shared"></div>
-		    <div class="url"><a href="<%=bm.getUrl()%>" target="_blank"><%=bm.getUrl()%></div>
-		    <div>
-		    <a class="addcomment" href="bookmarkForm.jsp?operation=share&idBookmark=<%=bm.getId()%>">share</a>
-			<a class="editlinks" href="bookmarkForm.jsp?idBookmark=<%=bm.getId()%>">edit</a>
-		    <a href="bookmarkAction.jsp?operation=delete&idBookmark=<%= bm.getId() %>">delete</a>
-			</div>
-			</div>
-		</div>
-		<p/>&nbsp;
-        <hr/>
-        <p/>&nbsp;
-<%
-			}
-		}
-%>
+			<div id="main">
+		<%
+		 if (idTag!=null&&!"".equals(idTag)){
+		%>
+			<Widget:BookmarkList idUser="<%=idUser%>" tagDAO="<%=tagDAO%>" bookmarkDAO="<%=bookmarkDAO%>" idTag="<%=idTag%>" />
+		<%
+		 }else{
+		%>
+			<Widget:BookmarkList idUser="<%=idUser%>" tagDAO="<%=tagDAO%>" bookmarkDAO="<%=bookmarkDAO%>" />
+		<% 
+		 }
+		%>
+			
 			</div>
         	<div id="sidebar">
         		<div id="block-menu-principal" class="block">
