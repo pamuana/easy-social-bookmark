@@ -12,4 +12,48 @@
     	<info>
     	</info>
 	</tag>
+	
+	<tag>
+    	<name>BookmarkList</name>
+		<tagclass>br.bookmark.project.BookmarkList</tagclass>
+		<bodycontent>empty</bodycontent>
+		<info></info>
+		<!-- Optional attributes  -->
+		<!-- personalized name -->
+		<attribute>
+			<name>idUser</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>tagDAO</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>bookmarkDAO</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>communityDAO</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>commentDAO</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>idTag</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>idCommunity</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
 </taglib>

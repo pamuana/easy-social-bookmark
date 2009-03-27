@@ -1,18 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"    pageEncoding="UTF-8"%>
-<%@page import="br.bookmark.project.*"%>
-<%@page import="br.bookmark.models.*"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"    pageEncoding="UTF-8"%>
 <%@page import="br.bookmark.db.*"%>
+<%@page import="br.bookmark.models.*"%>
+<%@page import="br.bookmark.project.Init"%>
 <%@page import="java.util.*" %>
+<%@taglib uri="br.bookmark.project" prefix="Widget" %>
 <%
     Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
 	BookmarkDAO bookmarkDAO = bookmarkInit.getBookmarkDAO();
 	TagDAO tagDAO = bookmarkInit.getTagDAO();
 	
 	String idUser=session.getAttribute("idUser").toString();
-	
-	CommunityDAO communityDAO=bookmarkInit.getCommunityDAO();
-	CommentDAO commentDAO= bookmarkInit.getCommentDAO();
 	String idCommunity = request.getParameter("idCommunity").toString();
+	String idTag = request.getParameter("idTag");
+	
+	CommunityDAO communityDAO= bookmarkInit.getCommunityDAO();
+	CommentDAO commentDAO= bookmarkInit.getCommentDAO();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -42,100 +44,35 @@
 			</div>
 		</div>
 		<div id="content">
-		<div id="main">
-
-    <div id="community">
-<%
-    Community currentCommunity=communityDAO.findById(Long.parseLong(idCommunity));
-%>
-        <h2>Your are view shared bookmarks in <b><%=currentCommunity.getName() %></b></h2>
-        <div class="descriptioncommunity">
-        	<%= currentCommunity.getDescription() %>
-        </div>
-    </div>
-    <p/>&nbsp;
-    <hr/>
-    <p/>&nbsp;
-<%
+			<div id="main">
 	
-	Collection<String> bookmarkIds=new ArrayList<String>();
-	if (request.getParameter("idTag")!=null){
-		bookmarkIds=tagDAO.findIdBookmarksByIdTag(Long.parseLong(request.getParameter("idTag")));
-	}
-
-	Collection<Bookmark> bookmarks = bookmarkDAO.findBookmarksByIdCommunity(Long.parseLong(idCommunity));
-	for(Bookmark bk : bookmarks){
-		boolean view=true;
-		if (request.getParameter("idTag")!=null){
-			view=bookmarkIds.contains(""+bk.getId());
-		}
-		if (view){
-%>
-    <div class="node">
-        <h2 class="nodeTitle"><a href="<%=bk.getUrl()%>" target="_blank"><%= bk.getName() %>&nbsp;&nbsp; (<%=bookmarkDAO.findByUrl(bk.getUrl()).size()%>)</a></h2>
-        <div class="post">
-		    <div class="taxonomy">
-				Tag's:
+    			<div id="community">
 <%
-			for (Tag tag : tagDAO.findTagsByIdBookmark(bk.getId())) {
+    				Community currentCommunity=communityDAO.findById(Long.parseLong(idCommunity));
 %>
-        		&nbsp;<%=tag.getName()%>, &nbsp;&nbsp;&nbsp;
-<%
-			}
-%>
-			</div>
-			<div class="url"><a href="<%=bk.getUrl()%>" target="_blank"><%=bk.getUrl()%></div>				
-        	<div class="content"><%= bk.getDescription() %></div>
-        	<div>
-        		<a class="addcomment" href="comments.jsp?idBookmark=<%=bk.getId()%>">Add comment</a>
-				<a class="editlinks" href="bookmarkForm.jsp?idBookmark=<%=bk.getId()%>">edit</a>,
-<%
-				if(currentCommunity.getIdAdmin() == Long.parseLong(idUser)){
-%>
-				;&nbsp;&nbsp;<a href="bookmarkAction.jsp?operation=delete&idBookmark=<%=bk.getId()%>">delete</a>
-<%
-        	}
-%>
-			</div>
-
-			<div class="comments">
-<%
-				Collection<Comment> comments=commentDAO.findCommentsByIdBookmark(bk.getId());
-				for (Comment comment : comments) {
-%>
-					<div class="comment"><%= comment.getText() %></div>
-<%
-				}
-%>
-        	</div>
-		</div>
-	</div>
-	<p/>&nbsp;
-    <hr/>
-    <p/>&nbsp;
-	
-<%
-		}
-	}
-%>
+        			<h2>Your are view shared bookmarks in <b><%=currentCommunity.getName() %></b></h2>
+        			<div class="descriptioncommunity">
+        				<%= currentCommunity.getDescription() %>
+        			</div>
+    			</div>
+    			<p/>&nbsp;
+    			<hr/>
+    			<p/>&nbsp;
+				<%
+		 		if (idTag!=null&&!"".equals(idTag)){
+				%>
+				<Widget:BookmarkList idUser="<%=idUser%>" tagDAO="<%=tagDAO%>" bookmarkDAO="<%=bookmarkDAO%>" communityDAO="<%=communityDAO%>" commentDAO="<%=commentDAO%>" idCommunity="<%=idCommunity%>" idTag="<%=idTag%>" />
+				<%
+		 		}else{
+				%>
+				<Widget:BookmarkList idUser="<%=idUser%>" tagDAO="<%=tagDAO%>" bookmarkDAO="<%=bookmarkDAO%>" communityDAO="<%=communityDAO%>" commentDAO="<%=commentDAO%>" idCommunity="<%=idCommunity%>" />
+				<% 
+		 		}
+				%>    
 			</div>
         	<div id="sidebar">
         		<div id="block-menu-principal" class="block">
-        			<h2>Main Menu</h2>
-        			<div class="content">
-						<ul>
-  							<li><a title="view bookmark" href="bookmarkList.jsp">&raquo;&nbsp;View Bookmark</a></li>
-  							<li><a title="new bookmark" href="bookmarkForm.jsp">&raquo;&nbsp;New Bookmark</a></li>
-  							<li><a title="view interesting" href="#">&raquo;&nbsp;View Interesting</a></li>
-  							<li><a title="view statistic" href="#">&raquo;&nbsp;View Statistics</a></li>
-						</ul>
-						<br/><p/>&nbsp;
-						<ul>
-        					<li><a title="list communities" href="../community/communityList.jsp">&raquo;&nbsp;List Communities</a></li>
-        					<li><a title="new community" href="../community/communityForm.jsp?create=create">&raquo;&nbsp;New Community</a></li>
-        					<li><a title="add community" href="../community/communityForm.jsp?addcommunity=addcommunity">&raquo;&nbsp;Add Community</a></li>
-    					</ul>    			
-        			</div>
+        			<Widget:MenuPrincipal/>
         		</div>
         		<p/>&nbsp;
         		<hr/>
