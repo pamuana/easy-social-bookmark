@@ -1,31 +1,6 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
-<%@page import="br.bookmark.project.Init"%>
-<%@page import="br.bookmark.db.UserDAO"%>
-<%@page import="br.bookmark.models.User"%>
-<% 
-	Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
-    UserDAO userDAO = bookmarkInit.getUserDAO();
-    if (userDAO == null){
-    	response.sendRedirect("error.jsp");
-    }
-    
-	//Le valores passados por p
-	String login = request.getParameter("login");
-	String password = request.getParameter("password");
-
-	if ((login != null)&&(password!=null)) {
-	
-		// Verifica o login e senha
-		User user = userDAO.validateUser(login, password);
-		if (user == null) {
-			response.sendRedirect("error.jsp");
-		} else {
-			// Login valido
-			session.setAttribute("idUser", user.getId());
-			response.sendRedirect("../bookmark/bookmarkList.jsp");
-		}
-	}
-%>
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -49,7 +24,7 @@
 		<div id="content">
           <div id="main">
           	<a href="register.jsp">Sign in</a> <br />
-            <form action="login.jsp" method="post" name="formLogin">
+            <form action="Login" method="post" name="formLogin">
                     Username:<br />
                     <input name="login" /> <br />
                     <br />

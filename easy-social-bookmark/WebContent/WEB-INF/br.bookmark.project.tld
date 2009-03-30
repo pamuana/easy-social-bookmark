@@ -14,6 +14,49 @@
 	</tag>
 	
 	<tag>
+    	<name>MenuCommunity</name>
+    	<tagclass>br.bookmark.project.MenuCommunity</tagclass>
+    	<bodycontent>empty</bodycontent>
+    	<info>
+    	</info>
+    	<!-- Attributes  -->
+    	<attribute>
+			<name>communityDAO</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>idUser</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+    	<name>MenuTag</name>
+    	<tagclass>br.bookmark.project.MenuTag</tagclass>
+    	<bodycontent>empty</bodycontent>
+    	<info>
+    	</info>
+    	<!-- Attributes  -->
+    	<attribute>
+			<name>tagDAO</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>idUser</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>idCommunity</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
     	<name>BookmarkList</name>
 		<tagclass>br.bookmark.project.BookmarkList</tagclass>
 		<bodycontent>empty</bodycontent>
