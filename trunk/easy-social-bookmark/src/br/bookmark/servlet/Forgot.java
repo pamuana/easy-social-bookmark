@@ -1,10 +1,7 @@
-/* Edita autor */
 package br.bookmark.servlet;
 
 import java.io.IOException;
-import java.util.Collection;
-
-
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import br.bookmark.project.*;
-import br.bookmark.db.CommunityDAO;
-import br.bookmark.db.MessageDAO;
 import br.bookmark.db.UserDAO;
 import br.bookmark.models.*;
 
@@ -70,24 +65,20 @@ public class Forgot extends HttpServlet {
 		Init bookmarkInit = (Init) session.getAttribute("bookmarkInit");
 
 		String email = request.getParameter("email");
-		String pssw="";
-		String login="";
+		String msg="Doesn't have register your mail";
 		if(request.getParameter("email")!=null){
 		    UserDAO userDAO = bookmarkInit.getUserDAO();
 		    User user = userDAO.findByEmail(email);
 	        if(user!=null){
-			    pssw= user.getPassword();
-			    login = user.getLogin();
+			    String pssw= user.getPassword();
+			    String login = user.getLogin();
+			    msg="Your login user is: "+login+" and your password is: "+pssw+"<br/>";
 	        }
 		}
 		
-		try { 
-			String url ="forgot.jsp";   
-			response.sendRedirect(url); 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		request.setAttribute("msg", msg);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("register.jsp");
+		requestDispatcher.forward(request, response);
 
 	}
 

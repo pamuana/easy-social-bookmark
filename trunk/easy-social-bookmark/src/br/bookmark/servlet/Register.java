@@ -1,10 +1,8 @@
-/* Edita autor */
 package br.bookmark.servlet;
 
 import java.io.IOException;
-import java.util.Collection;
 
-
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import br.bookmark.project.*;
-import br.bookmark.db.CommunityDAO;
-import br.bookmark.db.MessageDAO;
 import br.bookmark.db.UserDAO;
 import br.bookmark.models.*;
 
@@ -75,6 +71,10 @@ public class Register extends HttpServlet {
 			response.sendRedirect("error.jsp");
 		}
 		
+		System.out.println("-->"+request.getParameter("login"));
+		System.out.println("-->/"+request.getParameter("name"));
+		System.out.println("-->//"+request.getParameter("password"));
+		
 		if (request.getParameter("send")!=null){
 			if (userDAO.findByLogin(request.getParameter("login"))!=null){
 				msg = "<b>The user login exits plz change the field login for other</b><hr/>";
@@ -90,6 +90,10 @@ public class Register extends HttpServlet {
 				msg="<b>Error: The field password and Confirm Password need to be equals</b><hr/>";
 			}
 		}
+		
+		request.setAttribute("msg", msg);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("register.jsp");
+		requestDispatcher.forward(request, response);
 	}
 
 	
