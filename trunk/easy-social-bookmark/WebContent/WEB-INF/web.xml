@@ -19,4 +19,113 @@
 	    <servlet-name>CommentAdd</servlet-name>
 	    <url-pattern>/bookmark/CommentAdd</url-pattern>
     </servlet-mapping>    
+    
+     <servlet>
+        <description></description>
+        <servlet-name>BookmarkForm</servlet-name>
+        <servlet-class>br.bookmark.servlet.BookmarkForm</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookmarkForm</servlet-name>
+        <url-pattern>/bookmark/BookmarkForm</url-pattern>
+    </servlet-mapping>  
+    
+    <servlet>
+        <description></description>
+        <servlet-name>BookmarkEdit</servlet-name>
+        <servlet-class>br.bookmark.servlet.BookmarkEdit</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookmarkEdit</servlet-name>
+        <url-pattern>/bookmark/BookmarkEdit</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <description></description>
+        <servlet-name>BookmarkNew</servlet-name>
+        <servlet-class>br.bookmark.servlet.BookmarkNew</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookmarkNew</servlet-name>
+        <url-pattern>/bookmark/BookmarkNew</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <description></description>
+        <servlet-name>BookmarkShare</servlet-name>
+        <servlet-class>br.bookmark.servlet.BookmarkShare</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookmarkShare</servlet-name>
+        <url-pattern>/bookmark/BookmarkShare</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <description></description>
+        <servlet-name>CommunityAdd</servlet-name>
+        <servlet-class>br.bookmark.servlet.CommunityAdd</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommunityAdd</servlet-name>
+        <url-pattern>/community/CommunityAdd</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <description></description>
+        <servlet-name>CommunityManage</servlet-name>
+        <servlet-class>br.bookmark.servlet.CommunityManage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommunityManage</servlet-name>
+        <url-pattern>/community/CommunityManage</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <description></description>
+        <servlet-name>CommunityNew</servlet-name>
+        <servlet-class>br.bookmark.servlet.CommunityNew</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommunityNew</servlet-name>
+        <url-pattern>/community/CommunityNew</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <description></description>
+        <servlet-name>MessageDelete</servlet-name>
+        <servlet-class>br.bookmark.servlet.MessageDelete</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MessageDelete</servlet-name>
+        <url-pattern>/community/MessageDelete</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <description></description>
+        <servlet-name>MessageEdit</servlet-name>
+        <servlet-class>br.bookmark.servlet.MessageEdit</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MessageEdit</servlet-name>
+        <url-pattern>/community/MessageEdit</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <description></description>
+        <servlet-name>MessageNew</servlet-name>
+        <servlet-class>br.bookmark.servlet.MessageNew</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MessageNew</servlet-name>
+        <url-pattern>/community/MessageNew</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description></description>
+        <servlet-name>RemoveMember</servlet-name>
+        <servlet-class>br.bookmark.servlet.RemoveMember</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoveMember</servlet-name>
+        <url-pattern>/community/RemoveMember</url-pattern>
+    </servlet-mapping>
 </web-app>

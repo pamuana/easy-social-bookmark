@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
 <%@page import="br.bookmark.project.*"%>
+<%@page import="br.bookmark.db.*"%>
 <%@page import="br.bookmark.models.*"%>
 <%@page import="java.util.*"%>
 <%
-    Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
-    
-	BookmarkMgr bookmarkMgr = new BookmarkMgr(bookmarkInit.getBookmarkDAO());
-    TagMgr tagMgr = new TagMgr(bookmarkInit.getTagDAO());
-    CommunityMgr communityMgr = new CommunityMgr(bookmarkInit.getCommunityDAO(),bookmarkInit.getUserDAO());
+
+
+ Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
+CommunityDAO communityDAO = bookmarkInit.getCommunityDAO();
+	BookmarkDAO bookmarkDAO = bookmarkInit.getBookmarkDAO();
+    TagDAO tagDAO = bookmarkInit.getTagDAO();
+
     
     String idUser = session.getAttribute("idUser").toString();
     
@@ -17,11 +20,11 @@
 	String tagsString="";
 	String operation="new"; 
     if (request.getParameter("idBookmark")!=null){
-    	Bookmark bookmark=bookmarkMgr.findById(request.getParameter("idBookmark"));
+    	Bookmark bookmark=bookmarkDAO.findById(Long.parseLong(request.getParameter("idBookmark")));
     	name=bookmark.getName();
     	url=bookmark.getUrl();
     	description=bookmark.getDescription();
-    	Collection<Tag> tags = tagMgr.findTagsByIdBookmark(request.getParameter("idBookmark"));
+    	Collection<Tag> tags = tagDAO.findTagsByIdBookmark(Long.parseLong(request.getParameter("idBookmark")));
     	for (Tag tag: tags){
     		tagsString=tagsString+tag.getName()+",";
     	}
@@ -63,33 +66,33 @@
 		</div>
 		<div id="content">
 		<div id="main">
-			<form name="editbookmark" action="bookmarkAction.jsp" method="post">
-    			<input type="hidden" name="operation" value="<%=operation%>"/>
+			<form name="editbookmark" action="BookmarkForm" method="post">
+    			<input type="hidden" name="operation" value="<%=request.getParameter("operation")%>"/>
     			<% if (request.getParameter("idBookmark")!=null) {%>
     			<input type="hidden" name="idBookmark" value="<%=request.getParameter("idBookmark")%>"/>
     			<%} %>
 				Name:
 				<br />
-				<input name="name" value="<%=name%>" type="text" ></input>
+				<input name="name" value="<%=request.getParameter("name")%>" type="text" ></input>
 				<br />
 				<br />
 				URL:
 				<br />
-				<input name="url" value="<%=url%>" type="text"  ></input>
+				<input name="url" value="<%=request.getParameter("url")%>" type="text"  ></input>
 				<br />
 				<br />
 				Description:
 				<br />
-				<input name="description" value="<%=description%>" type="text" ></input>
+				<input name="description" value="<%=request.getParameter("description")%>" type="text" ></input>
 				<br />
 				<br />
 				Tags:
 				<br />
-				<textarea name="tags" cols="50" rows="10"><%=tagsString%></textarea>
+				<textarea name="tags" cols="50" rows="10"><%=request.getParameter("tagString")%></textarea>
 				<br />
 <%
 	if (operation.equals("share")){
-		Collection<Community> communities=communityMgr.findCommunitiesByIdUser(session.getAttribute("idUser").toString());
+		Collection<Community> communities=communityDAO.findCommunitiesByIdUser(Long.parseLong(session.getAttribute("idUser")+""));
 		for (Community community : communities){
 			out.println(community.getName()+"<input type=\"checkbox\" name=\"community"+community.getId()+"\" value=\""+community.getId()+"\" /><br/>");
 		}
@@ -128,14 +131,14 @@
 					<ul class="menu">
 <%
 					// TODO criar uma funç~ao recursiva para esta chamada
-				Collection<Community> communities=communityMgr.findCommunitiesByIdUser(idUser);
+				Collection<Community> communities=communityDAO.findCommunitiesByIdUser(Long.parseLong(idUser));
 				for (Community community:communities){
 					if (community.getIdParent()==0){
 %>
 						<li><a href="bookmarkCommunityList.jsp?idCommunity=<%=community.getId()%>"><%=community.getName()%></a>
 						<ul>
 <%
-						Collection<Community> subcommunities=communityMgr.findSubCommunity(""+community.getId());
+						Collection<Community> subcommunities=communityDAO.findByIdParent(community.getId());
 						for (Community subcommunity:subcommunities){
 %>
 							<li><a href="bookmarkCommunityList.jsp?idCommunity=<%=subcommunity.getId()%>"><%=subcommunity.getName()%></a></li>

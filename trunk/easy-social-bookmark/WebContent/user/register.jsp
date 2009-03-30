@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
-<%@page import="br.bookmark.db.Database"%>
-<%@page import="br.bookmark.db.DataBaseUtils"%>
 <%@page import="br.bookmark.project.*"%>
 <%@page import="br.bookmark.models.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -25,8 +23,10 @@
        	  <div id="main">
 <%
 	
-	Init bookmarkInit = (Init) session.getAttribute("bookmarkInit");
-	UserMgr userMgr = new UserMgr(bookmarkInit.getUserDAO());
+    if (request.getParameter("msg")!=""){
+    	out.print(request.getParameter("msg"));
+    }
+/*	UserMgr userMgr = new UserMgr(bookmarkInit.getUserDAO());
 	if (userMgr == null){
 		response.sendRedirect("error.jsp");
 	}
@@ -45,7 +45,7 @@
 		}else{
 			out.println("<b>Error: The field password and Confirm Password need to be equals</b><hr/>");
 		}
-	}
+	}*/
 %>
             Register<br>
             <form action="register.jsp" name="registerForm" method="post">

@@ -14,7 +14,7 @@
 	String idTag = request.getParameter("idTag");
 	
 	CommunityDAO communityDAO= bookmarkInit.getCommunityDAO();
-	CommentDAO commentDAO= bookmarkInit.getCommentDAO();
+	CommentDAO commentDAO= bookmarkInit.getCommentDAO(); 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
