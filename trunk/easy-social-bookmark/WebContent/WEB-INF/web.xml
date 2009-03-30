@@ -10,6 +10,46 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>	
 	
+	<servlet>
+	    <description></description>
+	    <servlet-name>Login</servlet-name>
+	    <servlet-class>br.bookmark.servlet.Login</servlet-class>
+    </servlet>
+	<servlet-mapping>
+	    <servlet-name>Login</servlet-name>
+	    <url-pattern>/user/Login</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+	    <description></description>
+	    <servlet-name>Forgot</servlet-name>
+	    <servlet-class>br.bookmark.servlet.Forgot</servlet-class>
+    </servlet>
+	<servlet-mapping>
+	    <servlet-name>Forgot</servlet-name>
+	    <url-pattern>/user/Forgot</url-pattern>
+    </servlet-mapping>
+        
+    <servlet>
+	    <description></description>
+	    <servlet-name>Register</servlet-name>
+	    <servlet-class>br.bookmark.servlet.Register</servlet-class>
+    </servlet>
+	<servlet-mapping>
+	    <servlet-name>Register</servlet-name>
+	    <url-pattern>/user/Register</url-pattern>
+    </servlet-mapping>
+	
+	<servlet>
+	    <description></description>
+	    <servlet-name>EditProfile</servlet-name>
+	    <servlet-class>br.bookmark.servlet.EditProfile</servlet-class>
+    </servlet>
+	<servlet-mapping>
+	    <servlet-name>EditProfile</servlet-name>
+	    <url-pattern>/user/EditProfile</url-pattern>
+    </servlet-mapping>
+	
     <servlet>
 	    <description></description>
 	    <servlet-name>CommentAdd</servlet-name>
@@ -18,7 +58,7 @@
 	<servlet-mapping>
 	    <servlet-name>CommentAdd</servlet-name>
 	    <url-pattern>/bookmark/CommentAdd</url-pattern>
-    </servlet-mapping>    
+    </servlet-mapping>
     
      <servlet>
         <description></description>
