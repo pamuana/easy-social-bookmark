@@ -2,35 +2,6 @@
 <%@page import="br.bookmark.project.*"%>
 <%@page import="br.bookmark.models.*"%>
 <%@page import="java.util.*"%>
-<%
-	/*	Init bookmarkInit = (Init) session.getAttribute("bookmarkInit");
-
-		CommentMgr commentMgr = new CommentMgr(bookmarkInit.getCommentDAO());
-		
-		BookmarkMgr bookmarkMgr = new BookmarkMgr(bookmarkInit.getBookmarkDAO());
-		
-		String idBookmark = request.getParameter("idBookmark");
-		String idUser = session.getAttribute("idUser").toString();
-		String operation = ""+request.getParameter("operation");
-		CommunityMgr communityMgr = new CommunityMgr(bookmarkInit.getCommunityDAO(),bookmarkInit.getUserDAO());
-		
-		if(request.getParameter("send")!=null){
-			if (operation.equals("new")){
-				Comment comment = new Comment();
-				comment.setText(request.getParameter("text"));
-				comment.setIdBookmark(Long.parseLong(idBookmark));
-				comment.setIdUser(Long.parseLong(idUser));
-				commentMgr.save(comment);
-				String src= "bookmarkCommunityList.jsp?idCommunity="+bookmarkMgr.findById(idBookmark).getIdCommunity();
-			
-%>
-    <SCRIPT type="text/javascript">
-        window.location.href = "<%= src%>";
-    </SCRIPT>
-<%
-			}
-		}*/
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>

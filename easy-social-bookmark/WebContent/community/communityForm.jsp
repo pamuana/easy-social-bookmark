@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"    pageEncoding="UTF-8"%>
 <%@page import="br.bookmark.project.*"%>
 <%@page import="br.bookmark.models.*"%>
+<%@page import="br.bookmark.db.*"%>
 <%@page import="java.util.*"%>
 
 <%
     Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
-    CommunityMgr communityMgr = new CommunityMgr(bookmarkInit.getCommunityDAO(), bookmarkInit.getUserDAO());     
+    CommunityDAO communityDAO = bookmarkInit.getCommunityDAO();     
     
     String idCommunity="";
     String name="";
     String description="";
     if(request.getParameter("community")!=null){
-        Community community = communityMgr.findById(""+request.getParameter("community"));
+        Community community = communityDAO.findById(Long.parseLong(""+request.getParameter("community")));
         idCommunity = community.getId()+"";
         name = community.getName();
         description = community.getDescription();
@@ -43,7 +44,7 @@
  <%
       if(request.getParameter("community")!=null){
  %>
-<form action="communityAction.jsp" method="post" name="comments">
+<form action="/CommunityManage" method="post" name="comments">
     <input type="hidden" name="operation" value="managecommunity"/>
     <input type="hidden" name="idCommunity" value="<%= idCommunity %>"></input>
     Community:
@@ -75,7 +76,7 @@
 <%
       }else if(request.getParameter("create")!=null){
 %>
-<form action="communityAction.jsp" method="post" name="comments">
+<form action="/CommunityNew" method="post" name="comments">
     <input type="hidden" name="operation" value="createcommunity"/>
     Community name:
     <br/>
@@ -107,13 +108,13 @@
     	  
          
 %>
-<form action="communityAction.jsp" method="post" name="comments">
+<form action="/CommunityAdd" method="post" name="comments">
     <input type="hidden" name="operation" value="addcommunity"/>
     Select Communities:
     <br/>
  <%
  
-		 Collection<Community> communities=communityMgr.findDiffCommunitiesByIdUser(session.getAttribute("idUser").toString());
+		 Collection<Community> communities=communityDAO.findDiffCommunitiesByIdUser(Long.parseLong(session.getAttribute("idUser").toString()));
      
 		 for (Community community : communities){
 			 

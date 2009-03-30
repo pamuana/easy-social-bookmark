@@ -73,7 +73,7 @@ public class BookmarkList extends TagSupport {
 	}
 	
     public int doStartTag() {
-    	pageContext.getResponse().setCharacterEncoding("ISO8859-1");
+
     	JspWriter out = pageContext.getOut();
     	String context = (((HttpServletRequest) pageContext.getRequest()).getContextPath());
     	
