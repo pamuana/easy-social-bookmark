@@ -1,9 +1,6 @@
-/* Edita autor */
 package br.bookmark.servlet;
 
 import java.io.IOException;
-import java.util.Collection;
-
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,11 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import br.bookmark.project.*;
-import br.bookmark.db.CommunityDAO;
-import br.bookmark.db.MessageDAO;
 import br.bookmark.db.UserDAO;
-import br.bookmark.models.*;
+import br.bookmark.models.User;
+import br.bookmark.project.Init;
 
 /**
  * Servlet implementation class AutorEdit
@@ -70,9 +65,9 @@ public class Login extends HttpServlet {
 		Init bookmarkInit = (Init) session.getAttribute("bookmarkInit");
 
 		UserDAO userDAO = bookmarkInit.getUserDAO();
-		String idUser = session.getAttribute("idUser").toString();
-		boolean edit=false;
-		String msg = "";
+		//String idUser = session.getAttribute("idUser").toString();
+		//boolean edit=false;
+		//String msg = "";
 		
 		    if (userDAO == null){
 		    	response.sendRedirect("error.jsp");

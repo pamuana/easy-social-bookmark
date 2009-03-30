@@ -1,10 +1,10 @@
-/* Edita autor */
 package br.bookmark.servlet;
 
 import java.io.IOException;
 import java.util.Collection;
 
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -111,14 +111,10 @@ public class EditProfile extends HttpServlet {
 				userDAO.save(user);
 			}
 		}
-
-		try { 
-			String url ="editprofile.jsp?msg"+msg;   
-			response.sendRedirect(url); 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		request.setAttribute("msg", msg);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("../user/editprofile.jsp");
+		requestDispatcher.forward(request, response);
 	}
 
 	

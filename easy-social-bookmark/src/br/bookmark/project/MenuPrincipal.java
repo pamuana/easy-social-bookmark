@@ -16,7 +16,6 @@ public class MenuPrincipal extends TagSupport {
 
             JspWriter out = pageContext.getOut();
             String context = (((HttpServletRequest) pageContext.getRequest()).getContextPath());
-            out.println("á -->"+context);
             out.println(
             		"<h2>Main Menu</h2>" +
         			"<div class=\"content\">" +

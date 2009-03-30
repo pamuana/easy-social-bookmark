@@ -16,12 +16,11 @@
 	
 	CommunityDAO communityDAO= bookmarkInit.getCommunityDAO();
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
   <title>Bookmark List</title>
-  <link rel="stylesheet" href="../css/style.css" type="text/css">
+  <link rel="stylesheet" href="../css/style.css" type="text/css"/>
 </head>
 <body>
 <div id="wrap">
@@ -69,28 +68,7 @@
         			<h2><a title="list communities" href="../community/communityList.jsp">List Communities</a></h2>
         			<div class="content">
 					<ul class="menu">
-<%
-					// TODO criar uma funç~ao recursiva para esta chamada
-				Collection<Community> communities=communityDAO.findCommunitiesByIdUser(Long.parseLong(idUser));
-				for (Community community:communities){
-					if (community.getIdParent()==0){
-%>
-						<li><a href="bookmarkCommunityList.jsp?idCommunity=<%=community.getId()%>"><%=community.getName()%></a>
-						<ul>
-<%
-						Collection<Community> subcommunities=communityDAO.findByIdParent(community.getId());
-						for (Community subcommunity:subcommunities){
-%>
-							<li><a href="bookmarkCommunityList.jsp?idCommunity=<%=subcommunity.getId()%>"><%=subcommunity.getName()%></a></li>
-<%
-						}
-%>
-						</ul>
-						</li>
-<%			
-					}
-				}
-%>
+					<Widget:MenuCommunity idUser="<%=idUser%>" communityDAO="<%=communityDAO%>"/>
 					</ul>
 					</div>
         		</div>
@@ -100,14 +78,7 @@
         		<div id="block-tags" class="block">
         			<h2>List of Tags</h2>
         			<div class="content">
-<%
-					Collection<Tag> userTags=tagDAO.findTagsByIdUser(Long.parseLong(idUser));
-					for (Tag tag:userTags){
-%>
-						<a href="bookmarkList.jsp?idTag=<%=tag.getId()%>"><%=tag.getName()%></a>
-<%	
-					}
-%>
+						<Widget:MenuTag idUser="<%=idUser%>"tagDAO="<%=tagDAO%>"/>
 					</div>
         		</div>
         	</div>

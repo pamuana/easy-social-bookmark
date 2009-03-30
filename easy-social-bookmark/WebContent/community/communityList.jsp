@@ -3,6 +3,7 @@
 <%@page import="br.bookmark.db.*"%>
 <%@page import="br.bookmark.models.*"%>
 <%@page import="java.util.*" %>
+<%@taglib uri="br.bookmark.project" prefix="Widget"%>
 <%
     Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
     BookmarkDAO bookmarkDAO = bookmarkInit.getBookmarkDAO();
@@ -20,9 +21,10 @@
   
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<link rel="stylesheet" href="../css/style.css" type="text/css" />
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+<head>
   <title>List Community</title>
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 </head>
 <body>
 <div id="wrap">
@@ -80,54 +82,25 @@
           </div>
 		  <div id="sidebar">
         		<div id="block-menu-principal" class="block">
-        			<h2>Main Menu</h2>
-        			<div class="content">
-                        <ul>
-                            <li><a title="view bookmark" href="../bookmark/bookmarkList.jsp">&raquo;&nbsp;View Bookmark</a></li>
-                            <li><a title="new bookmark" href="../bookmark/bookmarkForm.jsp">&raquo;&nbsp;New Bookmark</a></li>
-                            <li><a title="view interesting" href="#">&raquo;&nbsp;View Interesting</a></li>
-                            <li><a title="view statistic" href="#">&raquo;&nbsp;View Statistics</a></li>
-                        </ul>
-						<br/><p/>&nbsp;
-						<ul>
-                            <li><a title="list communities" href="communityList.jsp">&raquo;&nbsp;List Communities</a></li>
-                            <li><a title="new community" href="communityForm.jsp?create=create">&raquo;&nbsp;New Community</a></li>
-                            <li><a title="add community" href="communityForm.jsp?addcommunity=addcommunity">&raquo;&nbsp;Add Community</a></li>
-                        </ul>
-    				</div>
-                 </div>
-                 <p/>&nbsp;
+        			<Widget:MenuPrincipal/>
+        		</div>
+        		<p/>&nbsp;
         		<hr/>
         		<p/>&nbsp;
- 				<div id="block-menu-community" class="block">
-                     <h2> <a title="list communities" href="communityList.jsp">List Communities</a></h2>
-                     <div class="content">
-                     <ul class="menu">
-<%
-        // TODO criar uma funç~ao recursiva para esta chamada
-        Collection<Community> communities=communityDAO.findCommunitiesByIdUser(Long.parseLong(idUser));
-        for (Community community:communities){
-            if (community.getIdParent()==0){
-%>
-                <li><a href="#"><%=community.getName()%></a></li>
-                    <ul>
-<%
-                        Collection<Community> subcommunities=communityDAO.findByIdParent(community.getId());
-                        for (Community subcommunity:subcommunities){
-%>
-                            <li><a href="#"><%=subcommunity.getName()%></a></li>
-<%
-                        }
-%>
-                    </ul>
-<%          
-            }
-        }
-%>
-                     </ul>
-                  </div>
-    			</div>
-            </div>
+        		<div id="block-menu-community" class="block">
+        			<h2><a title="list communities" href="../community/communityList.jsp">List Communities</a></h2>
+        			<div class="content">
+					<ul class="menu">
+					<Widget:MenuCommunity idUser="<%=idUser%>" communityDAO="<%=communityDAO%>"/>
+					</ul>
+					</div>
+        		</div>
+        		<p/>&nbsp;
+        		<hr/>
+        		<p/>&nbsp;
+        		<div id="block-tags" class="block">
+        		</div>
+        	</div>
         	<div class="clear"></div>
         	<div id="footer"></div>
           </div>
