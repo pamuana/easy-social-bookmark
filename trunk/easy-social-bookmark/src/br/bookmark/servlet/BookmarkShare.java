@@ -2,7 +2,6 @@
 package br.bookmark.servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import br.bookmark.project.*;
 import br.bookmark.db.BookmarkDAO;
-import br.bookmark.db.CommentDAO;
 import br.bookmark.db.CommunityDAO;
 import br.bookmark.db.TagDAO;
 import br.bookmark.models.*;
@@ -36,7 +34,15 @@ public class BookmarkShare extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		bookmarkShare(request,response);
+		try {
+			bookmarkShare(request,response);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 
@@ -44,11 +50,19 @@ public class BookmarkShare extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		bookmarkShare(request,response);		
+		try {
+			bookmarkShare(request,response);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 
 	private void bookmarkShare(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response) throws NumberFormatException, Exception {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(true);
 		String url ="bookmarkList.jsp";		
@@ -59,7 +73,7 @@ public class BookmarkShare extends HttpServlet {
 		TagDAO tagDAO = bookmarkInit.getTagDAO();
 		String idUser = session.getAttribute("idUser").toString();
 		
-		String operation=(request.getParameter("operation")!=null?request.getParameter("operation"):"");
+		//String operation=(request.getParameter("operation")!=null?request.getParameter("operation"):"");
 		
 		CommunityDAO communityDAO=bookmarkInit.getCommunityDAO();
 		Collection<Community> communities=communityDAO.findCommunitiesByIdUser(Long.parseLong(session.getAttribute("idUser").toString()));
@@ -77,35 +91,20 @@ public class BookmarkShare extends HttpServlet {
 				Collection<Bookmark> communityBookmarks=bookmarkDAO.findBookmarksByIdCommunity(community.getId());
 				for (Bookmark communityBookmark:communityBookmarks){
 					if (communityBookmark.getName().equals(bookmark.getName())&&communityBookmark.getUrl().equals(bookmark.getUrl())){
-						tagDAO.assignBookmarkWithIdCommunity(nameTags,communityBookmark.getId(),community.getId());
+						tagDAO.assignBookmarkWithIdCommunity(nameTags,communityBookmark.getId(),community.getId(),tagDAO.findTagsByIdCommunity(community.getId()));
 					}
 				}
 			}
-		
-		if(request.getParameter("send")!=null){
-			if (operation.equals("new")){
-				comment.setText(request.getParameter("text"));
-				((Comment) comment).setIdBookmark(Long.parseLong(idBookmark));
-				comment.setIdUser(Long.parseLong(idUser));
-			}
+		}
 			
 		try { 
 
-			url="bookmarkCommunityList.jsp?idCommunity="+bookmarkDAO.findById(Long.parseLong(idBookmark)).getIdCommunity();	   
+			url="bookmarkList.jsp";	   
  
 			response.sendRedirect(url); 
-		} catch (ClassNotFoundException e) {   
-			// TODO Auto-generated catch block 
-			e.printStackTrace(); 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	}
-	
-
 }
