@@ -65,7 +65,7 @@ public class RemoveMember extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(true);
 		Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
-		String idUser = (String) session.getAttribute("idUser");
+		String idUser = session.getAttribute("idUser").toString();
 		CommunityDAO communityDAO = bookmarkInit.getCommunityDAO();		
 		String idCommunity =request.getParameter("idCommunity");
 		
@@ -75,7 +75,7 @@ public class RemoveMember extends HttpServlet {
 		
 
 		try { 
-			String url ="managemembers.jsp?idCommunity="+idCommunity+"msg="+msg;	    
+			String url ="managemembers.jsp?idCommunity="+idCommunity;	    
 			response.sendRedirect(url); 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

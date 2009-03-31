@@ -48,7 +48,7 @@
 			<div id="main">
 	
     			<div id="community">
-        			<h2>Your are view shared bookmarks in <b><%=currentCommunity.getName() %></b></h2>
+        			<h2>You are viewing shared bookmarks in <b><%=currentCommunity.getName() %></b></h2>
         			<div class="descriptioncommunity">
         				<%= currentCommunity.getDescription() %>
         			</div>
