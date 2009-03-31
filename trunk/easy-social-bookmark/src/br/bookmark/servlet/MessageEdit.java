@@ -67,7 +67,7 @@ public class MessageEdit extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(true);
 		Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
-		String idUser = (String) session.getAttribute("idUser");		
+		String idUser = session.getAttribute("idUser").toString();		
 		String idCommunity =request.getParameter("idCommunity");
 		MessageDAO messageDAO = bookmarkInit.getMessageDAO();
 		

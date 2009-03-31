@@ -66,15 +66,16 @@ public class MessageNew extends HttpServlet {
 			HttpServletResponse response) throws NumberFormatException, Exception {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(true);
-		Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
-		String idUser = (String) session.getAttribute("idUser");		
+		Init bookmarkInit = (Init) session.getAttribute("bookmarkInit");
+		UserDAO userDAO = bookmarkInit.getUserDAO();
+		User user = userDAO.findById(Long.parseLong(""+session.getAttribute("idUser")));		
 		String idCommunity =request.getParameter("idCommunity");
 		MessageDAO messageDAO = bookmarkInit.getMessageDAO();
 		
 		String message = request.getParameter("message");
 		Message msg = new Message();
 		msg.setIdCommunity(Long.parseLong(idCommunity));
-		msg.setIdUser(Long.parseLong(idUser));
+		msg.setIdUser(user.getId());
 		msg.setText(message);
 		messageDAO.save(msg);
 

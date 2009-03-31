@@ -6,8 +6,7 @@
 
 <%
     Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
-    CommunityDAO communityDAO = bookmarkInit.getCommunityDAO();     
-    
+    CommunityDAO communityDAO = bookmarkInit.getCommunityDAO();         
     String idCommunity="";
     String name="";
     String description="";
@@ -44,7 +43,7 @@
  <%
       if(request.getParameter("community")!=null){
  %>
-<form action="/CommunityManage" method="post" name="comments">
+<form action="CommunityManage" method="post" name="comments">
     <input type="hidden" name="operation" value="managecommunity"/>
     <input type="hidden" name="idCommunity" value="<%= idCommunity %>"></input>
     Community:
@@ -76,7 +75,7 @@
 <%
       }else if(request.getParameter("create")!=null){
 %>
-<form action="/CommunityNew" method="post" name="comments">
+<form action="CommunityNew" method="post" name="comments">
     <input type="hidden" name="operation" value="createcommunity"/>
     Community name:
     <br/>
@@ -108,7 +107,7 @@
     	  
          
 %>
-<form action="/CommunityAdd" method="post" name="comments">
+<form action="CommunityAdd" method="post" name="comments">
     <input type="hidden" name="operation" value="addcommunity"/>
     Select Communities:
     <br/>

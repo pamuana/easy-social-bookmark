@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"    pageEncoding="UTF-8"%>
 <%@page import="br.bookmark.project.*"%>
 <%@page import="br.bookmark.models.*"%>
+<%@page import="br.bookmark.db.*"%>
 <%@page import="java.util.*"%>
 <%
     Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
-    CommunityMgr communityMgr = new CommunityMgr(bookmarkInit.getCommunityDAO(), bookmarkInit.getUserDAO());  
-    MessageMgr messageMgr = new MessageMgr(bookmarkInit.getMessageDAO());
+    CommunityDAO communityDAO = bookmarkInit.getCommunityDAO();  
+    MessageDAO messageDAO = bookmarkInit.getMessageDAO();
     String idCommunty=request.getParameter("idCommunity"); 
     String operation =request.getParameter("operation");
     
     String idUser=session.getAttribute("idUser").toString();
-    Community community = communityMgr.findById(idCommunty);
+    Community community = communityDAO.findById(Long.parseLong(idCommunty));
   
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -45,7 +46,7 @@
 <%
 	if(operation.equals("new")){
 %>
-<form action="messageAction.jsp">
+<form action="MessageNew">
 <input type="hidden" name="idCommunity" value="<%= idCommunty %>"/>
 <input type="hidden" name="operation" value="<%= operation %>"/>
 <div>Community <%= community.getName() %></div>
@@ -61,9 +62,9 @@ Message:
 <%
 	}else if(operation.equals("edit")){
 		String idMessage =request.getParameter("idMessage");
-		Message message = messageMgr.findById(idMessage);
+		Message message = messageDAO.findById(Long.parseLong(idMessage));
 %>
-<form action="messageAction.jsp">
+<form action="MessageEdit">
 <input type="hidden" name="idCommunity" value="<%= idCommunty %>"/>
 <input type="hidden" name="operation" value="<%= operation %>"/>
 <div>Community <%= community.getName() %></div>
@@ -83,59 +84,26 @@ Message:
 		</div>
 		<!-- End Main -->
         	<div id="sidebar">
-        		<div id="block-menu-principal" class="block">
-        			<h2>Main Menu</h2>
-        			<div class="content">
-						<ul>
-  							<li><a title="view bookmark" href="../bookmark/bookmarkList.jsp">&raquo;&nbsp;View Bookmark</a></li>
-  							<li><a title="new bookmark" href="../bookmark/bookmarkForm.jsp">&raquo;&nbsp;New Bookmark</a></li>
-  							<li><a title="view interesting" href="#">&raquo;&nbsp;View Interesting</a></li>
-  							<li><a title="view statistic" href="#">&raquo;&nbsp;View Statistics</a></li>
-						</ul>
-						<br/><p/>&nbsp;
-						<ul>
-        					<li><a title="list communities" href="../community/communityList.jsp">&raquo;&nbsp;List Communities</a></li>
-        					<li><a title="new community" href="../community/communityForm.jsp?create=create">&raquo;&nbsp;New Community</a></li>
-        					<li><a title="add community" href="../community/communityForm.jsp?addcommunity=addcommunity">&raquo;&nbsp;Add Community</a></li>
-    					</ul>    			
-        			</div>
-        		</div>
-        		<p/>&nbsp;
-        		<hr/>
-        		<p/>&nbsp;
-        		<div id="block-menu-community" class="block">
-        			<h2><a title="list communities" href="../community/communityList.jsp">List Communities</a></h2>
-        			<div class="content">
-					<ul class="menu">
-<%
-					// TODO criar uma funç~ao recursiva para esta chamada
-				Collection<Community> myCommunities=communityMgr.findCommunitiesByIdUser(idUser);
-				for (Community myCommunity:myCommunities){
-					if (myCommunity.getIdParent()==0){
-%>
-						<li><a href="bookmarkCommunityList.jsp?idCommunity=<%=myCommunity.getId()%>"><%=myCommunity.getName()%></a>
-						<ul>
-<%
-						Collection<Community> subcommunities=communityMgr.findSubCommunity(""+myCommunity.getId());
-						for (Community subcommunity:subcommunities){
-%>
-							<li><a href="bookmarkCommunityList.jsp?idCommunity=<%=subcommunity.getId()%>"><%=subcommunity.getName()%></a></li>
-<%
-						}
-%>
-						</ul>
-						</li>
-<%			
-					}
-				}
-%>
-					</ul>
-					</div>
-        		</div>
-        		<p/>&nbsp;
-        		<hr/>
-        		<p/>&nbsp;
-        	</div>
+                <div id="block-menu-principal" class="block">
+                    <Widget:MenuPrincipal/>
+                </div>
+                <p/>&nbsp;
+                <hr/>
+                <p/>&nbsp;
+                <div id="block-menu-community" class="block">
+                    <h2><a title="list communities" href="../community/communityList.jsp">List Communities</a></h2>
+                    <div class="content">
+                    <ul class="menu">
+                    <Widget:MenuCommunity idUser="<%=idUser%>" communityDAO="<%=communityDAO%>"/>
+                    </ul>
+                    </div>
+                </div>
+                <p/>&nbsp;
+                <hr/>
+                <p/>&nbsp;
+                <div id="block-tags" class="block">
+                </div>
+            </div>
         	<div class="clear"></div>
         	<div id="footer"></div>
 		</div>

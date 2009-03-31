@@ -65,7 +65,6 @@ public class CommunityNew extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(true);
 		Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
-		String idUser = (String) session.getAttribute("idUser");
 		UserDAO userDAO = bookmarkInit.getUserDAO();
 		User user = userDAO.findById(Long.parseLong(""+session.getAttribute("idUser")));
 		CommunityDAO communityDAO = bookmarkInit.getCommunityDAO();		
