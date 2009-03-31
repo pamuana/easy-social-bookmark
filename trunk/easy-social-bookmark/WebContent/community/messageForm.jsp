@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"    pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"    pageEncoding="UTF-8"%>
 <%@page import="br.bookmark.project.*"%>
 <%@page import="br.bookmark.models.*"%>
 <%@page import="br.bookmark.db.*"%>
 <%@page import="java.util.*"%>
+<%@taglib uri="br.bookmark.project" prefix="Widget"%>
 <%
     Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
     CommunityDAO communityDAO = bookmarkInit.getCommunityDAO();  
@@ -14,12 +15,11 @@
     Community community = communityDAO.findById(Long.parseLong(idCommunty));
   
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
   <title>Message Form</title>
-  <link rel="stylesheet" href="../css/style.css" type="text/css">
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 </head>
 <body>
 <div id="wrap">
@@ -29,7 +29,7 @@
 			<div id="caption">
 				<div id="title">
 					<h1>Easy Bookmark Social</h1>
-					<p>Web System Develpoment </p>
+					<p>Web System Development </p>
 					<br />
 			  	</div>
 			</div>

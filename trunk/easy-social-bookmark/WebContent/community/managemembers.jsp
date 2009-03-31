@@ -3,6 +3,7 @@
 <%@page import="br.bookmark.project.*"%>
 <%@page import="br.bookmark.models.*"%>
 <%@page import="java.util.*"%>
+<%@taglib uri="br.bookmark.project" prefix="Widget"%>
 <%
     Init bookmarkInit = (Init) session.getAttribute("bookmarkInit");
     String idUser = session.getAttribute("idUser").toString();
@@ -18,10 +19,10 @@
     Collection<String> idUsers = communityDAO.findIdUsersByIdCommunity(Long.parseLong(idCommunity));
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<link rel="stylesheet" href="../css/style.css" type="text/css" />
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
   <title>Manage Members</title>
+  <link rel="stylesheet" href="../css/style.css" type="text/css"/>
 </head>
 <body>
 <div id="wrap">
@@ -30,7 +31,7 @@
 			<div id="caption">
 				<div id="title">
 					<h1>Easy Bookmark Social</h1>
-					<p>Web System Develpoment </p>
+					<p>Web System Development </p>
 					<br />
 			  </div>
 			</div>
@@ -82,7 +83,8 @@
             </div>
         <div class="clear"> </div>
         <div id="footer"></div>
-      </div>  
+      </div>
+	</div>
 </div>
 </body>
 </html>

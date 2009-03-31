@@ -33,7 +33,7 @@
 			<div id="caption">
 				<div id="title">
 					<h1>Easy Bookmark Social</h1>
-					<p>Web System Develpoment </p>
+					<p>Web System Development </p>
 					<br />
 			  </div>
 			</div>
