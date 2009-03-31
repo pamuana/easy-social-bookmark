@@ -4,11 +4,11 @@
 <%@page import="br.bookmark.db.CommunityDAO"%>
 <%@page import="br.bookmark.db.TagDAO"%>
 <%@page import="br.bookmark.models.Bookmark"%>
+<%@page import="br.bookmark.models.Community"%>
+<%@page import="br.bookmark.models.Tag"%>
 <%@page import="java.util.*"%>
 <%@taglib uri="br.bookmark.project" prefix="Widget"%>
 <%
-
-
  	Init bookmarkInit = (Init) session.getAttribute("bookmarkInit"); 
 	CommunityDAO communityDAO = bookmarkInit.getCommunityDAO();
 	BookmarkDAO bookmarkDAO = bookmarkInit.getBookmarkDAO();
@@ -27,6 +27,7 @@
     	name=bookmark.getName();
     	url=bookmark.getUrl();
     	description=bookmark.getDescription();
+    	
     	Collection<Tag> tags = tagDAO.findTagsByIdBookmark(Long.parseLong(request.getParameter("idBookmark")));
     	for (Tag tag: tags){
     		tagsString=tagsString+tag.getName()+",";
@@ -36,7 +37,8 @@
     	}
 		operation="edit";
     }
-    if (request.getParameter("operation")!=null&&request.getParameter("operation").equals("share")){
+    if (request.getParameter("operation")!=null&&"share".equals(request.getParameter("operation"))){
+    	System.out.println("-->"+operation);
     	operation="share";
     }
 %>
@@ -44,7 +46,7 @@
 <html>
 <head>
   <title>Bookmark Form</title>
-  <link rel="stylesheet" href="../css/style.css" type="text/css"/>
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 </head>
 <body>
 <div id="wrap">
@@ -69,28 +71,26 @@
 		<div id="content">
 		<div id="main">
 			<form name="BookmarkForm" action="BookmarkForm" method="post">
-    			<input type="hidden" name="operation" value="<%=request.getParameter("operation")%>"/>
-    			<% if (request.getParameter("idBookmark")!=null) {%>
-    			<input type="hidden" name="idBookmark" value="<%=request.getParameter("idBookmark")%>"/>
-    			<%} %>
+    			<input type="hidden" name="operation" value="<%=operation%>"/>
+				<input type="hidden" name="idBookmark" value="<%=request.getParameter("idBookmark")%>"/>
 				Name:
 				<br />
-				<input name="name" value="<%=request.getParameter("name")%>" type="text" ></input>
+				<input name="name" value="<%=name%>" type="text" ></input>
 				<br />
 				<br />
 				URL:
-				<br />
-				<input name="url" value="<%=request.getParameter("url")%>" type="text"  ></input>
+				<br />bookmarkForm
+				<input name="url" value="<%=url%>" type="text"  ></input>
 				<br />
 				<br />
 				Description:
 				<br />
-				<input name="description" value="<%=request.getParameter("description")%>" type="text" ></input>
+				<input name="description" value="<%=description%>" type="text" ></input>
 				<br />
 				<br />
 				Tags:
 				<br />
-				<textarea name="tags" cols="50" rows="10"><%=request.getParameter("tagString")%></textarea>
+				<textarea name="tags" cols="50" rows="10"><%=tagsString%></textarea>
 				<br />
 <%
 	if (operation.equals("share")){

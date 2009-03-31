@@ -126,7 +126,7 @@ public class BookmarkList extends TagSupport {
         		    "<div>" +
         		    "<a class=\"addcomment\" href=\"bookmarkForm.jsp?operation=share&idBookmark="+bm.getId()+"\">share</a>"+
         			"<a class=\"editlinks\" href=\"bookmarkForm.jsp?idBookmark="+bm.getId()+"\">edit</a>" +
-        		    "<a href=\"bookmarkAction.jsp?operation=delete&idBookmark="+bm.getId()+"\">delete</a>"+
+        		    "<a href=\"BookmarkDelete?idBookmark="+bm.getId()+"\">delete</a>"+
         			"</div>"+
         			"</div>"+
         		    "</div>"+
@@ -176,7 +176,7 @@ public class BookmarkList extends TagSupport {
     			);
     			
     			if(currentCommunity.getIdAdmin() == Long.parseLong(idUser)){
-    				out.print(";&nbsp;&nbsp;<a href=\"bookmarkAction.jsp?operation=delete&idBookmark="+bk.getId()+"\">delete</a>");
+    				out.print(";&nbsp;&nbsp;<a href=\"BookmarkDelete?idBookmark="+bk.getId()+"\">delete</a>");
             	}
     			
     			out.print(
