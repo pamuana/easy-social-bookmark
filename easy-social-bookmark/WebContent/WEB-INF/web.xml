@@ -72,32 +72,12 @@
     
     <servlet>
         <description></description>
-        <servlet-name>BookmarkEdit</servlet-name>
-        <servlet-class>br.bookmark.servlet.BookmarkEdit</servlet-class>
+        <servlet-name>BookmarkDelete</servlet-name>
+        <servlet-class>br.bookmark.servlet.BookmarkDelete</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>BookmarkEdit</servlet-name>
-        <url-pattern>/bookmark/BookmarkEdit</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <description></description>
-        <servlet-name>BookmarkNew</servlet-name>
-        <servlet-class>br.bookmark.servlet.BookmarkNew</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>BookmarkNew</servlet-name>
-        <url-pattern>/bookmark/BookmarkNew</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <description></description>
-        <servlet-name>BookmarkShare</servlet-name>
-        <servlet-class>br.bookmark.servlet.BookmarkShare</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>BookmarkShare</servlet-name>
-        <url-pattern>/bookmark/BookmarkShare</url-pattern>
+        <servlet-name>BookmarkDelete</servlet-name>
+        <url-pattern>/bookmark/BookmarkDelete</url-pattern>
     </servlet-mapping>
     
     <servlet>
