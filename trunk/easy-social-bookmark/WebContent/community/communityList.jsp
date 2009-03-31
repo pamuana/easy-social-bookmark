@@ -72,7 +72,7 @@
                     There are no community to this user.
                     <br />
                     <div class="post">
-                        <a href="communityForm.jsp?create=create">Cretate Community</a>
+                        <a href="communityForm.jsp?create=create">Create Community</a>
                         <a href="communityForm.jsp?addcommunity=addcommunity">Add Community</a>
                     </div>
                 </div>
