@@ -16,6 +16,7 @@
 <head>
   <title>Edit Profile</title>
   <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <script type="text/javascript" src="../js/include.js" />
 </head>
 <body>
 <div id="wrap">
@@ -38,7 +39,8 @@ if (request.getAttribute("msg")!=null){
 %>
             <form action="EditProfile" name="formProfile" method="post">
                 Login:<br />
-                <input name="login" value="<%=user.getLogin()%>" /><br />
+                <input name="login" value="<%=user.getLogin()%>" onchange="javascript:exist(this.value)" /><br />
+                <p/>Suggestions: <span id="suggestions"></span><p/>
                 Name:<br />
                 <input name="name" value="<%=user.getName()%>" /><br />
                 Email:<br />
