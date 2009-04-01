@@ -1,4 +1,6 @@
 package br.bookmark.db;
+import java.util.Collection;
+
 import br.bookmark.db.util.Database;
 import br.bookmark.db.util.GenericDAO;
 import br.bookmark.models.User;
@@ -30,4 +32,13 @@ public class UserDAO extends GenericDAO<User> {
         if (user.getPassword().equals(password)) return user;
         return null;
     }
+	
+	public Collection<User> findUsersByLogin(String login) throws Exception{
+		return findCollectionByCriterio("login='"+login+"'");
+	}
+	
+	public Collection<User> findUsersByLikeLogin(String login) throws Exception{
+		return findCollectionByCriterio("login like '%"+login+"%'");
+	}
+	
 }

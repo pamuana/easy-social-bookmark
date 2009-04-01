@@ -4,8 +4,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<title>Forgot Password</title>
-<link rel="stylesheet" href="../css/style.css" type="text/css" />
+	<title>Forgot Password</title>
+	<link rel="stylesheet" href="../css/style.css" type="text/css" />
+	<script type="text/javascript" src="../js/include.js" />
 </head>
 <body>
 <div id="wrap">
@@ -29,7 +30,8 @@
             Register<br/>
             <form action="Register" name="registerForm" method="post">
                 Login:<br/>
-                <input name="login" value="<%=(request.getParameter("login")!=null?request.getParameter("login"):"")%>"/><br/>
+                <input name="login" value="<%=(request.getParameter("login")!=null?request.getParameter("login"):"")%>" onchange="javascript:exist(this.value)" /><br/>
+                <p/>Suggestions: <span id="suggestions"></span><p/>
                 Name:<br/>
                 <input name="name" value="<%=(request.getParameter("name")!=null?request.getParameter("name"):"")%>"/><br/>
                 Email:<br/>

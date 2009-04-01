@@ -49,6 +49,16 @@
 	    <servlet-name>EditProfile</servlet-name>
 	    <url-pattern>/user/EditProfile</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+	    <description></description>
+	    <servlet-name>UserListAjax</servlet-name>
+	    <servlet-class>br.bookmark.servlet.UserListAjax</servlet-class>
+    </servlet>    
+    <servlet-mapping>
+	    <servlet-name>UserListAjax</servlet-name>
+	    <url-pattern>/user/UserListAjax</url-pattern>
+    </servlet-mapping>
 	
     <servlet>
 	    <description></description>

@@ -4,7 +4,8 @@
 	<head>
 	<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
 	<title>Login</title>
-	<link rel="stylesheet" href="../css/style.css" type="text/css" />	
+	<link rel="stylesheet" href="../css/style.css" type="text/css" />
+	<script type="text/javascript" src="../js/include.js" />
 </head>
 <body>
 <div id="wrap">
@@ -24,7 +25,8 @@
           	<a href="register.jsp">Sign in</a> <br />
             <form action="Login" method="post" name="formLogin">
                     Username:<br />
-                    <input name="login" /> <br />
+                    <input name="login" onkeyup="javascript:findSimilar(this.value)" /> <br />
+                    <p>Suggestions: <span id="suggestions"></span>
                     <br />
                     Password: <br />
                     <input name="password" type="password" /> <br />
@@ -32,8 +34,9 @@
                     <a href="forgot.jsp">forgot password</a> <br />
                     <input name="send" value="Send" type="submit" /> <br />
                     <br />
-                    
             </form>
+			
+			<br />
             <p><br />
               <br />
             </p>
