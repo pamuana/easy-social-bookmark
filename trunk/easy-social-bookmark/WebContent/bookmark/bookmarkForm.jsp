@@ -47,6 +47,10 @@
 <head>
   <title>Bookmark Form</title>
   <link rel="stylesheet" href="../css/style.css" type="text/css" />
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.validate.js" type="text/javascript"></script>
+<script src="../js/cmxforms.js" type="text/javascript"></script>
+<script src="../js/validate.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="wrap">
@@ -69,28 +73,31 @@
 			</div>
 		</div>
 		<div id="content">
-		<div id="main">
-			<form name="BookmarkForm" action="BookmarkForm" method="post">
+		<div id="main">	
+			<form id="idForm"  class="cmxform" name="BookmarkForm" action="BookmarkForm" method="post">
     			<input type="hidden" name="operation" value="<%=operation%>"/>
 				<input type="hidden" name="idBookmark" value="<%=request.getParameter("idBookmark")%>"/>
 				Name:
 				<br />
-				<input name="name" value="<%=name%>" type="text" ></input>
+				<input name="name" class="required cname" value="<%=name%>" type="text" />
 				<br />
 				<br />
 				URL:
-				<br />bookmarkForm
-				<input name="url" value="<%=url%>" type="text"  ></input>
+				<br />
+				<p>
+				<input name="url" id="curl" class="required url" value="<%=url%>" type="text"  />
+				</p>
+				
 				<br />
 				<br />
 				Description:
 				<br />
-				<input name="description" value="<%=description%>" type="text" ></input>
+				<input  id="ccomment" name="description" value="<%=description%>" type="text" />
 				<br />
 				<br />
 				Tags:
 				<br />
-				<textarea name="tags" cols="50" rows="10"><%=tagsString%></textarea>
+				<textarea id="ccomment" name="tags" cols="50" rows="10"><%=tagsString%></textarea>
 				<br />
 <%
 	if (operation.equals("share")){

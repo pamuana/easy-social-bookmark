@@ -12,6 +12,10 @@
 <head>
   <title>Comment Form</title>
   <link rel="stylesheet" href="../css/style.css" type="text/css"/>
+  <script src="../js/jquery.js" type="text/javascript"></script>
+    <script src="../js/jquery.validate.js" type="text/javascript"></script>
+    <script src="../js/cmxforms.js" type="text/javascript"></script>
+    <script src="../js/validate.js" type="text/javascript"/>
 </head>
 <body>
 <div id="wrap">
@@ -35,15 +39,15 @@
 		</div>
 		<div id="content">
 		<div id="main">
-			<form action="CommentAdd" method="post" >
+			<form id="idForm" class="cmxform" action="CommentAdd" method="post" >
 				<input type="hidden" name="operation" value="new"/>
 				<input type="hidden" name="idBookmark" value="<%= request.getParameter("idBookmark")%>"/>
 				Comments:
 				<br/>
-				<textarea cols="50" rows="10" name="text" ></textarea>
+				<textarea class="required comment" cols="50" rows="10" name="text" ></textarea>
 				<br/>
 				<input name="send" value="send" type="submit"/>
-				<input name="cancel" value="cancel" type="button"/>
+				<input name="cancel" value="cancel" type="button" onclick="history.back()"/>
 			</form>
 
 		</div>
