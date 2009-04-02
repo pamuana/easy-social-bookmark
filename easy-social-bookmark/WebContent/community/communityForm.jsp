@@ -25,6 +25,10 @@
   <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
   <title>Form Community</title>
   <link rel="stylesheet" href="../css/style.css" type="text/css" />
+    <script src="../js/jquery.js" type="text/javascript"></script>
+    <script src="../js/jquery.validate.js" type="text/javascript"></script>
+    <script src="../js/cmxforms.js" type="text/javascript"></script>
+    <script src="../js/validate.js" type="text/javascript"/>
 </head>
  <body>
  <div id="wrap">
@@ -43,16 +47,16 @@
  <%
       if(request.getParameter("community")!=null){
  %>
-<form action="CommunityManage" method="post" name="comments">
+<form id="idForm" class="cmxform"  action="CommunityManage" method="post" name="comments">
     <input type="hidden" name="operation" value="managecommunity"/>
     <input type="hidden" name="idCommunity" value="<%= idCommunity %>"></input>
     Community:
     <br/>
-    <input type="text" name="name" value="<%= name %>"></input>
+    <input type="text"  class="required cname" name="name" value="<%= name %>"></input>
     <br/>
     Description:
     <br/>
-    <textarea name="description" ><%= description %></textarea>
+    <textarea  class="required comment" name="description" ><%= description %></textarea>
     <br/>
     <a href="<%= "managemembers.jsp?idCommunity="+idCommunity%>">Manage Members</a>
     <br/>
@@ -75,15 +79,15 @@
 <%
       }else if(request.getParameter("create")!=null){
 %>
-<form action="CommunityNew" method="post" name="comments">
+<form id="idForm" class="cmxform" action="CommunityNew" method="post" name="comments">
     <input type="hidden" name="operation" value="createcommunity"/>
     Community name:
     <br/>
-    <input type="text" name="name" ></input>
+    <input class="required cname" type="text" name="name" ></input>
     <br/>
     Description:
     <br/>
-    <textarea name="description" ></textarea>
+    <textarea class="required comment" name="description" ></textarea>
     <br/>
     <br/>
     <input name="send" value="send" type="submit"/>
@@ -117,7 +121,7 @@
      
 		 for (Community community : communities){
 			 
-			  out.println(community.getName()+"<input type=\"checkbox\" name=\"community"+community.getId()+"\" value=\""+community.getId()+"\" /><br/>");			 
+			  out.println(community.getName()+"<input  type=\"checkbox\" name=\"community"+community.getId()+"\" value=\""+community.getId()+"\" /><br/>");			 
 		 }
 		 
  %>

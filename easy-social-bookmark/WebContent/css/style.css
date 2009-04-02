@@ -1000,3 +1000,14 @@ a.imageswitcher_button:hover {
 }
 */
 /* related posts END */
+
+
+/* jquery css */
+
+#idForm { width: 500px; }
+#idForm label { width: 20px; }
+#idForm label.error, #idForm input.submit { margin-left: 25px; }
+
+
+
+

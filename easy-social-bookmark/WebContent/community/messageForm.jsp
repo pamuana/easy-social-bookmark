@@ -19,7 +19,11 @@
 <html>
 <head>
   <title>Message Form</title>
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css"/>
+  <script src="../js/jquery.js" type="text/javascript"></script>
+    <script src="../js/jquery.validate.js" type="text/javascript"></script>
+    <script src="../js/cmxforms.js" type="text/javascript"></script>
+    <script src="../js/validate.js" type="text/javascript"/>
 </head>
 <body>
 <div id="wrap">
@@ -46,14 +50,14 @@
 <%
 	if(operation.equals("new")){
 %>
-<form action="MessageNew">
+<form id="idForm" class="cmxform" action="MessageNew">
 <input type="hidden" name="idCommunity" value="<%= idCommunty %>"/>
 <input type="hidden" name="operation" value="<%= operation %>"/>
 <div>Community <%= community.getName() %></div>
 <div class="message">
 Message:
 <br/>
-<textarea rows="10" cols="50" name="message" ></textarea>
+<textarea class="required comment" rows="10" cols="50" name="message" ></textarea>
 <br/>
 <input type="submit" value="send" name="send" />
 <input type="button" value="Cancel" name="cancel" onclick="history.back()" />
@@ -64,14 +68,14 @@ Message:
 		String idMessage =request.getParameter("idMessage");
 		Message message = messageDAO.findById(Long.parseLong(idMessage));
 %>
-<form action="MessageEdit">
+<form id="idForm"  class="cmxform" action="MessageEdit">
 <input type="hidden" name="idCommunity" value="<%= idCommunty %>"/>
 <input type="hidden" name="operation" value="<%= operation %>"/>
 <div>Community <%= community.getName() %></div>
 <div class="message">
 Message:
 <br/>
-<textarea rows="10" cols="50" name="message" ><%= message.getText() %></textarea>
+<textarea class="required comment" rows="10" cols="50" name="message" ><%= message.getText() %></textarea>
 <br/>
 <input type="submit" value="send" name="send" />
 <input type="button" value="Cancel" name="cancel" onclick="history.back()"/>
