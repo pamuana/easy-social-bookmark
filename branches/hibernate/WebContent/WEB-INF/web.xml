@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>easy-social-bookmark</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>	
+	
+	<servlet>
+	    <description></description>
+	    <servlet-name>Login</servlet-name>
+	    <servlet-class>br.bookmark.servlet.Login</servlet-class>
+    </servlet>
+	<servlet-mapping>
+	    <servlet-name>Login</servlet-name>
+	    <url-pattern>/user/Login</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+	    <description></description>
+	    <servlet-name>Forgot</servlet-name>
+	    <servlet-class>br.bookmark.servlet.Forgot</servlet-class>
+    </servlet>
+	<servlet-mapping>
+	    <servlet-name>Forgot</servlet-name>
+	    <url-pattern>/user/Forgot</url-pattern>
+    </servlet-mapping>
+        
+    <servlet>
+	    <description></description>
+	    <servlet-name>Register</servlet-name>
+	    <servlet-class>br.bookmark.servlet.Register</servlet-class>
+    </servlet>
+	<servlet-mapping>
+	    <servlet-name>Register</servlet-name>
+	    <url-pattern>/user/Register</url-pattern>
+    </servlet-mapping>
+	
+	<servlet>
+	    <description></description>
+	    <servlet-name>EditProfile</servlet-name>
+	    <servlet-class>br.bookmark.servlet.EditProfile</servlet-class>
+    </servlet>
+	<servlet-mapping>
+	    <servlet-name>EditProfile</servlet-name>
+	    <url-pattern>/user/EditProfile</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+	    <description></description>
+	    <servlet-name>UserListAjax</servlet-name>
+	    <servlet-class>br.bookmark.servlet.UserListAjax</servlet-class>
+    </servlet>    
+    <servlet-mapping>
+	    <servlet-name>UserListAjax</servlet-name>
+	    <url-pattern>/user/UserListAjax</url-pattern>
+    </servlet-mapping>
+	
+    <servlet>
+	    <description></description>
+	    <servlet-name>CommentAdd</servlet-name>
+	    <servlet-class>br.bookmark.servlet.CommentAdd</servlet-class>
+    </servlet>
+	<servlet-mapping>
+	    <servlet-name>CommentAdd</servlet-name>
+	    <url-pattern>/bookmark/CommentAdd</url-pattern>
+    </servlet-mapping>
+    
+     <servlet>
+        <description></description>
+        <servlet-name>BookmarkForm</servlet-name>
+        <servlet-class>br.bookmark.servlet.BookmarkForm</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookmarkForm</servlet-name>
+        <url-pattern>/bookmark/BookmarkForm</url-pattern>
+    </servlet-mapping>  
+    
+    <servlet>
+        <description></description>
+        <servlet-name>BookmarkDelete</servlet-name>
+        <servlet-class>br.bookmark.servlet.BookmarkDelete</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookmarkDelete</servlet-name>
+        <url-pattern>/bookmark/BookmarkDelete</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <description></description>
+        <servlet-name>CommunityAdd</servlet-name>
+        <servlet-class>br.bookmark.servlet.CommunityAdd</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommunityAdd</servlet-name>
+        <url-pattern>/community/CommunityAdd</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <description></description>
+        <servlet-name>CommunityManage</servlet-name>
+        <servlet-class>br.bookmark.servlet.CommunityManage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommunityManage</servlet-name>
+        <url-pattern>/community/CommunityManage</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <description></description>
+        <servlet-name>CommunityNew</servlet-name>
+        <servlet-class>br.bookmark.servlet.CommunityNew</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommunityNew</servlet-name>
+        <url-pattern>/community/CommunityNew</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <description></description>
+        <servlet-name>MessageDelete</servlet-name>
+        <servlet-class>br.bookmark.servlet.MessageDelete</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MessageDelete</servlet-name>
+        <url-pattern>/community/MessageDelete</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <description></description>
+        <servlet-name>MessageEdit</servlet-name>
+        <servlet-class>br.bookmark.servlet.MessageEdit</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MessageEdit</servlet-name>
+        <url-pattern>/community/MessageEdit</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <description></description>
+        <servlet-name>MessageNew</servlet-name>
+        <servlet-class>br.bookmark.servlet.MessageNew</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MessageNew</servlet-name>
+        <url-pattern>/community/MessageNew</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description></description>
+        <servlet-name>RemoveMember</servlet-name>
+        <servlet-class>br.bookmark.servlet.RemoveMember</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoveMember</servlet-name>
+        <url-pattern>/community/RemoveMember</url-pattern>
+    </servlet-mapping>
+</web-app>
