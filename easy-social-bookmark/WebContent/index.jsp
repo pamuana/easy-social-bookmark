@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8" %>
 <%@page import="br.bookmark.project.Init" %>
 <%
+	//..proyect with hibernate
 	Init.init("jdbc:mysql://localhost/bookmarks?user=root&amp;password=","");
     Init bookmarkInit=new Init();
     
