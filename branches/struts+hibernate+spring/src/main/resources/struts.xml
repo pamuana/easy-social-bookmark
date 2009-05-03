@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+
+	<constant name="struts.devMode" value="true"/>
+    <!-- Individual action, zero configuration -->
+    <constant name="struts.codebehind.defaultPackage" value="base-package" />
+    <constant name="struts.codebehind.pathPrefix" value="/WEB-INF/jsp/"/>
+
+    <package name="home-package" extends="struts-default" namespace="/">
+
+        <interceptors>
+            <interceptor name="security" class="br.bookmark.util.SecurityInterceptor" >
+                <param name="requiresAuthentication">
+                    /bookmark,
+                    /comment,
+                    /community,
+                    /participant
+                </param>
+            </interceptor>
+            <interceptor-stack name="securedBasicStack">
+                <interceptor-ref name="security" />
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="securedBasicStack" />
+        
+        <global-results>
+           <result name="authenticate">/WEB-INF/jsp/logon.jsp</result>
+        </global-results>
+
+        <action name="index" class="br.bookmark.action.BaseAction" >
+            <result name="success">/WEB-INF/jsp/index.jsp</result>
+        </action>
+
+        <action name="logon" class="br.bookmark.action.LogonAction" >
+            <result name="success" type="redirectAction">index</result>
+            <result name="failed" >/WEB-INF/jsp/logon.jsp</result>
+        </action>
+
+        <action name="logoff" class="br.bookmark.action.LogoffAction" >
+            <result name="success" type="redirectAction">index</result>
+        </action>
+
+    </package>
+
+
+	<package name="base-package" extends="home-package" >
+
+        <interceptors>
+            <interceptor-stack name="securedStack">
+                <interceptor-ref name="security" />
+                <interceptor-ref name="paramsPrepareParamsStack" />
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="securedStack" />
+
+        <!--<global-results>-->
+             <!--<result name="unknownError">/WEB-INF/jsp/error.jsp</result>-->
+         <!--</global-results>-->
+         <!--<global-exception-mappings>-->
+             <!--<exception-mapping exception="org.hibernate.exception.ConstraintViolationException" result="dupPK" />-->
+             <!--<exception-mapping exception="java.lang.Exception" result="unknownError" />-->
+         <!--</global-exception-mappings>-->
+
+     </package>
+    
+    <package name="enterBookmarkcommunity" namespace="/bookmarkcommunity" extends="base-package">
+
+        <interceptors>
+            <interceptor-stack name="eventStack">
+                <interceptor-ref name="scope">
+                    <param name="session">bookmarkcommunity</param>
+                    <param name="key">partialBookmarkcommunity</param>
+                </interceptor-ref>
+                <interceptor-ref name="paramsPrepareParamsStack"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="eventStack" />
+		
+    </package>
+
+
+    <include file="config-browser.xml"/>
+
+</struts>
