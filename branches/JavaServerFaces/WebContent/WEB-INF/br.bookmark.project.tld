@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<taglib>
+	<tlibversion>1.0</tlibversion>
+	<jspversion>1.1</jspversion>
+	<shortname>MenuPrincipal</shortname>
+	<uri>br.bookmark.project</uri>
+	<tag>
+    	<name>MenuPrincipal</name>
+    	<tagclass>br.bookmark.project.MenuPrincipal</tagclass>
+    	<bodycontent>empty</bodycontent>
+    	<info>
+    	</info>
+	</tag>
+	
+	<tag>
+    	<name>MenuCommunity</name>
+    	<tagclass>br.bookmark.project.MenuCommunity</tagclass>
+    	<bodycontent>empty</bodycontent>
+    	<info>
+    	</info>
+    	<!-- Attributes  -->
+    	<attribute>
+			<name>communityDAO</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>idUser</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+    	<name>MenuTag</name>
+    	<tagclass>br.bookmark.project.MenuTag</tagclass>
+    	<bodycontent>empty</bodycontent>
+    	<info>
+    	</info>
+    	<!-- Attributes  -->
+    	<attribute>
+			<name>tagDAO</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>idUser</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>idCommunity</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+    	<name>BookmarkList</name>
+		<tagclass>br.bookmark.project.BookmarkList</tagclass>
+		<bodycontent>empty</bodycontent>
+		<info></info>
+		<!-- Optional attributes  -->
+		<!-- personalized name -->
+		<attribute>
+			<name>idUser</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>tagDAO</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>bookmarkDAO</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>communityDAO</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>commentDAO</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>idTag</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>idCommunity</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>
