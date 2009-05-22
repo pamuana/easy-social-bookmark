@@ -15,7 +15,7 @@
 <html>
 <head>
   <title>Edit Profile</title>
-  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" ></link>
   <script type="text/javascript" src="../js/include.js"></script>
 </head>
 <body>

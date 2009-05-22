@@ -3,7 +3,7 @@
 	<head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
 	<title>Error Page</title>
-	<link rel="stylesheet" href="../css/style.css" type="text/css" />	
+	<link rel="stylesheet" href="../css/style.css" type="text/css" ></link>	
 </head>
 <body>
 <div id="wrap">

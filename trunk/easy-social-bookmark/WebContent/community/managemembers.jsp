@@ -22,7 +22,7 @@
 <html>
 <head>
   <title>Manage Members</title>
-  <link rel="stylesheet" href="../css/style.css" type="text/css"/>
+  <link rel="stylesheet" href="../css/style.css" type="text/css"></link>
 </head>
 <body>
 <div id="wrap">
@@ -38,7 +38,7 @@
 		</div>
         <div id="content">
        	  <div id="main">
-<h2 class="nodeTitle"> <%= communinty.getName() %></h2>
+<h2 class="nodeTitle"><%= communinty.getName() %></h2>
 
 <%
 	for (String id : idUsers){

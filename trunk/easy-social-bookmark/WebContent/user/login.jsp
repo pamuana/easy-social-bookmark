@@ -4,7 +4,7 @@
 	<head>
 	<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type" />
 	<title>Login</title>
-	<link rel="stylesheet" href="../css/style.css" type="text/css" />
+	<link rel="stylesheet" href="../css/style.css" type="text/css" ></link>
 	<script type="text/javascript" src="../js/include.js"></script>
 </head>
 <body>
