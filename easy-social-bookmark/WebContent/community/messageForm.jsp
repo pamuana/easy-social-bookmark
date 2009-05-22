@@ -19,11 +19,11 @@
 <html>
 <head>
   <title>Message Form</title>
-  <link rel="stylesheet" href="../css/style.css" type="text/css"/>
+  <link rel="stylesheet" href="../css/style.css" type="text/css"></link>
   <script src="../js/jquery.js" type="text/javascript"></script>
     <script src="../js/jquery.validate.js" type="text/javascript"></script>
     <script src="../js/cmxforms.js" type="text/javascript"></script>
-    <script src="../js/validate.js" type="text/javascript"/>
+    <script src="../js/validate.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="wrap">
