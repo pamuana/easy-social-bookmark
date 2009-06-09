@@ -23,15 +23,15 @@ public class ListMyBookmarkAction extends BaseAction implements ServletRequestAw
 	protected List<Bookmark> bookmarks = new ArrayList<Bookmark>();
 	protected BookmarkService service;
 	protected HttpServletRequest request;
-	
+
 	public void setBookmarkService(BookmarkService service) {
 		this.service = service;
 	}
-	
+
 	public void setServletRequest(HttpServletRequest httpServletRequest) {
 		this.request=httpServletRequest;		
 	}
-	
+
 	public void setBookmarks(List<Bookmark> bookmarks) {
 		this.bookmarks = bookmarks;
 	}

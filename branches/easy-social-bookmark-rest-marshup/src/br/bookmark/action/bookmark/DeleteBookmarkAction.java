@@ -8,14 +8,14 @@ import org.apache.struts2.dispatcher.ServletActionRedirectResult;
 
 @ParentPackage("base-package")
 @Results({
-    @Result(name="success", value="listMyBookmark", type= ServletActionRedirectResult.class)
+	@Result(name="success", value="listMyBookmark", type= ServletActionRedirectResult.class)
 })
 public class DeleteBookmarkAction extends BaseBookmarkAction{
-	
+
 	private static final long serialVersionUID = 1L;
 
-    public String execute() throws Exception {
-    	this.service.remove(""+this.bookmark.getId());
-        return SUCCESS;
-    }
+	public String execute() throws Exception {
+		this.service.remove(""+this.bookmark.getId());
+		return SUCCESS;
+	}
 }
