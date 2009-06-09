@@ -1,4 +1,4 @@
-package br.bookmark.action.community;
+package br.bookmark.action.bookmark;
 
 import org.apache.struts2.config.ParentPackage;
 import org.apache.struts2.config.Result;
