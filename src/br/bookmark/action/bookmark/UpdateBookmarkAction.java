@@ -18,7 +18,7 @@ import com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator;
 
 @ParentPackage("base-package")
 @Results({
-	@Result(name="success", value="index", type= ServletActionRedirectResult.class),
+	@Result(name="success", value="listMyBookmark", type= ServletActionRedirectResult.class),
 	@Result(name="dupPK",type= ServletDispatcherResult.class,value="/WEB-INF/jsp/bookmark/findBookmark-success.jsp"),
 	@Result(name="input",type= ServletDispatcherResult.class,value="/WEB-INF/jsp/bookmark/findBookmark-success.jsp")
 })
@@ -50,17 +50,4 @@ public class UpdateBookmarkAction extends BaseBookmarkAction implements ServletR
 		return SUCCESS;
 	}
 
-	/*
-	private HttpServletRequest request;
-
-	public void prepare() throws Exception {
-		User userADD =  (User) this.request.getSession(true).getAttribute(SecurityInterceptor.USER_OBJECT);
-        super.prepare();
-        bookmark.setUser(userADD);
-    }
-
-	public void setServletRequest(HttpServletRequest httpServletRequest) {
-		this.request=httpServletRequest;		
-	}
-	 */
 }
