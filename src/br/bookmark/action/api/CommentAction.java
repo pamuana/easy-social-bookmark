@@ -94,7 +94,7 @@ public class CommentAction extends BaseAction implements ModelDriven<Comment>, P
 	}
 
 	public String create(){
-		service.persistNative(comment, ""+idBookmark);
+		service.persist(comment, ""+idBookmark);
 		return index();
 	}
 

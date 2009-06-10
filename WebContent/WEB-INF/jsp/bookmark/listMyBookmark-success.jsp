@@ -30,8 +30,8 @@
 					<s:a href="%{deleteBookmark}">delete</s:a>
         		</div>
         		<div>
-	        		<s:url id="shareBookmark" action="shareBookmarkPublic" namespace="/bookmark"><s:param name="idBookmark" value="id" /></s:url>
-	        		<s:a href="%{editBookmark}" cssClass="editlinks">edit</s:a>
+	        		<s:url id="addComment" action="findComment" namespace="/comment"><s:param name="idBookmark" value="id" /></s:url>
+	        		<s:a href="%{addComment}" cssClass="addComment">edit</s:a>
         		</div>
         	</div>
 		</div>

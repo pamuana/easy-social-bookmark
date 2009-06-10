@@ -2,8 +2,6 @@ package br.bookmark.action.bookmark;
 
 import br.bookmark.action.BaseAction;
 import br.bookmark.models.Bookmark;
-import br.bookmark.models.BookmarkPrivate;
-import br.bookmark.services.BookmarkPrivateService;
 import br.bookmark.services.BookmarkService;
 
 import com.opensymphony.xwork2.ModelDriven;

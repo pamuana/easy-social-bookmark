@@ -15,7 +15,7 @@ public class DeleteCommunityAction extends BaseCommunityAction{
 	private static final long serialVersionUID = 1L;
 
 	public String execute() throws Exception {
-		this.service.remove(idCommunity);
+		this.service.remove(Long.parseLong(idCommunity));
 		return SUCCESS;
 	}
 }
