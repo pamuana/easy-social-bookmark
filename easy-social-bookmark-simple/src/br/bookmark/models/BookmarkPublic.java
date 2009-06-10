@@ -15,7 +15,7 @@ public class BookmarkPublic extends Bookmark{
 
 	private static final long serialVersionUID = 1L;
 	
-	@OneToMany(mappedBy="comment",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="bookmark",cascade=CascadeType.ALL)
 	private List<Comment> comments = new ArrayList<Comment>();
 
 	public void setComments(List<Comment> comments) {

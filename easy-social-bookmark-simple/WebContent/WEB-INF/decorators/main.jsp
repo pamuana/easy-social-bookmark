@@ -61,7 +61,7 @@
 		<div id="block-menu-principal" class="block">
 			<h2>View Bookmarks</h2>
 			<s:url id="listMyBookmark" action="listMyBookmark" namespace="/bookmark" />
-			<s:url id="addBookmark" action="findBookmark" namespace="/bookmark" />
+			<s:url id="addBookmark" action="findBookmarkPrivate" namespace="/bookmark" />
 			<s:url id="listMyBookmarkWithGoogleAPI" action="listMyBookmarkWithGoogleAPI" namespace="/bookmark" />
 			<div class="content">
 				<ul>
