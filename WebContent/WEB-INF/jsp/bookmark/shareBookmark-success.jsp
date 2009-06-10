@@ -9,7 +9,7 @@
 <body>
 
 
-<s:form namespace="/bookmark" action="addCommunity" method="post" >
+<s:form namespace="/community" action="addBookmark"  method="post" >
 
     <s:hidden name="idBookmark"/>    
     <s:select name="idCommunity" list="participants" listKey="community.id" listValue="community.name" size="5" >

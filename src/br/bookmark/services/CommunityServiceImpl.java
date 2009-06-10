@@ -117,7 +117,6 @@ public class CommunityServiceImpl extends GenericServiceImpl<Community> implemen
 			tx = entityMgr.getTransaction();
 			tx.begin();
 
-			//System.out.println("INSERT INTO Community_Bookmark(Community_id,bookmarks_id) VALUES ("+community.getId()+","+idBookmark+")");
 			entityMgr.createNativeQuery("INSERT INTO Community_Bookmark(Community_id,bookmarks_id) VALUES ("+community.getId()+","+idBookmark+")").executeUpdate();
 
 			tx.commit();
