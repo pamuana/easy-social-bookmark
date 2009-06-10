@@ -104,14 +104,14 @@
             <result name="single">/WEB-INF/jsp/api/community.jsp</result>
             <result name="xml">/WEB-INF/jsp/api/community-xml.jsp</result>
         </action>
-        
+    -->     
         <action name="comment/*" class="br.bookmark.action.api.CommentAction">
             <result name="new">/WEB-INF/jsp/api/comment-new.jsp</result>
             <result name="list">/WEB-INF/jsp/api/commentList.jsp</result>
             <result name="single">/WEB-INF/jsp/api/comment.jsp</result>
             <result name="xml">/WEB-INF/jsp/api/comment-xml.jsp</result>
         </action>
- -->
+
     </package>
     
     <include file="config-browser.xml"/>

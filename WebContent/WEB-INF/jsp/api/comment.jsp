@@ -10,14 +10,14 @@
 <body>
 
 <table>
-    <tr><td colspan="2"><h1><s:property value="name"/></h1></td></tr>
     <tr>
-        <td>text:</td>
-        <td><s:property value="description"/></td>
+        <td>Text:</td>
+        <td><s:property value="text"/></td>
     </tr>
 </table>
 
 	<form method="post">
+	    <input type="hidden" name="idBookmark" value="idBookmark" />
         <input type="hidden" name="__http_method" value="delete" />
 		<input type="submit" value="Delete" />
     </form>
