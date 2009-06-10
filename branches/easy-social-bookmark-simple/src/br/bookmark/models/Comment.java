@@ -25,16 +25,15 @@ public class Comment implements Serializable{
 	@Column(name="id")
 	private long id;
 	
+	@Column(name="data")
+	private String data;
+	
 	@Column(name="text")
 	private String text;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="idBookmark")
-	private Bookmark bookmark;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="idUser")
-	private User user;
+	private BookmarkPublic bookmark;
 	
 	public void setId(long id) {
 		this.id = id;
@@ -51,18 +50,20 @@ public class Comment implements Serializable{
 		return text;
 	}
 	
-	public void setUser(User user) {
-		this.user = user;
+	
+	public void setData(String data) {
+		this.data = data;
 	}
-	public User getUser() {
-		return user;
+	public String getData() {
+		return data;
 	}
 	
-	public void setBookmark(Bookmark bookmark) {
+	public void setBookmark(BookmarkPublic bookmark) {
 		this.bookmark = bookmark;
 	}
-	public Bookmark getBookmark() {
+	public BookmarkPublic getBookmark() {
 		return bookmark;
 	}
+	
 	
 }

@@ -39,13 +39,7 @@ public class User implements Serializable {
 	private String email;
 
 	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
-	private List<Bookmark> bookmarks = new ArrayList<Bookmark>();
-
-	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
-	private List<Comment> comments = new ArrayList<Comment>();
-
-	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
-	private List<Participant> participants = new ArrayList<Participant>();
+	private List<BookmarkPrivate> bookmarks = new ArrayList<BookmarkPrivate>();
 
 
 	public long getId() {
@@ -92,34 +86,17 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public void setBookmarks(List<Bookmark> bookmarks) {
+	public void setBookmarks(List<BookmarkPrivate> bookmarks) {
 		this.bookmarks = bookmarks;
 	}
-	public List<Bookmark> getBookmarks() {
+
+	public List<BookmarkPrivate> getBookmarks() {
 		return bookmarks;
 	}
-	public void addBookmark(Bookmark bookmark){
+	
+	public void addBookmark(BookmarkPrivate bookmark) {
 		this.bookmarks.add(bookmark);
 	}
 
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
-	public List<Comment> getComments() {
-		return comments;
-	}
-	public void addComment(Comment comment){
-		this.comments.add(comment);
-	}
-
-	public void setParticipants(List<Participant> participants) {
-		this.participants = participants;
-	}
-	public List<Participant> getParticipants() {
-		return participants;
-	}
-	public void addParticipant(Participant participant){
-		this.participants.add(participant);
-	}
 
 }

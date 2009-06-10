@@ -3,7 +3,7 @@ package br.bookmark.services;
 import java.util.List;
 
 public interface GenericService<T> {
-	
+		
 	public T findById(String id);
 	
 	public T findByField(String field, String value);

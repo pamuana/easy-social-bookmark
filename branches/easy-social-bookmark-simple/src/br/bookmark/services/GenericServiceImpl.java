@@ -7,14 +7,22 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
+import javax.persistence.Persistence;
 
 public class GenericServiceImpl<T> implements GenericService<T> {
 
-	protected EntityManagerFactory emf = EntityManagerFactoryService.getEmf();
-	protected EntityManager entityMgr = emf.createEntityManager();
-	protected Class<T> type = null;	
+	protected EntityManagerFactory emf;
+	protected EntityManager entityMgr;
+	protected Class<T> type = null;
+
+	public GenericServiceImpl(){
+		emf = Persistence.createEntityManagerFactory("bookmarks");
+		entityMgr = emf.createEntityManager();
+	}
+	
 
 	public T findById(String id) {
+		entityMgr = emf.createEntityManager();
 		if (id == null || "".equals(id)) return null;
 		T toReturn = null;
 		try {
@@ -26,6 +34,7 @@ public class GenericServiceImpl<T> implements GenericService<T> {
 	}
 
 	public T findByField(String field, String value)   {
+		entityMgr = emf.createEntityManager();
 		Object toReturn = null;
 		try {
 			toReturn = entityMgr.createQuery("FROM "+type.getName()+" WHERE "+field+" = :"+field+" ").setParameter(field, value).getSingleResult();
@@ -36,6 +45,7 @@ public class GenericServiceImpl<T> implements GenericService<T> {
 	}
 
 	public T findByLikeField(String field, String value) {
+		entityMgr = emf.createEntityManager();
 		Object toReturn = null;
 		try {
 			toReturn = entityMgr.createQuery("FROM "+type.getName()+" WHERE "+field+" like :"+field+" ").setParameter(field, value).getSingleResult();
@@ -45,25 +55,32 @@ public class GenericServiceImpl<T> implements GenericService<T> {
 		return type.cast(toReturn);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<T> listAll() {
+		entityMgr = emf.createEntityManager();
 		List<T> toReturn = new ArrayList<T>();
 		toReturn = (List<T>) entityMgr.createQuery("FROM "+type.getName()).getResultList();
 		return toReturn;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<T> listByField(String field, String value) {
+		entityMgr = emf.createEntityManager();
 		List<T> toReturn = new ArrayList<T>();
 		toReturn = (List<T>) entityMgr.createQuery("FROM "+type.getName()+" WHERE "+field+" = :"+field+" ").setParameter(field, value).getResultList();
 		return toReturn;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<T> listByLikeField(String field, String value) {
+		entityMgr = emf.createEntityManager();
 		List<T> toReturn = new ArrayList<T>();
 		toReturn = (List<T>) entityMgr.createQuery("FROM "+type.getName()+" WHERE "+field+" like :"+field+" ").setParameter(field, value).getResultList();
 		return toReturn;
 	}
 
 	public T persist(T obj, String id) {
+		entityMgr = emf.createEntityManager();
 		EntityTransaction tx = null;
 		try {
 			tx = entityMgr.getTransaction();
@@ -86,10 +103,12 @@ public class GenericServiceImpl<T> implements GenericService<T> {
 	}
 
 	public void remove(T obj) {
+		entityMgr = emf.createEntityManager();
 		entityMgr.remove(obj);
 	}
 
 	public void remove(String id) {
+		entityMgr = emf.createEntityManager();
 		EntityTransaction tx = null;
 		try {
 			tx = entityMgr.getTransaction();

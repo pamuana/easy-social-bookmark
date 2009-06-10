@@ -1,7 +1,5 @@
 package br.bookmark.services;
 
-import javax.persistence.EntityTransaction;
-
 import br.bookmark.models.User;
 
 public class UserServiceImpl extends GenericServiceImpl<User> implements UserService {
@@ -10,9 +8,8 @@ public class UserServiceImpl extends GenericServiceImpl<User> implements UserSer
 		super();
 		this.type = User.class;
 	}
-
+	
 	public User validateUser(String login, String password) {
-		
 		User user = this.findByField("login", login);
 		if (user!=null && password.equals(user.getPassword())) {
 			return user;
@@ -20,5 +17,4 @@ public class UserServiceImpl extends GenericServiceImpl<User> implements UserSer
 			return null;
 		}
 	}
-	
 }
