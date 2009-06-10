@@ -10,12 +10,12 @@ import org.apache.struts2.dispatcher.ServletActionRedirectResult;
 @Results({
 	@Result(name="success", value="listMyBookmark", type= ServletActionRedirectResult.class)
 })
-public class DeleteBookmarkAction extends BaseBookmarkAction{
+public class DeleteBookmarkPrivateAction extends BaseBookmarkPrivateAction{
 
 	private static final long serialVersionUID = 1L;
 
 	public String execute() throws Exception {
-		this.service.remove(""+this.bookmark.getId());
+		this.getService().remove(""+this.getBookmark().getId());
 		return SUCCESS;
 	}
 }

@@ -7,8 +7,8 @@
 
 	<bean id="userService" class="br.bookmark.services.UserServiceImpl" />
 	<bean id="bookmarkService" class="br.bookmark.services.BookmarkServiceImpl" />
-	<bean id="bookmarkPublicService" class="br.bookmark.services.BookmarkServicePublicImpl" />
-	<bean id="bookmarkPrivateService" class="br.bookmark.services.BookmarkServicePrivateImpl" />
+	<bean id="bookmarkPublicService" class="br.bookmark.services.BookmarkPublicServiceImpl" />
+	<bean id="bookmarkPrivateService" class="br.bookmark.services.BookmarkPrivateServiceImpl" />
 	<bean id="commentService" class="br.bookmark.services.CommentServiceImpl" />
 
 	

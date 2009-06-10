@@ -9,7 +9,7 @@
 <body>
 
 
-<s:form id="bookmarkForm" name="bookmarkForm" namespace="/bookmark" action="updateBookmark" method="post" >
+<s:form id="bookmarkForm" name="bookmarkForm" namespace="/bookmark" action="updateBookmarkPrivate" method="post" >
 
     <s:hidden name="idBookmark" />
     

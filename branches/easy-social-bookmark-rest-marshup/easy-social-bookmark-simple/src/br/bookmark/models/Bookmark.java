@@ -14,8 +14,7 @@ import javax.persistence.InheritanceType;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 
 @Entity
-@Table(name="Bookmark")
-@Inheritance(strategy=InheritanceType.JOINED)
+@Table(name="Bookmark") @Inheritance(strategy=InheritanceType.JOINED)
 public class Bookmark implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

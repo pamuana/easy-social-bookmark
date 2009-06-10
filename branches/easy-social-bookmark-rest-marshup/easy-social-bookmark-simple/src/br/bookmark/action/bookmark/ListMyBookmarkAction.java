@@ -10,9 +10,9 @@ import org.apache.struts2.config.ParentPackage;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import br.bookmark.action.BaseAction;
-import br.bookmark.models.Bookmark;
+import br.bookmark.models.BookmarkPrivate;
 import br.bookmark.models.User;
-import br.bookmark.services.BookmarkService;
+import br.bookmark.services.BookmarkPrivateService;
 import br.bookmark.util.SecurityInterceptor;
 
 @ParentPackage("base-package")
@@ -20,11 +20,11 @@ public class ListMyBookmarkAction extends BaseAction implements ServletRequestAw
 
 	private static final long serialVersionUID = 1L;
 
-	protected List<Bookmark> bookmarks = new ArrayList<Bookmark>();
-	protected BookmarkService service;
+	protected List<BookmarkPrivate> bookmarks = new ArrayList<BookmarkPrivate>();
+	protected BookmarkPrivateService service;
 	protected HttpServletRequest request;
 
-	public void setBookmarkService(BookmarkService service) {
+	public void setBookmarkPrivateService(BookmarkPrivateService service) {
 		this.service = service;
 	}
 
@@ -32,11 +32,11 @@ public class ListMyBookmarkAction extends BaseAction implements ServletRequestAw
 		this.request=httpServletRequest;		
 	}
 
-	public void setBookmarks(List<Bookmark> bookmarks) {
+	public void setBookmarks(List<BookmarkPrivate> bookmarks) {
 		this.bookmarks = bookmarks;
 	}
 
-	public List<Bookmark> getBookmarks() {
+	public List<BookmarkPrivate> getBookmarks() {
 		return bookmarks;
 	}
 
