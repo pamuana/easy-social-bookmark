@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<!-- <bean type="org.apache.struts2.dispatcher.mapper.ActionMapper" name="fallback" class="org.apache.struts2.dispatcher.mapper.Restful2ActionMapper" />  -->
+	<bean type="org.apache.struts2.dispatcher.mapper.ActionMapper" name="fallback" class="org.apache.struts2.dispatcher.mapper.FallbackRestful2ActionMapper" />
+	<constant name="struts.mapper.idParameterName" value="id" />
+
+	<constant name="struts.devMode" value="true"/>
+    <!-- Individual action, zero configuration -->
+    <constant name="struts.codebehind.defaultPackage" value="base-package" />
+    <constant name="struts.codebehind.pathPrefix" value="/WEB-INF/jsp/"/>
+    
+    <constant name="struts.enable.SlashesInActionNames" value="true" />
+	<constant name="struts.mapper.alwaysSelectFullNamespace" value="false" />
+	<constant name="struts.mapper.composite" value="struts,fallback" />
+	<constant name="struts.mapper.class" value="composite" />
+
+    <package name="home-package" extends="struts-default" namespace="/">
+
+        <interceptors>
+            <interceptor name="security" class="br.bookmark.util.SecurityInterceptor" >
+                <param name="requiresAuthentication">
+                    /bookmark,
+                    /comment,
+                    /community,
+                    /participant,
+                    /importexport,
+                    /api
+                </param>
+            </interceptor>
+            <interceptor-stack name="securedBasicStack">
+                <interceptor-ref name="security" />
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="securedBasicStack" />
+        
+        <global-results>
+           <result name="authenticate">/WEB-INF/jsp/logon.jsp</result>
+        </global-results>
+
+        <action name="index" class="br.bookmark.action.BaseAction" >
+            <result name="success">/WEB-INF/jsp/index.jsp</result>
+        </action>
+
+        <action name="logon" class="br.bookmark.action.LogonAction" >
+            <result name="success" type="redirectAction">index</result>
+            <result name="failed" >/WEB-INF/jsp/logon.jsp</result>
+        </action>
+
+        <action name="logoff" class="br.bookmark.action.LogoffAction" >
+            <result name="success" type="redirectAction">index</result>
+        </action>
+
+    </package>
+
+
+	<package name="base-package" extends="home-package" >
+
+        <interceptors>
+            <interceptor-stack name="securedStack">
+                <interceptor-ref name="security" />
+                <interceptor-ref name="paramsPrepareParamsStack" />
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="securedStack" />
+     </package>
+    
+    <package name="enterBookmarkcommunity" namespace="/bookmarkcommunity" extends="base-package">
+
+        <interceptors>
+            <interceptor-stack name="eventStack">
+                <interceptor-ref name="scope">
+                    <param name="session">bookmarkcommunity</param>
+                    <param name="key">partialBookmarkcommunity</param>
+                </interceptor-ref>
+                <interceptor-ref name="paramsPrepareParamsStack"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="eventStack" />
+		
+    </package>
+    
+	<package name="api" namespace="/api" extends="base-package">
+
+        <action name="bookmark/*" class="br.bookmark.action.api.BookmarkAction">
+        	<result name="new">/WEB-INF/jsp/api/bookmark-new.jsp</result>
+            <result name="list">/WEB-INF/jsp/api/bookmarkList.jsp</result>
+            <result name="single">/WEB-INF/jsp/api/bookmark.jsp</result>
+            <result name="xml">/WEB-INF/jsp/api/bookmark-xml.jsp</result>
+        </action>
+<!--         
+        <action name="community/*" class="br.bookmark.action.api.CommunityAction">
+            <result name="new">/WEB-INF/jsp/api/community-new.jsp</result>
+            <result name="list">/WEB-INF/jsp/api/communityList.jsp</result>
+            <result name="single">/WEB-INF/jsp/api/community.jsp</result>
+            <result name="xml">/WEB-INF/jsp/api/community-xml.jsp</result>
+        </action>
+        
+        <action name="comment/*" class="br.bookmark.action.api.CommentAction">
+            <result name="new">/WEB-INF/jsp/api/comment-new.jsp</result>
+            <result name="list">/WEB-INF/jsp/api/commentList.jsp</result>
+            <result name="single">/WEB-INF/jsp/api/comment.jsp</result>
+            <result name="xml">/WEB-INF/jsp/api/comment-xml.jsp</result>
+        </action>
+ -->
+    </package>
+    
+    <include file="config-browser.xml"/>
+
+</struts>
