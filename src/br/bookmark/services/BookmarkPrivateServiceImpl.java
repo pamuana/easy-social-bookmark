@@ -48,7 +48,8 @@ public class BookmarkPrivateServiceImpl extends GenericServiceImpl<BookmarkPriva
 	 * @param objectId1 ID of first object
 	 * @param objectId2 ID of second object
 	 */
-	public double getCorrelation(int objectId1, int objectId2) throws SQLException {
+	public double getCorrelation(int objectId1, int objectId2) {
+		/*
 		Map<Integer, Double> dataOfObject1 = new HashMap<Integer, Double>();
 		Map<Integer, Double> dataOfObject2 = new HashMap<Integer, Double>();
 		
@@ -95,6 +96,8 @@ public class BookmarkPrivateServiceImpl extends GenericServiceImpl<BookmarkPriva
 		}
 		
 		return correlation;
+		*/
+		return 0.0;
 	}
 	
 	//..overriding method persist to include separator between tags
