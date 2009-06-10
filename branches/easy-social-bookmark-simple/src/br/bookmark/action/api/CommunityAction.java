@@ -75,7 +75,7 @@ public class CommunityAction extends BaseAction implements ModelDriven<Community
 	}
 
 	public String remove(){
-		service.remove(""+id);
+		service.remove(id);
 		return index();
 	}
 
