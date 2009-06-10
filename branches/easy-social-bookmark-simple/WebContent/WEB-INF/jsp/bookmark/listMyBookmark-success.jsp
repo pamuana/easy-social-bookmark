@@ -22,12 +22,16 @@
 				<div class="shared"></div>
 				<div class="url"><a href="<s:property id="url" value="url" />" target="_blank"><s:property id="url" value="url" /></a></div>
 				<div>
-					<s:url id="shareBookmark" action="shareBookmark" namespace="/bookmark"><s:param name="idBookmark" value="id" /></s:url>
+					<s:url id="shareBookmark" action="shareBookmarkPublic" namespace="/bookmark"><s:param name="idBookmark" value="id" /></s:url>
 					<s:a href="%{shareBookmark}" cssClass="addcomment">share</s:a>
 					<s:url id="editBookmark" action="findBookmark" namespace="/bookmark"><s:param name="idBookmark" value="id" /></s:url>
 					<s:a href="%{editBookmark}" cssClass="editlinks">edit</s:a>
 					<s:url id="deleteBookmark" action="deleteBookmark" namespace="/bookmark"><s:param name="idBookmark" value="id" /></s:url>
 					<s:a href="%{deleteBookmark}">delete</s:a>
+        		</div>
+        		<div>
+	        		<s:url id="shareBookmark" action="shareBookmarkPublic" namespace="/bookmark"><s:param name="idBookmark" value="id" /></s:url>
+	        		<s:a href="%{editBookmark}" cssClass="editlinks">edit</s:a>
         		</div>
         	</div>
 		</div>

@@ -10,14 +10,13 @@
 
 
 <form action="updateComment" method="post" >
-<input type="hidden" name="__http_method" value="delete" />
+<input type="hidden" name="idBookmark" value="bookmark" />
 
     <s:if test="#session['user']==null">
     	<s:property value="%{#session['user']}" />
     	<s:textfield name="user" value="%{#session['user']}" />
     </s:if>
-    
-
+	
 	<s:textarea label="Text" name="text" cols="25" rows="5" />
 
     <s:submit label="Register" value="Register" />

@@ -1,33 +1,31 @@
 package br.bookmark.action.bookmark;
 
 import br.bookmark.action.BaseAction;
-import br.bookmark.models.Bookmark;
 import br.bookmark.models.BookmarkPrivate;
 import br.bookmark.services.BookmarkPrivateService;
-import br.bookmark.services.BookmarkService;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 
-public class BaseBookmarkAction extends BaseAction implements ModelDriven<Bookmark>, Preparable {
+public class BaseBookmarkPrivateAction extends BaseAction implements ModelDriven<BookmarkPrivate>, Preparable {
 
 	private static final long serialVersionUID = 1L;
 
-	protected Bookmark bookmark;
+	protected BookmarkPrivate bookmark;
 	protected String idBookmark;
-	protected BookmarkService service;
+	protected BookmarkPrivateService service;
 	
-	public Bookmark getModel() {
+	public BookmarkPrivate getModel() {
 		return this.bookmark;
 	}
 
-	public void setBookmarkService(BookmarkService service) {
+	public void setBookmarkPrivateService(BookmarkPrivateService service) {
 		this.service = service;
 	}
 
 	public void prepare() throws Exception {
 		if( this.idBookmark ==null || "".equals(this.idBookmark) ) {
-			 this.bookmark = new Bookmark();
+			 this.bookmark = new BookmarkPrivate();
 		} else {
 			this.bookmark = service.findById(this.idBookmark);
 		}
@@ -35,10 +33,10 @@ public class BaseBookmarkAction extends BaseAction implements ModelDriven<Bookma
 	
 	// --------------------------------------------------- 
 	
-	public void setBookmark(Bookmark bookmark) {
+	public void setBookmark(BookmarkPrivate bookmark) {
 		this.bookmark = bookmark;
 	}
-	public Bookmark getBookmark() {
+	public BookmarkPrivate getBookmark() {
 		return bookmark;
 	}
 	
@@ -49,10 +47,10 @@ public class BaseBookmarkAction extends BaseAction implements ModelDriven<Bookma
 		return idBookmark;
 	}
 
-	public void setService(BookmarkService service) {
+	public void setService(BookmarkPrivateService service) {
 		this.service = service;
 	}
-	public BookmarkService getService() {
+	public BookmarkPrivateService getService() {
 		return service;
 	}
 
