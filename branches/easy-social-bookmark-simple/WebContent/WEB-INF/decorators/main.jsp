@@ -117,8 +117,9 @@
 		<p/>&nbsp;
 		<s:if test="#session['user']!=null">
 			<div id="block-tags" class="block">
-				<h2>Tags Used</h2>
+				<h2>Tags of User</h2>
 				<div class="content">
+				<%=session.getAttribute("cloudText").toString()%>
 				</div>
         	</div>
         </s:if>

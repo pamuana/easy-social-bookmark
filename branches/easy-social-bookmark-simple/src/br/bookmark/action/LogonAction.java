@@ -1,10 +1,13 @@
 package br.bookmark.action;
 
+import java.util.Map;
+
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 
 import br.bookmark.models.User;
+import br.bookmark.services.BookmarkPrivateService;
 import br.bookmark.services.UserService;
 import br.bookmark.util.SecurityInterceptor;
 
@@ -19,12 +22,17 @@ public class LogonAction extends BaseAction implements ServletRequestAware {
 	private String password;
 
 	protected UserService service;
+	protected BookmarkPrivateService bookmarkService;
 	private HttpServletRequest request;
 
 	public static final String FAILURE = "failed";
 
 	public void setUserService(UserService service) {
 		this.service = service;
+	}
+	
+	public void setBookmarkPrivateService(BookmarkPrivateService service) {
+		this.bookmarkService = service;
 	}
 
 	public void setServletRequest(HttpServletRequest httpServletRequest) {
@@ -51,6 +59,14 @@ public class LogonAction extends BaseAction implements ServletRequestAware {
 			if( user!=null && null!=login && !"".equals(login)
 					&& password.equals(user.getPassword()) ) {
 				request.getSession(true).setAttribute(SecurityInterceptor.USER_OBJECT,user);
+				
+				String cloudText="";
+				Map<String,Long> cloudTag = bookmarkService.getUserCloud(""+user.getId(), 22);
+				for (String tagName : cloudTag.keySet()) {
+					cloudText+="<a href=\"#\" style=\"font-size:"+cloudTag.get(tagName)+"px;text-decoration:none;\">"+tagName+"</a> ";
+				}
+				request.getSession(true).setAttribute("cloudText",cloudText);
+				
 				return SUCCESS;
 			} else {
 				addActionError(getText("Authentification failed. Your login and password is wrong"));
