@@ -78,6 +78,14 @@ public class GenericServiceImpl<T> implements GenericService<T> {
 		toReturn = (List<T>) entityMgr.createQuery("FROM "+type.getName()+" WHERE "+field+" like :"+field+" ").setParameter(field, value).getResultList();
 		return toReturn;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<T> listByCriteria(String criteria) {
+		entityMgr = emf.createEntityManager();
+		List<T> toReturn = new ArrayList<T>();
+		toReturn = (List<T>) entityMgr.createQuery("FROM "+type.getName()+" WHERE "+criteria+" ").getResultList();
+		return toReturn;
+	}
 
 	public T persist(T obj, String id) {
 		entityMgr = emf.createEntityManager();
@@ -123,5 +131,6 @@ public class GenericServiceImpl<T> implements GenericService<T> {
 			throw (RuntimeException)e.getCause();
 		}
 	}
+
 
 }
