@@ -27,21 +27,33 @@ public class BookmarkPrivateServiceImpl extends GenericServiceImpl<BookmarkPriva
 		return toReturn.substring(1);
 	}
 	
-	public Map<String,Long> getUserCloud(String idUser){
-		Map<String, Long> toReturn = new HashMap<String, Long>();
+	public Map<String,Long> getUserCloud(String idUser,long cssMaxIndex){
+		
+		Map<String, Long> uniqueCountTagByUser = new HashMap<String, Long>();
 		List<BookmarkPrivate> bookmarks= this.listByField("idUser", idUser);
 		for (BookmarkPrivate bookmarkPrivate : bookmarks) {
 			String[] tags =bookmarkPrivate.getTags().split(",");
 			for (String tagName : tags) {
-				if (!toReturn.containsKey(tagName)) {
-					toReturn.put(tagName, 1L);
+				if (!uniqueCountTagByUser.containsKey(tagName)) {
+					uniqueCountTagByUser.put(tagName, 1L);
 				}else {
-					toReturn.put(tagName, toReturn.get(tagName)+1);
+					uniqueCountTagByUser.put(tagName, uniqueCountTagByUser.get(tagName)+1);
 				}
 			}
 		}
+		
+		long bestCountTag = 0L;
+		Map<String, Long> toReturn = new HashMap<String, Long>();
+		for (String tagName : uniqueCountTagByUser.keySet()) {
+			if (uniqueCountTagByUser.get(tagName).longValue() > bestCountTag) bestCountTag= uniqueCountTagByUser.get(tagName).longValue();
+		}
+		for (String tagName : uniqueCountTagByUser.keySet()) {
+			toReturn.put(tagName, uniqueCountTagByUser.get(tagName).longValue() * cssMaxIndex / bestCountTag);
+		}
+		
 		return toReturn;
 	}
+	
 	
 	/**
 	 * Returns the correlation existent between 2 objects.
