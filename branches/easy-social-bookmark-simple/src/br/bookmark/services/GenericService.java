@@ -15,6 +15,8 @@ public interface GenericService<T> {
 	public List<T> listByField(String field, String value);
 
 	public List<T> listByLikeField(String field, String value);
+	
+	public List<T> listByCriteria(String criteria);
 
 	public T persist(T obj, String id);
 

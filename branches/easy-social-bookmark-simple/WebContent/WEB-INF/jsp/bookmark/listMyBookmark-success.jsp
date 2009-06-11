@@ -24,7 +24,7 @@
 				<div>
 					<s:url id="shareBookmark" action="shareBookmarkPublic" namespace="/bookmark"><s:param name="idBookmark" value="id" /></s:url>
 					<s:a href="%{shareBookmark}" cssClass="addcomment">share</s:a>
-					<s:url id="editBookmark" action="findBookmark" namespace="/bookmark"><s:param name="idBookmark" value="id" /></s:url>
+					<s:url id="editBookmark" action="findBookmarkPrivate" namespace="/bookmark"><s:param name="idBookmark" value="id" /></s:url>
 					<s:a href="%{editBookmark}" cssClass="editlinks">edit</s:a>
 					<s:url id="deleteBookmark" action="deleteBookmark" namespace="/bookmark"><s:param name="idBookmark" value="id" /></s:url>
 					<s:a href="%{deleteBookmark}">delete</s:a>

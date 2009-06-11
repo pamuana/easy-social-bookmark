@@ -60,10 +60,11 @@ public class LogonAction extends BaseAction implements ServletRequestAware {
 					&& password.equals(user.getPassword()) ) {
 				request.getSession(true).setAttribute(SecurityInterceptor.USER_OBJECT,user);
 				
+				//..add cloud of tags in session variable cloudText
 				String cloudText="";
 				Map<String,Long> cloudTag = bookmarkService.getUserCloud(""+user.getId(), 22);
 				for (String tagName : cloudTag.keySet()) {
-					cloudText+="<a href=\"#\" style=\"font-size:"+cloudTag.get(tagName)+"px;text-decoration:none;\">"+tagName+"</a> ";
+					cloudText+="<a href=\""+request.getContextPath()+"/bookmark/listMyBookmark.action?tag="+tagName+"\" style=\"font-size:"+cloudTag.get(tagName)+"px;text-decoration:none;\">"+tagName+"</a> ";
 				}
 				request.getSession(true).setAttribute("cloudText",cloudText);
 				

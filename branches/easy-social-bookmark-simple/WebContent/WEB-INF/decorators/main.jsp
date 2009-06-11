@@ -6,6 +6,7 @@
 <%@taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator" %>
 <%@taglib prefix="page" uri="http://www.opensymphony.com/sitemesh/page" %>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<%@ page language="java"  import="java.util.*" %>
 <html>
 <head>
 	<title>Easy Social Bookmark</title>

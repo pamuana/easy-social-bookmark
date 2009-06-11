@@ -1,5 +1,7 @@
 package br.bookmark.action.bookmark;
 
+import java.util.Map;
+
 import org.apache.struts2.config.ParentPackage;
 import org.apache.struts2.config.Result;
 import org.apache.struts2.config.Results;
@@ -46,6 +48,14 @@ public class UpdateBookmarkPrivateAction extends BaseBookmarkPrivateAction  {
 		this.bookmark.setUser(userService.findById(userADD.getId()+""));
 		service.persist(this.bookmark,this.bookmark.getId()+"");
 
+		//..add cloud of tags in session variable cloudText
+		String cloudText="";
+		Map<String,Long> cloudTag = service.getUserCloud(""+userADD.getId(), 22);
+		for (String tagName : cloudTag.keySet()) {
+			cloudText+="<a href=\""+request.getContextPath()+"/bookmark/listMyBookmark.action?tag="+tagName+"\" style=\"font-size:"+cloudTag.get(tagName)+"px;text-decoration:none;\">"+tagName+"</a> ";
+		}
+		request.getSession(true).setAttribute("cloudText",cloudText);
+		
 		return SUCCESS;
 	}
 
