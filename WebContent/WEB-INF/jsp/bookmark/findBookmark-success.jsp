@@ -16,6 +16,8 @@
     <s:textfield id="name" label="Name" name="name" />
     
     <s:textfield id="url" label="URL" name="url" />
+    
+    <s:hidden id="shared" name="shared" />
 
 	<s:textarea id="description" label="Description" name="description" cols="25" rows="5" />
 	
