@@ -1,20 +1,24 @@
 package br.bookmark.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.InheritanceType;
 
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 
 @Entity
-@Table(name="Bookmark") @Inheritance(strategy=InheritanceType.JOINED)
+@Table(name="Bookmark") //@Inheritance(strategy=InheritanceType.JOINED)
 public class Bookmark implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -32,9 +36,13 @@ public class Bookmark implements Serializable{
 
 	@Column(name="description")
 	private String description;
-
-	@Column(name="tags")
-	private String tags;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="idUser")
+	private User user;
+	
+	@OneToMany(mappedBy="bookmark",cascade=CascadeType.ALL)
+	private List<TagUser> tagsUser = new ArrayList<TagUser>();
 	
 	public void setId(long id) {
 		this.id = id;
@@ -42,7 +50,7 @@ public class Bookmark implements Serializable{
 	public long getId() {
 		return id;
 	}
-
+	
 	@RequiredStringValidator(message="the field url is requiered")
 	public void setUrl(String url) {
 		this.url = url;
@@ -65,13 +73,22 @@ public class Bookmark implements Serializable{
 	public String getDescription() {
 		return description;
 	}
-
-	@RequiredStringValidator(message="the field tag's is requiered")
-	public void setTags(String tags) {
-		this.tags = tags;
+	
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public String getTags() {
-		return tags;
+	public User getUser() {
+		return user;
+	}
+	
+	public void setTagsUser(List<TagUser> tagsUser) {
+		this.tagsUser = tagsUser;
+	}
+	public List<TagUser> getTagsUser() {
+		return tagsUser;
+	}
+	public void addTagUser(TagUser tagUser) {
+		tagsUser.add(tagUser);
 	}
 
 }

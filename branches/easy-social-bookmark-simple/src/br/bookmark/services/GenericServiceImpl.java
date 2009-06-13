@@ -27,10 +27,10 @@ public class GenericServiceImpl<T> implements GenericService<T> {
 		T toReturn = null;
 		try {
 			toReturn = entityMgr.find(type,Long.parseLong(id));
+			return  type.cast(toReturn);
 		} catch (NoResultException e) { 
 			return null;
 		}
-		return  type.cast(toReturn);
 	}
 
 	public T findByField(String field, String value)   {
@@ -38,10 +38,10 @@ public class GenericServiceImpl<T> implements GenericService<T> {
 		Object toReturn = null;
 		try {
 			toReturn = entityMgr.createQuery("FROM "+type.getName()+" WHERE "+field+" = :"+field+" ").setParameter(field, value).getSingleResult();
+			return type.cast(toReturn);
 		}catch (NoResultException e) {
 			return null;
 		}
-		return type.cast(toReturn);
 	}
 
 	public T findByLikeField(String field, String value) {
@@ -49,10 +49,10 @@ public class GenericServiceImpl<T> implements GenericService<T> {
 		Object toReturn = null;
 		try {
 			toReturn = entityMgr.createQuery("FROM "+type.getName()+" WHERE "+field+" like :"+field+" ").setParameter(field, value).getSingleResult();
+			return type.cast(toReturn);
 		}catch (NoResultException e) {
 			return null;
 		}
-		return type.cast(toReturn);
 	}
 
 	@SuppressWarnings("unchecked")

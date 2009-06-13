@@ -1,6 +1,6 @@
 package br.bookmark.action.bookmark;
 
-import java.util.Map;
+import java.util.List;
 
 import org.apache.struts2.config.ParentPackage;
 import org.apache.struts2.config.Result;
@@ -8,10 +8,13 @@ import org.apache.struts2.config.Results;
 import org.apache.struts2.dispatcher.ServletActionRedirectResult;
 import org.apache.struts2.dispatcher.ServletDispatcherResult;
 
+import br.bookmark.models.Tag;
 import br.bookmark.models.User;
-import br.bookmark.services.BookmarkPrivateService;
+import br.bookmark.services.TagService;
+import br.bookmark.services.TagUserService;
 import br.bookmark.services.UserService;
 import br.bookmark.util.SecurityInterceptor;
+import br.bookmark.util.TagUtil;
 
 import com.opensymphony.xwork2.validator.annotations.Validation;
 import com.opensymphony.xwork2.validator.annotations.Validations;
@@ -24,14 +27,24 @@ import com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator;
 	@Result(name="input",type= ServletDispatcherResult.class,value="/WEB-INF/jsp/bookmark/findBookmarkPrivate-success.jsp")
 })
 @Validation
-public class UpdateBookmarkPrivateAction extends BaseBookmarkPrivateAction  {
+public class UpdateBookmarkAction extends BaseBookmarkAction  {
+	
+	private static final long serialVersionUID = 1L;
 	
 	protected UserService userService;
-
-	private static final long serialVersionUID = 1L;
+	protected TagService tagService;
+	protected TagUserService tagUserService;
 	
 	public void setUserService(UserService service) {
 		this.userService = service;
+	}
+	
+	public void setTagService(TagService service) {
+		this.tagService = service;
+	}
+	
+	public void setTagUserService(TagUserService service) {
+		this.tagUserService = service;
 	}
 	
 	@Validations( visitorFields = {
@@ -42,18 +55,30 @@ public class UpdateBookmarkPrivateAction extends BaseBookmarkPrivateAction  {
 	public String execute() throws Exception {
 
 
-		User userADD =  (User) this.request.getSession(true).getAttribute(SecurityInterceptor.USER_OBJECT);
-
+		String idUser =  ((User) this.request.getSession(true).getAttribute(SecurityInterceptor.USER_OBJECT)).getId() + "";
+		User user = this.userService.findById(idUser);
+		
+		
 		service.persist(this.bookmark,this.idBookmark);
-		this.bookmark.setUser(userService.findById(userADD.getId()+""));
+		this.bookmark.setUser(user);
 		service.persist(this.bookmark,this.bookmark.getId()+"");
-
-		//..add cloud of tags in session variable cloudText
-		String cloudText="";
-		Map<String,Long> cloudTag = service.getUserCloud(""+userADD.getId(), 22);
-		for (String tagName : cloudTag.keySet()) {
-			cloudText+="<a href=\""+request.getContextPath()+"/bookmark/listMyBookmark.action?tag="+tagName+"\" style=\"font-size:"+cloudTag.get(tagName)+"px;text-decoration:none;\">"+tagName+"</a> ";
+		
+		//..creamos o relacoamento de tags
+		this.tagUserService.removeByBookmark(idUser,""+this.bookmark.getId());
+		List<String> tags = TagUtil.stringToTags(this.tags);
+		for (String tagName : tags) {
+			Tag tag = this.tagService.findByField("name", tagName);
+			if (tag==null) {
+				tag = new Tag();
+				tag.setName(tagName);
+				this.tagService.persist(tag, "");
+				tag = this.tagService.findById(tag.getId()+"");
+			}
+			
+			this.tagUserService.persist(idUser,""+tag.getId(),""+this.bookmark.getId());
 		}
+		
+		String cloudText= tagUserService.getCloud(""+user.getId(),request.getContextPath()+"/bookmark/listMyBookmark.action?tag=");
 		request.getSession(true).setAttribute("cloudText",cloudText);
 		
 		return SUCCESS;
