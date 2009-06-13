@@ -61,8 +61,8 @@
         <div id="sidebar">
 		<div id="block-menu-principal" class="block">
 			<h2>View Bookmarks</h2>
-			<s:url id="listMyBookmark" action="listMyBookmark" namespace="/bookmark" />
-			<s:url id="addBookmark" action="findBookmarkPrivate" namespace="/bookmark" />
+			<s:url id="listMyBookmark" action="listMyBookmark" namespace="/bookmark" ><s:param name="tag" value="" /></s:url>
+			<s:url id="addBookmark" action="findBookmark" namespace="/bookmark" />
 			<s:url id="listMyBookmarkWithGoogleAPI" action="listMyBookmarkWithGoogleAPI" namespace="/bookmark" />
 			<div class="content">
 				<ul>
@@ -120,7 +120,7 @@
 			<div id="block-tags" class="block">
 				<h2>Tags of User</h2>
 				<div class="content">
-				<%=session.getAttribute("cloudText").toString()%>
+				<%=session.getAttribute("cloudText").toString() %>
 				</div>
         	</div>
         </s:if>

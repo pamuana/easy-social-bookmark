@@ -9,7 +9,6 @@ import org.apache.struts2.dispatcher.ServletActionRedirectResult;
 import org.apache.struts2.dispatcher.ServletDispatcherResult;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-import br.bookmark.action.bookmark.BaseBookmarkPrivateAction;
 import br.bookmark.models.Bookmark;
 import br.bookmark.models.Comment;
 import br.bookmark.models.User;

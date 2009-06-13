@@ -39,8 +39,10 @@ public class User implements Serializable {
 	private String email;
 
 	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
-	private List<BookmarkPrivate> bookmarks = new ArrayList<BookmarkPrivate>();
+	private List<Bookmark> bookmarks = new ArrayList<Bookmark>();
 
+	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
+	private List<TagUser> tagsUser = new ArrayList<TagUser>();
 
 	public long getId() {
 		return id;
@@ -86,17 +88,28 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public void setBookmarks(List<BookmarkPrivate> bookmarks) {
+	public void setBookmarks(List<Bookmark> bookmarks) {
 		this.bookmarks = bookmarks;
 	}
 
-	public List<BookmarkPrivate> getBookmarks() {
+	public List<Bookmark> getBookmarks() {
 		return bookmarks;
 	}
 	
-	public void addBookmark(BookmarkPrivate bookmark) {
+	public void addBookmark(Bookmark bookmark) {
 		this.bookmarks.add(bookmark);
 	}
 
+	public void setTagsUser(List<TagUser> tagsUser) {
+		this.tagsUser = tagsUser;
+	}
+
+	public List<TagUser> getTagsUser() {
+		return tagsUser;
+	}
+
+	public void addTagUser(TagUser tagUser) {
+		this.tagsUser.add(tagUser);
+	}
 
 }

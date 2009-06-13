@@ -12,24 +12,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
-
 @Entity
-@Table(name="Comment")
-public class Comment implements Serializable{	
+@Table(name="TagUser")
+public class TagUser implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")
 	private long id;
 	
-	@Column(name="data")
-	private String data;
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="idTag")
+	private Tag tag;
 	
-	@Column(name="text")
-	private String text;
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="idUser")
+	private User user;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="idBookmark")
@@ -42,20 +42,18 @@ public class Comment implements Serializable{
 		return id;
 	}
 	
-	@RequiredStringValidator(message="the field text is requiered")
-	public void setText(String text) {
-		this.text = text;
+	public void setTag(Tag tag) {
+		this.tag = tag;
 	}
-	public String getText() {
-		return text;
+	public Tag getTag() {
+		return tag;
 	}
 	
-	
-	public void setData(String data) {
-		this.data = data;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public String getData() {
-		return data;
+	public User getUser() {
+		return user;
 	}
 	
 	public void setBookmark(Bookmark bookmark) {
@@ -65,5 +63,5 @@ public class Comment implements Serializable{
 		return bookmark;
 	}
 	
-	
+
 }
