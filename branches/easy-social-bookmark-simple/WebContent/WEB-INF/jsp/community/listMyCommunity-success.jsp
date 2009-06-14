@@ -9,11 +9,14 @@
 <body>
 
 <s:iterator value="communities">
-	<s:url id="unsubscribeCommunity" action="unsubscribeCommunity"
-		namespace="/community">
+	<s:url id="unsubscribeCommunity" action="unsubscribeCommunity" namespace="/community">
 		<s:param name="idCommunity" value="id" />
 	</s:url>
-	<s:property value="name" /> - <s:a href="%{unsubscribeCommunity}">unsubscribe</s:a>
+	<s:url id="listCommunityBookmark" action="listCommunityBookmark" namespace="/bookmark">
+		<s:param name="idCommunity" value="id" />
+	</s:url>
+	
+	<s:a href="%{listCommunityBookmark}"><s:property value="name" /></s:a> - <s:a href="%{unsubscribeCommunity}">unsubscribe</s:a>
 	<br />
 	<s:property value="description" />
 	<br />
