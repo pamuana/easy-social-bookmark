@@ -35,7 +35,7 @@ public class BaseBookmarkAction extends BaseAction implements ModelDriven<Bookma
 			List<TagUser> tagsUser = this.bookmark.getTagsUser();
 			this.tags="";
 			for (TagUser tagUser : tagsUser) {
-				this.tags += tagUser.getTag().getName()+",";
+				this.tags += tagUser.getTag().getName()+" ";
 			}
 		}
 	}

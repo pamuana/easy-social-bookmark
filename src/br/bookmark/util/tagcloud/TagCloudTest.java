@@ -64,7 +64,7 @@ public class TagCloudTest extends TestCase {
 		BufferedWriter out = new BufferedWriter(
 				new FileWriter(fileName));
 		VisualizeTagCloudDecorator decorator = new HTMLTagCloudDecorator();
-		out.write(decorator.decorateTagCloud(cloud,""));
+		out.write(decorator.decorateTagCloud(cloud,"",""));
 		out.close();
 	}
 }

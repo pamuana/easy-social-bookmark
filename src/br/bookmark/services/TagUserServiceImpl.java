@@ -25,6 +25,36 @@ public class TagUserServiceImpl extends GenericServiceImpl<TagUser> implements T
 		this.type = TagUser.class;
 	}
 
+	private Map<String, Double> getTagFrecuency(List<TagUser> tagsUser) {
+		Map<String, Double> tagFrecuency = new HashMap<String, Double>();
+		for (TagUser tagUser : tagsUser) {
+			Tag tag = tagUser.getTag();
+			if (tagFrecuency.containsKey(tag.getName())) {
+				tagFrecuency.put(tag.getName(), tagFrecuency.get(tag.getName())+1);
+			}else {
+				tagFrecuency.put(tag.getName(), 1.);
+			}
+		}
+		return tagFrecuency;
+	}
+
+	private String makeCloud(Map<String, Double> tagFrecuency,String href,String head) {
+		int numSizes = 3;
+		String fontPrefix = "font-size: ";
+
+		List<TagCloudElement> listTagName = new ArrayList<TagCloudElement>();
+		for (String tagName : tagFrecuency.keySet()) {
+			listTagName.add(new TagCloudElementImpl(tagName,tagFrecuency.get(tagName).doubleValue()));
+		}
+
+		FontSizeComputationStrategy strategy = new LogFontSizeComputationStrategy(numSizes,fontPrefix);
+		TagCloud cloudLog = new TagCloudImpl(listTagName,strategy);
+		VisualizeTagCloudDecorator decorator = new HTMLTagCloudDecorator();
+
+		return decorator.decorateTagCloud(cloudLog,href,head);
+	}
+
+
 	public void persist(String idUser, String idTag, String idBookmark) {
 		entityMgr = emf.createEntityManager();
 		EntityTransaction tx = null;
@@ -59,38 +89,33 @@ public class TagUserServiceImpl extends GenericServiceImpl<TagUser> implements T
 		}
 	}
 
-	@Override
+
 	public String getCloud(String idUser) {
 		return this.getCloud(idUser, "");
 	}
 
-	@Override
+
 	public String getCloud(String idUser, String href) {
-		Map<String, Double> tagFrecuency = new HashMap<String, Double>();
+
 		List<TagUser> tagsUser = this.listByField("idUser", idUser);
+		Map<String, Double> tagFrecuency = this.getTagFrecuency(tagsUser);
+
+		return makeCloud(tagFrecuency,href,"<h3>Usuario</h3>");
+	}
+
+
+
+	public String getCloudShared(String href) {
+		
+		List<TagUser> tagsUser = this.listAll();
 		for (TagUser tagUser : tagsUser) {
-			Tag tag = tagUser.getTag();
-			if (tagFrecuency.containsKey(tag.getName())) {
-				tagFrecuency.put(tag.getName(), tagFrecuency.get(tag.getName())+1);
-			}else {
-				tagFrecuency.put(tag.getName(), 1.);
+			if (!"true".equals(tagUser.getBookmark().getShared())) {
+				tagsUser.remove(tagUser);
 			}
 		}
+		Map<String, Double> tagFrecuency = this.getTagFrecuency(tagsUser);
 
-		int numSizes = 3;
-		String fontPrefix = "font-size: ";
-
-		List<TagCloudElement> listTagName = new ArrayList<TagCloudElement>();
-		for (String tagName : tagFrecuency.keySet()) {
-			listTagName.add(new TagCloudElementImpl(tagName,tagFrecuency.get(tagName).doubleValue()));
-		}
-
-		FontSizeComputationStrategy strategy = new LogFontSizeComputationStrategy(numSizes,fontPrefix);
-		TagCloud cloudLog = new TagCloudImpl(listTagName,strategy);
-		VisualizeTagCloudDecorator decorator = new HTMLTagCloudDecorator();
-		
-		//System.out.println(decorator.decorateTagCloud(cloudLog));
-		return decorator.decorateTagCloud(cloudLog,href);
+		return makeCloud(tagFrecuency,href,"<h3>Shared</h3>");
 	}
 
 }

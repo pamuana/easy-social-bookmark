@@ -11,5 +11,7 @@ public interface TagUserService extends GenericService<TagUser> {
 	public String getCloud(String idUser);
 
 	public String getCloud(String idUser, String href);
+	
+	public String getCloudShared(String href);
 
 }
