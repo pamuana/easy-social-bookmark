@@ -14,11 +14,11 @@ import br.bookmark.util.SecurityInterceptor;
 @ParentPackage("base-package")
 @Results({
 	@Result(name="success", value="listMyCommunity", type= ServletActionRedirectResult.class),
-	@Result(name="dupPK",type= ServletDispatcherResult.class,value="/WEB-INF/jsp/community/listSubscribeCommunity-success.jsp"),
-	@Result(name="input",type= ServletDispatcherResult.class,value="/WEB-INF/jsp/community/listSubscribeCommunity-success.jsp")
+	@Result(name="dupPK",type= ServletDispatcherResult.class,value="/WEB-INF/jsp/community/listMyCommunity-success.jsp"),
+	@Result(name="input",type= ServletDispatcherResult.class,value="/WEB-INF/jsp/community/listMyCommunity-success.jsp")
 })
 @Validation
-public class SubscribeCommunityAction extends BaseCommunityAction {
+public class UnsubscribeCommunityAction extends BaseCommunityAction {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -27,7 +27,7 @@ public class SubscribeCommunityAction extends BaseCommunityAction {
 		User user =  (User) request.getSession(true).getAttribute(SecurityInterceptor.USER_OBJECT);
 		String idUser = ""+user.getId();
 		
-		this.service.addParticant(this.idCommunity,idUser);
+		this.service.removeParticipant(this.idCommunity,idUser);
 		return SUCCESS;
 	}
 

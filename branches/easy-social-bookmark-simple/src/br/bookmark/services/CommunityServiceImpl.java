@@ -95,4 +95,22 @@ public class CommunityServiceImpl extends GenericServiceImpl<Community> implemen
 		return toReturn;
 	}
 
+	@Override
+	public void removeParticipant(String idCommunity, String idUser) {
+		entityMgr = emf.createEntityManager();
+		EntityTransaction tx = null;
+		try {
+			tx = entityMgr.getTransaction();
+			tx.begin();
+
+			entityMgr.createNativeQuery("DELETE FROM participant WHERE idUser="+idUser+" AND idCommunity="+idCommunity).executeUpdate();
+
+			tx.commit();
+		} catch (Exception e) {
+			if ( tx != null && tx.isActive() )
+				tx.rollback();
+			throw (RuntimeException)e.getCause();
+		}
+	}
+
 }
