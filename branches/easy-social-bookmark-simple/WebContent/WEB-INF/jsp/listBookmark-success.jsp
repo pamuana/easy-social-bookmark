@@ -25,8 +25,8 @@
 				<div class="shared"></div>
 				<div class="url"><a href="<s:property id="url" value="url" />" target="_blank"><s:property id="url" value="url" /></a></div>
 				<div>
-					<s:url id="addComment" action="" namespace="/"><s:param name="idBookmark" value="id" /></s:url>
-					<s:a href="%{addComment}" cssClass="addcomment">share</s:a>
+					<s:url id="addComment" action="findComment" namespace="/comment"><s:param name="idBookmark" value="id" /></s:url>
+					<s:a href="%{addComment}" cssClass="addcomment">Add Comment</s:a>
         		</div>
         		<div>
         			view comments
