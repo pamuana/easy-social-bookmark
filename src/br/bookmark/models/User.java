@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -43,6 +46,12 @@ public class User implements Serializable {
 
 	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
 	private List<TagUser> tagsUser = new ArrayList<TagUser>();
+	
+	@ManyToMany(cascade = { CascadeType.ALL})
+	@JoinTable(name="participant",
+			joinColumns={@JoinColumn(name="idUser")},
+			inverseJoinColumns={@JoinColumn(name="idCommunity")})
+	private List<Community> communities = new ArrayList<Community>();
 
 	public long getId() {
 		return id;
@@ -110,6 +119,16 @@ public class User implements Serializable {
 
 	public void addTagUser(TagUser tagUser) {
 		this.tagsUser.add(tagUser);
+	}
+
+	public void setCommunities(List<Community> communties) {
+		this.communities = communties;
+	}
+	public List<Community> getCommunities() {
+		return communities;
+	}
+	public void addCommunity(Community community) {
+		this.communities.add(community);
 	}
 
 }
