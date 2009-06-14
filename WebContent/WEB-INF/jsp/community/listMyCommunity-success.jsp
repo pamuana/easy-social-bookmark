@@ -14,6 +14,7 @@
 	</s:url>
 	<s:url id="listCommunityBookmark" action="listCommunityBookmark" namespace="/bookmark">
 		<s:param name="idCommunity" value="id" />
+		<s:param name="tag" value="" />
 	</s:url>
 	
 	<s:a href="%{listCommunityBookmark}"><s:property value="name" /></s:a> - <s:a href="%{unsubscribeCommunity}">unsubscribe</s:a>

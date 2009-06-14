@@ -62,9 +62,6 @@ public class ListBookmarkAction extends BaseAction implements ServletRequestAwar
 
 	public String execute() throws Exception{
 
-		String cloudText= tagUserService.getCloudShared(request.getContextPath()+"/listBookmark.action?tag=");
-		request.getSession(true).setAttribute("cloudText",cloudText);
-
 		this.bookmarks = service.listByField("shared", "true");
 		if (tag!=null && !"".equals(tag)) {
 			
@@ -81,6 +78,9 @@ public class ListBookmarkAction extends BaseAction implements ServletRequestAwar
 			}
 			
 		}
+		
+		String cloudText= tagUserService.getCloudShared(request.getContextPath()+"/listBookmark.action?tag=");
+		request.getSession(true).setAttribute("cloudText",cloudText);
 
 		return SUCCESS;
 	}
