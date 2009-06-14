@@ -12,4 +12,6 @@ public interface CommunityService extends GenericService<Community> {
 
 	public List<Community> listByIdUser(String idUser);
 
+	public void removeParticipant(String idCommunity, String idUser);
+
 }
