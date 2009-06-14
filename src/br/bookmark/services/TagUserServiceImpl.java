@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import br.bookmark.models.Tag;
@@ -116,6 +117,35 @@ public class TagUserServiceImpl extends GenericServiceImpl<TagUser> implements T
 		Map<String, Double> tagFrecuency = this.getTagFrecuency(tagsUser);
 
 		return makeCloud(tagFrecuency,href,"<h3>Shared</h3>");
+	}
+
+	public String getCloudCommunity(String idCommunity, String href) {
+		List<TagUser> tagsUser = this.listByIdCommunity(idCommunity);
+		Map<String, Double> tagFrecuency = this.getTagFrecuency(tagsUser);
+
+		return makeCloud(tagFrecuency,href,"<h3>Community</h3>");
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<TagUser> listByIdCommunity(String idCommunity) {
+		List<TagUser> toReturn= new ArrayList<TagUser>();
+
+		EntityManager entityMgr = emf.createEntityManager();
+		EntityTransaction tx = null;
+		try {
+			tx = entityMgr.getTransaction();
+			tx.begin();
+
+			toReturn = (List<TagUser>) entityMgr.createNativeQuery("SELECT * FROM TagUser WHERE idBookmark IN (SELECT id FROM Bookmark WHERE shared='true' ) AND idUser IN (SELECT idUser FROM participant WHERE idCommunity="+idCommunity+" ) ",TagUser.class).getResultList();
+
+			tx.commit();
+		} catch (Exception e) {
+			if ( tx != null && tx.isActive() )
+				tx.rollback();
+			throw (RuntimeException)e.getCause();
+		}
+
+		return toReturn;
 	}
 
 }
