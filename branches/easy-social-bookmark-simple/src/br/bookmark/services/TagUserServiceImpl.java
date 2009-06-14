@@ -108,15 +108,32 @@ public class TagUserServiceImpl extends GenericServiceImpl<TagUser> implements T
 
 	public String getCloudShared(String href) {
 		
-		List<TagUser> tagsUser = this.listAll();
-		for (TagUser tagUser : tagsUser) {
-			if (!"true".equals(tagUser.getBookmark().getShared())) {
-				tagsUser.remove(tagUser);
-			}
-		}
+		List<TagUser> tagsUser = this.listShared();
 		Map<String, Double> tagFrecuency = this.getTagFrecuency(tagsUser);
 
 		return makeCloud(tagFrecuency,href,"<h3>Shared</h3>");
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<TagUser> listShared() {
+		List<TagUser> toReturn= new ArrayList<TagUser>();
+
+		EntityManager entityMgr = emf.createEntityManager();
+		EntityTransaction tx = null;
+		try {
+			tx = entityMgr.getTransaction();
+			tx.begin();
+
+			toReturn = (List<TagUser>) entityMgr.createNativeQuery("SELECT * FROM TagUser WHERE idBookmark IN (SELECT id FROM Bookmark WHERE shared='true' ) ",TagUser.class).getResultList();
+
+			tx.commit();
+		} catch (Exception e) {
+			if ( tx != null && tx.isActive() )
+				tx.rollback();
+			throw (RuntimeException)e.getCause();
+		}
+
+		return toReturn;
 	}
 
 	public String getCloudCommunity(String idCommunity, String href) {
