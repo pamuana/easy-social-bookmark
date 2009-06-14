@@ -61,11 +61,13 @@
         <div id="sidebar">
 		<div id="block-menu-principal" class="block">
 			<h2>View Bookmarks</h2>
+			<s:url id="listBookmark" action="listBookmark" namespace="/" ><s:param name="tag" value="" /></s:url>
 			<s:url id="listMyBookmark" action="listMyBookmark" namespace="/bookmark" ><s:param name="tag" value="" /></s:url>
 			<s:url id="addBookmark" action="findBookmark" namespace="/bookmark" />
 			<s:url id="listMyBookmarkWithGoogleAPI" action="listMyBookmarkWithGoogleAPI" namespace="/bookmark" />
 			<div class="content">
 				<ul>
+					<li><s:a href="%{listBookmark}">List shared bookmarks</s:a></li>
 					<li><s:a href="%{listMyBookmark}">List my bookmarks</s:a></li>
 					<li><s:a href="%{addBookmark}">Add bookmark</s:a></li>
 					<li><s:a href="%{listMyBookmarkWithGoogleAPI}">List bookmark - Mashup</s:a></li>
@@ -116,14 +118,12 @@
 		<p/>&nbsp;
 		<hr/>
 		<p/>&nbsp;
-		<s:if test="#session['user']!=null">
 			<div id="block-tags" class="block">
-				<h2>Tags of User</h2>
+				<h2>Tags</h2>
 				<div class="content">
 				<%=session.getAttribute("cloudText").toString() %>
 				</div>
         	</div>
-        </s:if>
         </div>
         <div class="clear"></div>
         <div id="footer"></div>

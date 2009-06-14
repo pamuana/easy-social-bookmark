@@ -28,11 +28,12 @@ public class HTMLTagCloudDecorator implements VisualizeTagCloudDecorator {
         fontMap.put("font-size: 2", "font-size: 24px");
     }
     
-    public String decorateTagCloud(TagCloud tagCloud,String href) {
+    public String decorateTagCloud(TagCloud tagCloud,String href,String head) {
         StringWriter sw = new StringWriter();
         List<TagCloudElement> elements = tagCloud.getTagCloudElements();
         //sw.append(HEADER_HTML);
         //sw.append("<br><body><h3>TagCloud (" +  elements.size() +")</h3>");
+        sw.append(head);
         int count = 0;
         for (TagCloudElement tce :  elements) {
             sw.append("&nbsp;<a href=\""+href+tce.getTagText()+"\" style=\""+ this.fontMap.get(tce.getFontSize())+";\">" );
