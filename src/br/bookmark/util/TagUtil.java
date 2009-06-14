@@ -1,7 +1,9 @@
 package br.bookmark.util;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import br.bookmark.util.tagcloud.FontSizeComputationStrategy;
 import br.bookmark.util.tagcloud.TagCloud;
@@ -9,6 +11,8 @@ import br.bookmark.util.tagcloud.TagCloudElement;
 import br.bookmark.util.tagcloud.impl.LinearFontSizeComputationStrategy;
 import br.bookmark.util.tagcloud.impl.TagCloudImpl;
 import br.bookmark.util.textanalysis.impl.SimpleMetaDataExtractor;
+import br.bookmark.util.webcrawler.CrawlerUrl;
+import br.bookmark.util.webcrawler.NaiveCrawler;
 
 public class TagUtil {
 
@@ -73,6 +77,37 @@ public class TagUtil {
 		}
 
 		return toReturn;
+	}
+	
+	public static void teste() {
+		String url = url = "http://citeseerx.ist.psu.edu/search?q=Joseph+Psotka&submit=Search&sort=rel";
+		int maxNumberUrls = 10;
+		int maxDepth = 5;
+		long delayBetweenUrls = 1000L;
+		
+		
+		Queue<CrawlerUrl> urlQueue = new LinkedList<CrawlerUrl>();
+		//String url = "http://citeseerx.ist.psu.edu/search?q=Joseph+Psotka&submit=Search&sort=rel";
+		String regexp = ".*";
+		//int maxNumberUrls = 50;
+		//int maxDepth = 10;
+		//long delayBetweenUrls = 10000L;
+
+		urlQueue.add(new CrawlerUrl(url, 0));
+		NaiveCrawler crawler;
+		try {
+			crawler = new NaiveCrawler(urlQueue, maxNumberUrls,
+					maxDepth, delayBetweenUrls, regexp);
+			List<CrawlerUrl> urls = crawler.crawl();
+			for (CrawlerUrl resultUrl : urls) {
+				System.out.println(resultUrl.getTitle() + "|" + resultUrl.getUrlString());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
 	}
 
 }
