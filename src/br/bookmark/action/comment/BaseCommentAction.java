@@ -15,8 +15,7 @@ public class BaseCommentAction extends BaseAction implements ModelDriven<Comment
 	protected Comment comment;
 	protected String idComment;
 	protected CommentService commentService;
-	protected BookmarkService bookmarkService;
-
+	
 	public Comment getModel() {
 		return getComment();
 	}
@@ -25,20 +24,6 @@ public class BaseCommentAction extends BaseAction implements ModelDriven<Comment
 		this.commentService = service;
 	}
 	
-	public void setBookmarkService(BookmarkService service) {
-		this.bookmarkService = service;
-	}
-
-	public void prepare() throws Exception {
-		if( getIdComment()==null || "".equals(getIdComment()) ) {
-			setComment(new Comment());
-		} else {
-			setComment(commentService.findById(getIdComment()));
-		}
-	}
-
-
-
 	public void setComment(Comment comment) {
 		this.comment = comment;
 	}
@@ -54,6 +39,16 @@ public class BaseCommentAction extends BaseAction implements ModelDriven<Comment
 	public String getIdComment() {
 		return idComment;
 	}
+
+	public void prepare() throws Exception {
+		if( this.idComment==null || "".equals(this.idComment) ) {
+			this.comment = new Comment();
+		} else {
+			this.comment = commentService.findById(this.idComment);
+		}
+	}
+
+	
 
 
 }
