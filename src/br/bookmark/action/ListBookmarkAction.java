@@ -11,6 +11,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 
 import br.bookmark.action.BaseAction;
 import br.bookmark.models.Bookmark;
+import br.bookmark.models.TagUser;
 import br.bookmark.services.BookmarkService;
 import br.bookmark.services.TagService;
 import br.bookmark.services.TagUserService;
@@ -22,7 +23,7 @@ public class ListBookmarkAction extends BaseAction implements ServletRequestAwar
 
 	protected List<Bookmark> bookmarks = new ArrayList<Bookmark>();
 	private String tag;
-	
+
 	protected BookmarkService service;
 	protected TagService tagService;
 	protected TagUserService tagUserService;
@@ -30,11 +31,11 @@ public class ListBookmarkAction extends BaseAction implements ServletRequestAwar
 	public void setBookmarkService(BookmarkService service) {
 		this.service = service;
 	}
-	
+
 	public void setTagService(TagService service) {
 		this.tagService = service;
 	}
-	
+
 	public void setTagUserService(TagUserService service) {
 		this.tagUserService = service;
 	}
@@ -50,7 +51,7 @@ public class ListBookmarkAction extends BaseAction implements ServletRequestAwar
 	public List<Bookmark> getBookmarks() {
 		return bookmarks;
 	}
-	
+
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
@@ -60,12 +61,27 @@ public class ListBookmarkAction extends BaseAction implements ServletRequestAwar
 	}
 
 	public String execute() throws Exception{
-		
+
 		String cloudText= tagUserService.getCloudShared(request.getContextPath()+"/listBookmark.action?tag=");
 		request.getSession(true).setAttribute("cloudText",cloudText);
-		
+
 		this.bookmarks = service.listByField("shared", "true");
-		
+		if (tag!=null && !"".equals(tag)) {
+			
+			this.bookmarks = new ArrayList<Bookmark>();
+			
+			List<Bookmark> bookmarksAux = service.listByField("shared", "true");
+			for (Bookmark bookmark : bookmarksAux) {
+				List<TagUser> tagsUser = bookmark.getTagsUser();
+				for (TagUser tagUser : tagsUser) {
+					if (this.tag.equals(tagUser.getTag().getName())) {
+						this.bookmarks.add(bookmark);
+					}
+				}
+			}
+			
+		}
+
 		return SUCCESS;
 	}
 
