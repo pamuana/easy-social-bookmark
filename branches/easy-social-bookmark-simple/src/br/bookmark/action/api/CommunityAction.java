@@ -75,7 +75,7 @@ public class CommunityAction extends BaseAction implements ModelDriven<Community
 	}
 
 	public String remove(){
-		service.remove(id);
+		service.remove(""+id);
 		return index();
 	}
 
@@ -85,7 +85,7 @@ public class CommunityAction extends BaseAction implements ModelDriven<Community
 	}
 
 	public String create(){
-		service.persist(community, ""+id, ""+idUser);
+		service.persist(community,"");
 		return index();
 	}
 

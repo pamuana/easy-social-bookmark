@@ -10,7 +10,7 @@
 	<bean id="commentService" class="br.bookmark.services.CommentServiceImpl" />
 	<bean id="tagService" class="br.bookmark.services.TagServiceImpl" />
 	<bean id="tagUserService" class="br.bookmark.services.TagUserServiceImpl" />
-
+	<bean id="communityService" class="br.bookmark.services.CommunityServiceImpl" />
 	
 </beans>
 
