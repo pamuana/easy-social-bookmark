@@ -41,6 +41,8 @@
         		<div>
 	        		<s:url id="addComment" action="findComment" namespace="/comment"><s:param name="idBookmark" value="id" /></s:url>
 	        		<s:a href="%{addComment}" cssClass="addComment">edit</s:a>
+	        		<s:url id="findSimilarInWebBookmark" action="findSimilarInWebBookmark" namespace="/bookmark"><s:param name="idBookmark" value="id" /></s:url>
+					<s:a href="%{findSimilarInWebBookmark}">find similar in web</s:a>
         		</div>
         	</div>
 		</div>
