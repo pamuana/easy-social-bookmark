@@ -17,12 +17,10 @@ public class DecisionTreeImpl {
 	}
 	
 	public static void build(String path,String sqlQueryDT, String entropy) throws ClassNotFoundException, SQLException {
-		
-		 AnnotationConfiguration cfg = new AnnotationConfiguration();
 		 
-		 String url = cfg.getProperty("hibernate.connection.url");
-		 String user = cfg.getProperty("hibernate.connection.username");
-		 String password = cfg.getProperty("hibernate.connection.password");
+		 String url = "jdbc:mysql://localhost/bookmarks";
+		 String user = "root";
+		 String password = "";
 		 
 		 String stringConnection = url+"?"+"user="+user+"&password="+password;
 		
