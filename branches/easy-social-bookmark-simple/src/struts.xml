@@ -30,7 +30,8 @@
                     /participant,
                     /importexport,
                     /api,
-                    /webBookmark
+                    /webBookmark,
+                    /decisionTree
                 </param>
             </interceptor>
             <interceptor-stack name="securedBasicStack">
