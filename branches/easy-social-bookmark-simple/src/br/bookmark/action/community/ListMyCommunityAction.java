@@ -29,7 +29,12 @@ public class ListMyCommunityAction extends BaseCommunityAction {
 	public String execute() throws Exception {
 		User user =  (User) request.getSession(true).getAttribute(SecurityInterceptor.USER_OBJECT);
 		String idUser = ""+user.getId();
+		
 		this.communities = service.listByIdUser(idUser);
+		
+		//..add list of community in session variable communityListText
+		String communityListText = service.getCommunityListText(idUser,request.getContextPath()+"/bookmark/listCommunityBookmark.action?idCommunity=");
+		request.getSession(true).setAttribute("communityListText",communityListText);
 		
 		return SUCCESS;
 	}	

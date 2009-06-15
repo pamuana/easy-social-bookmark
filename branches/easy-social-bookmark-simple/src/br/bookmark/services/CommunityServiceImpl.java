@@ -113,4 +113,16 @@ public class CommunityServiceImpl extends GenericServiceImpl<Community> implemen
 		}
 	}
 
+	public String getCommunityListText(String idUser,String href) {
+		
+		String toReturn = "";
+		List<Community> listCommunityUser = this.listByIdUser(idUser);
+		for (Community community : listCommunityUser) {
+			String add = "<li><a href=\""+href+community.getId()+"\" >"+community.getName()+"</a></li>";
+			toReturn+=add;
+		}
+		
+		return toReturn;
+	}
+
 }
