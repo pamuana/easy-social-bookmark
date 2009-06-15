@@ -104,13 +104,12 @@
 			<div id="block-menu-community" class="block">
 				<h2>Administrator Functions</h2>
 				<s:url id="adminWebBookmark" action="adminWebBookmark" namespace="/webBookmark" />
-				<s:url id="addCommunity" action="findCommunity" namespace="/community" ><s:param name="idCommunity" value="" /> </s:url>
+				<s:url id="adminDecisionTree" action="adminDecisionTree" namespace="/decisionTree" ></s:url>
 				<s:url id="listSubscribeCommunity" action="listSubscribeCommunity" namespace="/community" />
 				<div class="content">
 					<ul class="menu">
-						<li><s:a href="%{adminWebBookmark}">web bookmark</s:a></li>
-						<li><s:a href="%{addCommunity}">Add community</s:a></li>
-						<li><s:a href="%{listSubscribeCommunity}">Subscribe community</s:a></li>
+						<li><s:a href="%{adminWebBookmark}">Web Bookmark</s:a></li>
+						<li><s:a href="%{adminDecisionTree}">D. T for Community Suggestion. </s:a></li>
 					</ul>
 				</div>
 			</div>
@@ -118,7 +117,6 @@
 			<hr/>
 			<p/>&nbsp;
 		</s:if>
-		<hr/>
 		<p/>&nbsp;
 			<div id="block-tags" class="block">
 				<h2>Tags</h2>
