@@ -46,6 +46,9 @@ public class Bookmark implements Serializable{
 
 	@OneToMany(mappedBy="bookmark",cascade=CascadeType.ALL)
 	private List<TagUser> tagsUser = new ArrayList<TagUser>();
+	
+	@OneToMany(mappedBy="bookmark",cascade=CascadeType.ALL)
+	private List<WebBookmark> webBookmarks = new ArrayList<WebBookmark>();
 
 	public void setId(long id) {
 		this.id = id;
@@ -101,4 +104,14 @@ public class Bookmark implements Serializable{
 		tagsUser.add(tagUser);
 	}
 
+	public void setWebBookmarks(List<WebBookmark> webBookmarks) {
+		this.webBookmarks = webBookmarks;
+	}
+	public List<WebBookmark> getWebBookmarks() {
+		return webBookmarks;
+	}
+	public void addWebBookmark(WebBookmark webBookmark){
+		this.webBookmarks.add(webBookmark);
+	}
+	
 }
