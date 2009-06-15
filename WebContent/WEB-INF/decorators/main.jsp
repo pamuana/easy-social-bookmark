@@ -62,12 +62,14 @@
 		<div id="block-menu-principal" class="block">
 			<h2>View Bookmarks</h2>
 			<s:url id="listBookmark" action="listBookmark" namespace="/" ><s:param name="tag" value="" /></s:url>
+			<s:url id="listBookmarkCloud" action="listBookmarkCloud" namespace="/bookmark" ><s:param name="tag" value="" /></s:url>
 			<s:url id="listMyBookmark" action="listMyBookmark" namespace="/bookmark" ><s:param name="tag" value="" /></s:url>
 			<s:url id="addBookmark" action="findBookmark" namespace="/bookmark" />
 			<s:url id="listMyBookmarkWithGoogleAPI" action="listMyBookmarkWithGoogleAPI" namespace="/bookmark" />
 			<div class="content">
 				<ul>
 					<li><s:a href="%{listBookmark}">List shared bookmarks</s:a></li>
+					<li><s:a href="%{listBookmarkCloud}">List shared bookmark cloud</s:a></li>
 					<li><s:a href="%{listMyBookmark}">List my bookmarks</s:a></li>
 					<li><s:a href="%{addBookmark}">Add bookmark</s:a></li>
 					<li><s:a href="%{listMyBookmarkWithGoogleAPI}">List bookmark - Mashup</s:a></li>
@@ -100,7 +102,7 @@
 			<p/>&nbsp;
 		</s:if>
 		<p/>&nbsp;
-		<s:if test="#session['user']!=null">
+		<s:if test="#session['user']!=null && #session['user'].role.equals('admin')">
 			<div id="block-menu-community" class="block">
 				<h2>Administrator Functions</h2>
 				<s:url id="adminWebBookmark" action="adminWebBookmark" namespace="/webBookmark" />

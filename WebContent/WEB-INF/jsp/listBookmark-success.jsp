@@ -29,7 +29,15 @@
 					<s:a href="%{addComment}" cssClass="addcomment">Add Comment</s:a>
         		</div>
         		<div>
-        			view comments
+        			<br/> <h3>view comments</h3><br/>
+        			<ul style="margin-left: 20px;">
+	        			<s:iterator id="comments" value="comments" >
+	        			    <li>
+	                        <s:property id="comment" value="text"/>
+	                        </li>
+	                    </s:iterator>
+                    </ul>
+        			
         		</div>
         	</div>
 		</div>

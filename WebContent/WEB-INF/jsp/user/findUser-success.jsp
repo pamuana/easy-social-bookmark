@@ -19,13 +19,13 @@
 
 <s:form id="userForm" name="userForm" namespace="/user" action="updateUser" method="post" enctype="multipart/form-data"  cssClass="cmxform" >
 
-    <s:textfield  id="name" cssClass="required cname" label="Name" name="name"  />
-    <s:textfield  cssClass="required number"  maxlength="2" id="age" label="Age" name="age"  />
-    <s:textfield  cssClass="required email" id="email" label="E-Mail" name="email"   />
-    <s:textfield  cssClass="required" id="address" label="Address" name="address"   />
-    <s:textfield  cssClass="required" id="city" label="City" name="City"  />
-    <s:textfield  cssClass="required" id="state" label="State" name="state"  />
-    <s:textfield  cssClass="required" id="country" label="Country" name="country"  />
+    <s:textfield  id="name" label="Name" name="name"  />
+    <s:textfield  id="age" label="Age" name="age"  />
+    <s:textfield  id="email" label="E-Mail" name="email"   />
+    <s:textfield  id="address" label="Address" name="address"   />
+    <s:textfield  id="city" label="City" name="city"  />
+    <s:textfield  id="state" label="State" name="state"  />
+    <s:textfield  id="country" label="Country" name="country"  />
     <s:textfield  id="login" label="Login" name="login"  />    
     <s:password cssClass="required password" id="password" label="Password" name="password"  />
     <s:password id="confirm_password" label="Confirm Password" name="confirm_password"  />

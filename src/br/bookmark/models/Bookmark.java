@@ -14,13 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 
-
 @Entity
-@Table(name="Bookmark", uniqueConstraints={@UniqueConstraint(columnNames={"url","idUser"})}) //@Inheritance(strategy=InheritanceType.JOINED)
+@Table(name="Bookmark") //@Inheritance(strategy=InheritanceType.JOINED)
 public class Bookmark implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -45,13 +43,15 @@ public class Bookmark implements Serializable{
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="idUser")
 	private User user;
-	
 
 	@OneToMany(mappedBy="bookmark",cascade=CascadeType.ALL)
 	private List<TagUser> tagsUser = new ArrayList<TagUser>();
 	
 	@OneToMany(mappedBy="bookmark",cascade=CascadeType.ALL)
 	private List<WebBookmark> webBookmarks = new ArrayList<WebBookmark>();
+	
+	@OneToMany(mappedBy="bookmark",cascade=CascadeType.ALL)
+	private List<Comment> comments = new ArrayList<Comment>();
 
 	public void setId(long id) {
 		this.id = id;
@@ -116,5 +116,12 @@ public class Bookmark implements Serializable{
 	public void addWebBookmark(WebBookmark webBookmark){
 		this.webBookmarks.add(webBookmark);
 	}
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
 	
 }
