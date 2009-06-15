@@ -64,9 +64,9 @@ public class ListBookmarkAction extends BaseAction implements ServletRequestAwar
 
 		this.bookmarks = service.listByField("shared", "true");
 		if (tag!=null && !"".equals(tag)) {
-			
+
 			this.bookmarks = new ArrayList<Bookmark>();
-			
+
 			List<Bookmark> bookmarksAux = service.listByField("shared", "true");
 			for (Bookmark bookmark : bookmarksAux) {
 				List<TagUser> tagsUser = bookmark.getTagsUser();
@@ -76,9 +76,9 @@ public class ListBookmarkAction extends BaseAction implements ServletRequestAwar
 					}
 				}
 			}
-			
+
 		}
-		
+
 		String cloudText= tagUserService.getCloudShared(request.getContextPath()+"/listBookmark.action?tag=");
 		request.getSession(true).setAttribute("cloudText",cloudText);
 

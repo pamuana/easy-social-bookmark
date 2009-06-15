@@ -74,14 +74,7 @@
 				</ul>
 				<br/>Bookmarks in your community:<br/>
 				<ul>
-				<s:if test="#session['user']!=null">
-					<s:if test="#session['user'].participants.size!=0" >
-						<s:iterator id="communitiesBookmark" value="#session['user'].participants">
-							<s:url id="listCommunityBookmark" action="listCommunityBookmark" namespace="/community" ><s:param name="idCommunity" value="community.id" /></s:url>
-							<li><s:a href="%{listCommunityBookmark}"><s:property value="community.name" /></s:a></li>
-						</s:iterator>
-					</s:if>
-				</s:if>
+					<%=(session.getAttribute("communityListText").toString()!=null ? session.getAttribute("communityListText").toString() : "") %>
 				</ul>
 			</div>
 		</div>
@@ -105,15 +98,6 @@
 			<p/>&nbsp;
 			<hr/>
 			<p/>&nbsp;
-			<div id="block-menu-community" class="block">
-				<h2>Import / Export</h2>
-				<s:url id="importFromDelicius" action="importFromDelicius" namespace="/importexport" />
-				<div class="content">
-					<ul class="menu">
-						<li><s:a href="%{importFromDelicius}">import From Delicius</s:a></li>
-					</ul>
-				</div>
-			</div>
 		</s:if>
 		<p/>&nbsp;
 		<hr/>
@@ -121,7 +105,7 @@
 			<div id="block-tags" class="block">
 				<h2>Tags</h2>
 				<div class="content">
-				<%=session.getAttribute("cloudText").toString() %>
+				<%=(session.getAttribute("cloudText").toString()!=null?session.getAttribute("cloudText").toString():"")%>
 				</div>
         	</div>
         </div>

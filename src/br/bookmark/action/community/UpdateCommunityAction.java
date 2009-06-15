@@ -5,6 +5,10 @@ import org.apache.struts2.config.Result;
 import org.apache.struts2.config.ParentPackage;
 import org.apache.struts2.dispatcher.ServletActionRedirectResult;
 import org.apache.struts2.dispatcher.ServletDispatcherResult;
+
+import br.bookmark.models.User;
+import br.bookmark.util.SecurityInterceptor;
+
 import com.opensymphony.xwork2.validator.annotations.Validation;
 
 @ParentPackage("base-package")
@@ -20,7 +24,13 @@ public class UpdateCommunityAction extends BaseCommunityAction {
 
 	public String execute() throws Exception{
 		
-		this.service.persist(this.community, this.idCommunity);		
+		this.service.persist(this.community, this.idCommunity);
+		
+		//..add list of community in session variable communityListText
+		String idUser = ""+((User) request.getSession(true).getAttribute(SecurityInterceptor.USER_OBJECT)).getId();
+		String communityListText = service.getCommunityListText(idUser,request.getContextPath()+"/bookmark/listCommunityBookmark.action?idCommunity=");
+		request.getSession(true).setAttribute("communityListText",communityListText);
+		
 		return SUCCESS;
 	}
 }

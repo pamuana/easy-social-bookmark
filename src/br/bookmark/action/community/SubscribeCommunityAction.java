@@ -28,6 +28,11 @@ public class SubscribeCommunityAction extends BaseCommunityAction {
 		String idUser = ""+user.getId();
 		
 		this.service.addParticant(this.idCommunity,idUser);
+		
+		//..add list of community in session variable communityListText
+		String communityListText = service.getCommunityListText(idUser,request.getContextPath()+"/bookmark/listCommunityBookmark.action?idCommunity=");
+		request.getSession(true).setAttribute("communityListText",communityListText);
+		
 		return SUCCESS;
 	}
 

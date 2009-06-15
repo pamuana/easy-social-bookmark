@@ -14,4 +14,6 @@ public interface CommunityService extends GenericService<Community> {
 
 	public void removeParticipant(String idCommunity, String idUser);
 
+	public String getCommunityListText(String idUser, String href);
+
 }
