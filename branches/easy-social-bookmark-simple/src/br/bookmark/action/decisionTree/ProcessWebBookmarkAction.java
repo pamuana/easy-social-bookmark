@@ -3,6 +3,7 @@ package br.bookmark.action.decisionTree;
 import org.apache.struts2.config.ParentPackage;
 
 import br.bookmark.action.BaseAction;
+import br.bookmark.util.DecisionTreeImpl;
 import br.usp.ime.collective.decisiontree.Attribute;
 import br.usp.ime.collective.decisiontree.ItemSet;
 import br.usp.ime.collective.decisiontree.model.DecisionTree;
@@ -30,18 +31,8 @@ public class ProcessWebBookmarkAction extends BaseAction {
 	}
 	
 	public String execute() throws Exception{
-		
-		Attribute attributeObjetive = null;
-		ItemSetMySql itemMySqlSet = new ItemSetMySql("","");
-		ItemSet itemSet = itemMySqlSet.read(this.sqlQueryDT);
-		
-		DecisionTree decisionTree = new DecisionTree(itemSet,attributeObjetive);
-		
-		decisionTree.toGIF("original.gif");
-		
-		decisionTree.prune(Double.parseDouble(this.entropy));
-		
-		decisionTree.toGIF("prune.gif");
+		String path = request.getRealPath("/");
+		DecisionTreeImpl.build(path,this.sqlQueryDT,this.entropy);
 		
 		return SUCCESS;
 	}
