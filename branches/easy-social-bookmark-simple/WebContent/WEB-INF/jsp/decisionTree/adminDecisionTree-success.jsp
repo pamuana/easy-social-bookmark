@@ -4,18 +4,19 @@
 <%@taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
-    <title>Admin Decision Tree Parameters for Suggestion Community</title>
+    <title>Decision Tree Parameters for Suggestion Community</title>
 </head>
 <body>
 
-<s:form action="processWebBookmark" namespace="/webBookmark" >
+<s:form action="processWebBookmark" namespace="/decisionTree" >
 
-	<s:textfield id="maxNumberUrls" name="maxNumberUrls" label="Max. Number. Url." ></s:textfield>
-	<s:textfield id="maxDepth" name="maxDepth"  label="Max. Number Depth"></s:textfield>
-	<s:textfield id="delayBetweenUrls" name="delayBetweenUrls"  label="Max. Delay Between Urls (ms)"></s:textfield>
+	<s:textarea id="sqlQueryDT" name="sqlQueryDT" value="" label="SQL Query"></s:textarea>
+	<s:textfield id="entropy" name="entropy" value="0.5" label="Entropy" ></s:textfield>
 
-<s:submit value="submit" name="submit"></s:submit>
+	<s:submit value="submit" name="submit"></s:submit>
 </s:form>
+
+<s:a href="">view decision tree</s:a>
 
 </body>
 </html>
