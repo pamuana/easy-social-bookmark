@@ -85,7 +85,7 @@
 				<div class="shared"></div>
 				<div class="url"><a href="<s:property id="url" value="url" />" target="_blank"><s:property id="url" value="url" /></a></div>
 				<div>
-					<s:a href="javascript:searchControl.execute('%{href}')" cssClass="addcomment">view similar for tag's</s:a>
+					<s:a href="javascript:searchControl.execute('%{name}')" cssClass="addcomment">view similar for name</s:a>
         		</div>
         	</div>
 		</div>
