@@ -1,14 +1,24 @@
 package br.bookmark.action;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
 
+import br.bookmark.models.Community;
 import br.bookmark.models.User;
 import br.bookmark.services.CommunityService;
 import br.bookmark.services.TagUserService;
 import br.bookmark.services.UserService;
+import br.bookmark.util.DecisionTreeImpl;
 import br.bookmark.util.SecurityInterceptor;
+import br.usp.ime.collective.decisiontree.Attribute;
+import br.usp.ime.collective.decisiontree.model.DecisionTree;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,11 +29,12 @@ public class LogonAction extends BaseAction implements ServletRequestAware {
 
 	private String login;
 	private String password;
+	private List<Community> communities = new ArrayList<Community>();
 
 	protected UserService service;
 	protected TagUserService tagUserService;
 	protected CommunityService communityService;
-	//protected BookmarkPrivateService bookmarkService;
+	
 	private HttpServletRequest request;
 
 	public static final String FAILURE = "failed";
@@ -39,10 +50,6 @@ public class LogonAction extends BaseAction implements ServletRequestAware {
 	public void setCommunityService(CommunityService service) {
 		this.communityService = service;
 	}
-	
-//	public void setBookmarkPrivateService(BookmarkPrivateService service) {
-//		this.bookmarkService = service;
-//	}
 
 	public void setServletRequest(HttpServletRequest httpServletRequest) {
 		this.request=httpServletRequest;
@@ -59,6 +66,14 @@ public class LogonAction extends BaseAction implements ServletRequestAware {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public void setCommunities(List<Community> communities) {
+		this.communities = communities;
+	}
+
+	public List<Community> getCommunities() {
+		return communities;
 	}
 
 	public String execute() throws Exception {
@@ -77,6 +92,9 @@ public class LogonAction extends BaseAction implements ServletRequestAware {
 				String communityListText= communityService.getCommunityListText(""+user.getId(),request.getContextPath()+"/bookmark/listCommunityBookmark.action?idCommunity=");
 				request.getSession(true).setAttribute("communityListText",communityListText);
 				
+				classifiedUserCommunity(user);
+				
+				
 				return SUCCESS;
 			} else {
 				addActionError(getText("Authentification failed. Your login and password is wrong"));
@@ -87,4 +105,33 @@ public class LogonAction extends BaseAction implements ServletRequestAware {
 			return FAILURE;
 		}
 	}
+
+	
+	private void classifiedUserCommunity(User user) {
+		DecisionTree dt;
+		try {
+			dt = DecisionTreeImpl.getInstance();
+			Map<Attribute, Object> observation = new HashMap<Attribute, Object>();
+			observation.put(dt.getAttributeSet().get(0), user.getAge());
+			observation.put(dt.getAttributeSet().get(1), user.getCity());
+			observation.put(dt.getAttributeSet().get(2), user.getState());
+			observation.put(dt.getAttributeSet().get(3), user.getCountry());
+			
+			this.communities = new ArrayList<Community>();
+			Map<Object, Double> results = dt.mdClassify(observation);
+			for (Object element : results.keySet()) {
+				this.communities.add(this.communityService.findByLikeField("name", element.toString()));
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	
 }

@@ -116,6 +116,7 @@ public class GenericServiceImpl<T> implements GenericService<T> {
 	}
 
 	public void remove(String id) {
+		
 		entityMgr = emf.createEntityManager();
 		EntityTransaction tx = null;
 		try {
