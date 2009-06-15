@@ -5,7 +5,6 @@ import org.apache.struts2.config.ParentPackage;
 import org.apache.struts2.config.Result;
 import org.apache.struts2.config.Results;
 import org.apache.struts2.dispatcher.ServletActionRedirectResult;
-import org.apache.struts2.dispatcher.ServletDispatcherResult;
 
 import br.bookmark.action.BaseAction;
 import br.bookmark.services.WebBookmarkService;
