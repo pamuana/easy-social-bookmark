@@ -5,6 +5,10 @@
 <html>
 <head>
     <title>Edit Community</title>
+<script src="../js/jquery.js" type="text/javascript"></script>
+<script src="../js/jquery.validate.js" type="text/javascript"></script>
+<script src="../js/cmxforms.js" type="text/javascript"></script>
+<script src="../js/validate.js" type="text/javascript"></script>
 </head>
 <body>
 

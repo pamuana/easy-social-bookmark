@@ -1,5 +1,5 @@
 
-package br.bookmark.action;
+package br.bookmark.action.bookmark;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import br.bookmark.services.TagService;
 import br.bookmark.services.TagUserService;
 
 @ParentPackage("base-package")
-public class ListBookmarkAction extends BaseAction implements ServletRequestAware{
+public class ListBookmarkCloudAction extends BaseAction implements ServletRequestAware{
 
 	private static final long serialVersionUID = 1L;
 
@@ -78,6 +78,9 @@ public class ListBookmarkAction extends BaseAction implements ServletRequestAwar
 			}
 
 		}
+
+		String cloudText= tagUserService.getCloudShared(request.getContextPath()+"/listBookmark.action?tag=");
+		request.getSession(true).setAttribute("cloudShared",cloudText);
 
 		return SUCCESS;
 	}

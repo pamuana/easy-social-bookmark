@@ -24,8 +24,23 @@ $().ready(function() {
 				minlength: 5,
 				equalTo: "#password"
 			},
-			messages: {
-				email: "Please enter a valid email address"
+			age: {
+				 required: true,
+			      number: true,
+			      maxlength: 2
+
+			},
+			city: {
+				required: true
+			},
+			state: {
+				required: true
+			},
+			address: {
+				required: true
+			},
+			country: {
+				required: true
 			}
 		}
 	});
@@ -40,6 +55,10 @@ $().ready(function() {
 				url: true
 			},
 			tags: {
+				required: true
+			},
+			
+			description: {
 				required: true
 			}
 		}

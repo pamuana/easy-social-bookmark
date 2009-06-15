@@ -111,7 +111,7 @@ public class TagUserServiceImpl extends GenericServiceImpl<TagUser> implements T
 		List<TagUser> tagsUser = this.listShared();
 		Map<String, Double> tagFrecuency = this.getTagFrecuency(tagsUser);
 
-		return makeCloud(tagFrecuency,href,"<h3>Shared</h3>");
+		return makeCloud(tagFrecuency,href,"");
 	}
 
 	@SuppressWarnings("unchecked")
