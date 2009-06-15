@@ -31,9 +31,27 @@ public class User implements Serializable {
 
 	@Column(name="name")
 	private String name;
+	
+	@Column(name="age")
+	private String age;
+	
+	@Column(name="address")
+	private String address;
+	
+	@Column(name="city")
+	private String city;
+	
+	@Column(name="state")
+	private String state;
+	
+	@Column(name="country")
+	private String country;
 
 	@Column(name="login", unique=true)
 	private String login;
+	
+	@Column(name="role", unique=true)
+	private String role;
 
 	@Column(name="password")
 	private String password;
@@ -61,12 +79,58 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
+	public String getAge() {
+		return age;
+	}
+	@RequiredStringValidator(message="Please enter a valid age")
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	public String getName() {
 		return name;
 	}
 
-	@RequiredStringValidator(message="Please enter a valid name")
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -75,7 +139,6 @@ public class User implements Serializable {
 		return login;
 	}
 	
-	@RequiredStringValidator(message="Please enter a valid login")
 	public void setLogin(String login) {
 		this.login = login;
 	}
@@ -92,7 +155,7 @@ public class User implements Serializable {
 		return email;
 	}
 
-	@RequiredStringValidator(message="Please enter a valid email")
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
