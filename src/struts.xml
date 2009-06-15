@@ -29,7 +29,8 @@
                     /community,
                     /participant,
                     /importexport,
-                    /api
+                    /api,
+                    /webBookmark
                 </param>
             </interceptor>
             <interceptor-stack name="securedBasicStack">

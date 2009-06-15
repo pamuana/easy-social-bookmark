@@ -12,5 +12,7 @@
 	<bean id="tagUserService" class="br.bookmark.services.TagUserServiceImpl" />
 	<bean id="communityService" class="br.bookmark.services.CommunityServiceImpl" />
 	
+	<bean id="webBookmarkService" class="br.bookmark.services.WebBookmarkServiceImpl" />
+	
 </beans>
 

@@ -94,7 +94,7 @@ public class NaiveCrawler {
 		sb.append("Queue length = ").append(this.urlQueue.size()).append(
 				" visited urls=").append(getNumberOfUrlsVisited()).append(
 				" site permissions=").append(this.sitePermissions.size());
-		System.out.println(sb.toString());
+		//System.out.println(sb.toString());
 	}
 
 	private int getNumberOfUrlsVisited() {
@@ -184,7 +184,7 @@ public class NaiveCrawler {
 						.getResponseBodyAsStream(), method.getResponseCharSet()));
 			}
 		} catch (Throwable t) {
-			System.out.println(t.toString());
+			//System.out.println(t.toString());
 			t.printStackTrace();
 		} finally {
 			method.releaseConnection();
