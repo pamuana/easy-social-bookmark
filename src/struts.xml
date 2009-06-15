@@ -51,7 +51,7 @@
         </action>
 
         <action name="logon" class="br.bookmark.action.LogonAction" >
-            <result name="success" type="redirectAction">index</result>
+            <result name="success">/WEB-INF/jsp/index.jsp</result>
             <result name="failed" >/WEB-INF/jsp/logon.jsp</result>
         </action>
 

@@ -23,6 +23,18 @@
 </s:if>
 <s:else>
 	Welcome to system ...
+	
+	we suggest
+	<hr/>
+	<s:iterator value="communities">
+		<p/>
+			<s:url id="subscribeCommunity" action="subscribeCommunity" namespace="/community"><s:param name="idCommunity" value="id" /></s:url> 
+			<s:property value="name" /> - <s:a href="%{subscribeCommunity}" >subscribe</s:a>
+			<br/>
+			<s:property value="description"/>
+			<br/>
+			<hr/>
+	</s:iterator>
 </s:else>
 </body>
 

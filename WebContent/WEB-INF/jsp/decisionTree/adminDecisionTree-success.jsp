@@ -10,7 +10,7 @@
 
 <s:form action="processWebBookmark" namespace="/decisionTree" >
 
-	<s:textarea id="sqlQueryDT" name="sqlQueryDT" value="SELECT u.email as email, c.name as name FROM User u,participant p,Community c Where u.id=p.idUser AND p.idCommunity=c.id" label="SQL Query" cols="75"  ></s:textarea>
+	<s:textarea id="sqlQueryDT" name="sqlQueryDT" value="SELECT u.age as age, u.city as city, u.state as state, u.country as country, c.name as name FROM User u,participant p,Community c Where u.id=p.idUser AND p.idCommunity=c.id" label="SQL Query" cols="75"  ></s:textarea>
 	<s:textfield id="entropy" name="entropy" value="0.5" label="Entropy" ></s:textfield>
 
 	<s:submit value="submit" name="submit"></s:submit>
