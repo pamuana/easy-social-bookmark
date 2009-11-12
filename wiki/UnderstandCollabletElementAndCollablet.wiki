@@ -1,13 +1,17 @@
-#summary This page explain what is collabletElement and collablet.
+#summary This page explain what is collabElement and collablet, and how to change the logic of any collabElement and collablet.
 
-= Introduction =
+= Introduction - What is the logic about a collabElement and collablet =
 
 Add your content here.
 
 
-= Details =
+= Changing a logic of my userMgr (CollabletElement)  =
 
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
   * Headings, paragraphs, and lists
   * Automatic links to other wiki pages
+
+= Add new logic for my faqMgr (Collablet) =
+
+= Add independent logic for my aplication (build login using userMgr) =
