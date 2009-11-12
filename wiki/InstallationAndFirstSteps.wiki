@@ -1,0 +1,27 @@
+#summary This page sumarize how to do in order to install, run and testing the sample application.
+
+= Installation And First Steps =
+
+== How to obtain the source code ? ==
+
+Add your content here.
+
+
+== Configure the application (web.xml and context.xml) ==
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
+
+== Running the application ==
+
+== Testing the vantagens of Groupware-Workbench  ==
+
+=== Add new faq (creating a new instance of faq) ===
+
+=== Know about how to manager instance of collablet (collabletMgr) ===
+
+=== Change a view (jsp) of all collablet ===
+
+=== Change a view (jsp) of collabletElement ===
