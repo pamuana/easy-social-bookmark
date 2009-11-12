@@ -7,7 +7,7 @@ Add your content here.
 
 = Build Entities in my collabElement (categoryMgr) =
 
-== Thinking in components and model 3C ==
+== Thinking in components and 3C model ==
 
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
