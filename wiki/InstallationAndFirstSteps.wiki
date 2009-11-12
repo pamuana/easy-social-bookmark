@@ -1,4 +1,4 @@
-#summary This page sumarize how to do in order to install, run and testing the sample application.
+#summary This page sumarize how to install, run and testing the sample application.
 
 = Installation And First Steps =
 
@@ -22,6 +22,6 @@ Add your content here.  Format your content with:
 
 === Know about how to manager instance of collablet (collabletMgr) ===
 
-=== Change a view (jsp) of all collablet ===
+=== Change a view of collablet (jsp) ===
 
-=== Change a view (jsp) of collabletElement ===
+=== Change a view of collabletElement (jsp) ===
