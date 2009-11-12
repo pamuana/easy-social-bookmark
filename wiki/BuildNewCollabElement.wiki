@@ -1,0 +1,19 @@
+#summary This page show how to build a new collabElement.
+
+= Introduction (Reusable part of all collabElement) =
+
+Add your content here.
+
+
+= Build Entities in my collabElement (categoryMgr) =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
+
+= Integrated my collabElement with Groupware-Workbench (categoryMgr) =
+
+= Making logic for my collabElement REST // CRUD (categoryMgr) =
+
+= Integrated with my application (category Faq) =
