@@ -16,7 +16,7 @@ Add your content here.  Format your content with:
 
 == Running the application ==
 
-== Testing the vantagens of Groupware-Workbench  ==
+== Testing the sample application (FaqMgr) ==
 
 === Add new faq (creating a new instance of faq) ===
 
