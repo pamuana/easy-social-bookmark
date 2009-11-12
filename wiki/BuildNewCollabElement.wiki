@@ -16,4 +16,4 @@ Add your content here.  Format your content with:
 
 = Making logic for my collabElement REST // CRUD (categoryMgr) =
 
-= Integrated with my application (category Faq) =
+= Integrated with my application (categoryMgr and Faq) =
