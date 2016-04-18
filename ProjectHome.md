@@ -1,0 +1,1 @@
+Easy Social Bookmark is a application of web software that provide a easy system to store your bookmarks of web recoused based in URL, and used collaborative technics for evaluation your preferences.
